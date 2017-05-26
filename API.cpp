@@ -9,23 +9,20 @@ Created by FOXente (Aradam)
 License GPL-3.0
 */
 
-#ifndef UnitLogoH
-#define UnitLogoH
+#pragma hdrstop
 
-#include <System.Classes.hpp>
-#include <Vcl.Controls.hpp>
-#include <Vcl.StdCtrls.hpp>
-#include <Vcl.Forms.hpp>
+#include "API.h"
 
-class TForm1 : public TForm
+#pragma package(smart_init)
+
+//Get GameData folder's path
+UnicodeString GetGameDataPath ()
  {
-  __published:	// IDE-managed Components
-	void __fastcall FormShow (TObject *Sender);
-  private:	// User declarations
-  public:		// User declarations
-	__fastcall TForm1 (TComponent* Owner);
- };
+  return ExtractFilePath (Application -> ExeName) + "GameData\\";
+ }
 
-extern PACKAGE TForm1 *Form1;
-
-#endif
+//Get LauncherData folder's path
+UnicodeString GetLauncherDataPath ()
+ {
+  return ExtractFilePath (Application -> ExeName) + "LauncherData\\";
+ }
