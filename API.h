@@ -23,6 +23,8 @@ UnicodeString GetGameDataPath ();
 UnicodeString GetLauncherDataPath ();
 UnicodeString GetOnlyFileName (UnicodeString FilePath);
 void WriteNewStringToIniFile (TMemIniFile *IniFile, UnicodeString Section, UnicodeString Ident, UnicodeString Value);
+void RequiredFileExists (UnicodeString FilePath);
 void SetFormToScreenCenter (TForm* Form);
+void ShowErrorM (UnicodeString Error);
 
 #endif

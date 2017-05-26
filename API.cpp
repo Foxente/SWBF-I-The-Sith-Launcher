@@ -40,9 +40,25 @@ void WriteNewStringToIniFile (TMemIniFile *IniFile, UnicodeString Section, Unico
   IniFile -> WriteString (Section, Ident, Value);
  }
 
+//If file doesn't exists that will be error shown and the application terminate
+void RequiredFileExists (UnicodeString FilePath)
+ {
+  if (!FileExists (FilePath))
+   {
+	ShowErrorM ("File '" + FilePath + "' doesn't exsists!");
+    Application -> Terminate ();
+   }
+ }
+
 //Set form position to screen center
 void SetFormToScreenCenter (TForm* Form)
  {
   Form -> Left = (Screen -> Width - Form -> Width) / 2;
   Form -> Top = (Screen -> Height - Form -> Height) / 2;
+ }
+
+//Show error message
+void ShowErrorM (UnicodeString Error)
+ {
+  Application -> MessageBox (Error.c_str (), UnicodeString ("ERROR").c_str (), MB_OK);
  }
