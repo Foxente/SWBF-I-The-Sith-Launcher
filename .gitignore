@@ -24,10 +24,16 @@ __history
 *.il?
 *.#??
 *.pbi
+*.pch
+*.pdi
 
 # 64bit Delphi/C++Builder files
 *.[ao]
 
+# Castalia statistics file (since XE7 Castalia is distributed with Delphi)
+*.stat
+
 # SWBF I files
 
 # Launcher unique files
+Win32/Release/SWBF-I-The-Sith-Launcher.exe
