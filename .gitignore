@@ -1,0 +1,33 @@
+# IDE files
+*.~*~
+*.local
+*.identcache
+__history
+
+# Delphi Compiler output files
+*.drc
+*.map
+*.jdbg
+*.tds
+#*.exe
+#*.dll
+*.bpl
+*.dcu
+*.dcp
+
+# C++ Builder Compiler output files
+*.bpi
+*.obj
+*.lib
+*.hpp
+*.i
+*.il?
+*.#??
+*.pbi
+
+# 64bit Delphi/C++Builder files
+*.[ao]
+
+# SWBF I files
+
+# Launcher unique files
