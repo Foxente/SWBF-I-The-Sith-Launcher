@@ -17,6 +17,7 @@ License GPL-3.0
 
 #pragma package(smart_init)
 #pragma link "sSkinManager"
+#pragma link "acImage"
 #pragma resource "*.dfm"
 
 TFormLogo *FormLogo;
