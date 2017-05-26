@@ -18,13 +18,13 @@ License GPL-3.0
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 
-TForm1 *Form1;
+TFormLogo *FormLogo;
 
-__fastcall TForm1::TForm1 (TComponent* Owner) : TForm (Owner)
+__fastcall TFormLogo::TFormLogo (TComponent* Owner) : TForm (Owner)
  {
  }
 
-void __fastcall TForm1::FormShow (TObject *Sender)
+void __fastcall TFormLogo::FormShow (TObject *Sender)
  {
   //
  }
