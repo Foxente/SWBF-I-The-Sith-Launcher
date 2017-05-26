@@ -26,3 +26,9 @@ UnicodeString GetLauncherDataPath ()
  {
   return ExtractFilePath (Application -> ExeName) + "LauncherData\\";
  }
+
+//Get file name without extension
+UnicodeString GetOnlyFileName (UnicodeString FilePath)
+ {
+  return StringReplace (ExtractFileName (FilePath), ExtractFileExt (FilePath), "", TReplaceFlags ());
+ }

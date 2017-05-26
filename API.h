@@ -19,5 +19,6 @@ License GPL-3.0
 
 UnicodeString GetGameDataPath ();
 UnicodeString GetLauncherDataPath ();
+UnicodeString GetOnlyFileName (UnicodeString FilePath);
 
 #endif

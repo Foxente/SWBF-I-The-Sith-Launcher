@@ -16,10 +16,12 @@ License GPL-3.0
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
+#include "sSkinManager.hpp"
 
 class TFormLogo : public TForm
  {
   __published:	// IDE-managed Components
+	TsSkinManager *sSkinManager;
 	void __fastcall FormShow (TObject *Sender);
   private:	// User declarations
   public:		// User declarations

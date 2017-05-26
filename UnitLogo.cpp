@@ -16,6 +16,7 @@ License GPL-3.0
 #include "API.h"
 
 #pragma package(smart_init)
+#pragma link "sSkinManager"
 #pragma resource "*.dfm"
 
 TFormLogo *FormLogo;
