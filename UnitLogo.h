@@ -23,12 +23,12 @@ License GPL-3.0
 
 class TFormLogo : public TForm
  {
-  __published:	// IDE-managed Components
+  __published :	// IDE-managed Components
 	TsSkinManager *sSkinManager;
 	TsImage *sImageFOXenteLogo;
 	void __fastcall FormShow (TObject *Sender);
-  private:	// User declarations
-  public:		// User declarations
+  private :	// User declarations
+  public :		// User declarations
 	__fastcall TFormLogo (TComponent* Owner);
  };
 
