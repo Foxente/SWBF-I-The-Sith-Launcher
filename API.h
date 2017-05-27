@@ -19,6 +19,21 @@ License GPL-3.0
 
 #include <IniFiles.hpp>
 
+class TAPIdata : public TForm
+ {
+  __published:
+  private:
+  public:
+	__fastcall TAPIdata (TComponent* Owner);
+ };
+
+extern PACKAGE TAPIdata *APIdata;
+
+//Api data
+extern PACKAGE TMemIniFile *SettingsFile;
+extern PACKAGE UnicodeString LanguageStrings [100];
+
+//Api methods
 UnicodeString GetGameDataPath ();
 UnicodeString GetLauncherDataPath ();
 UnicodeString GetOnlyFileName (UnicodeString FilePath);

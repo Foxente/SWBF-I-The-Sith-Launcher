@@ -9,11 +9,23 @@ Created by FOXente (Aradam)
 License GPL-3.0
 */
 
+#include <vcl.h>
 #pragma hdrstop
 
 #include "API.h"
 
 #pragma package(smart_init)
+#pragma resource "*.dfm"
+
+TAPIdata *APIdata;
+
+__fastcall TAPIdata::TAPIdata (TComponent* Owner) : TForm (Owner)
+ {
+ }
+
+//Vars for saving main data
+TMemIniFile *SettingsFile = new TMemIniFile (GetLauncherDataPath () + "Settings.ini");
+UnicodeString LanguageStrings [100];
 
 //Get GameData folder's path
 UnicodeString GetGameDataPath ()
@@ -45,7 +57,7 @@ void RequiredFileExists (UnicodeString FilePath)
  {
   if (!FileExists (FilePath))
    {
-	ShowErrorM ("File '" + FilePath + "' doesn't exsists!");
+    ShowErrorM ("File '" + FilePath + "' doesn't exsists!");
     Application -> Terminate ();
    }
  }

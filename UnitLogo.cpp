@@ -21,7 +21,6 @@ License GPL-3.0
 #pragma resource "*.dfm"
 
 TFormLogo *FormLogo;
-TMemIniFile *SettingsFile = new TMemIniFile (GetLauncherDataPath () + "Settings.ini");
 
 __fastcall TFormLogo::TFormLogo (TComponent* Owner) : TForm (Owner)
  {

@@ -7206,7 +7206,7 @@ object FormLogo: TFormLogo
           C70000000049454E44AE426082}
       end>
     SkinDirectory = 'D:\GIT\SWBF-I-The-Sith-Launcher\Win32\Release\LauncherData'
-    SkinName = 'Design'
+    SkinName = 'Design (internal)'
     SkinInfo = '10.25'
     ThirdParty.ThirdEdits = ' '
     ThirdParty.ThirdButtons = 'TButton'
