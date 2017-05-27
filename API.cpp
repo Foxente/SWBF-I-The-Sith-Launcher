@@ -84,10 +84,19 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   LanguageStrings [2] = WriteNewStringToIniFile (LanguageFile, "FormCaption", "Name", "SWBF I The Sith Launcher");
   LanguageStrings [0] = WriteNewStringToIniFile (LanguageFile, "FormCaption", "Logo", "Created by %name%");
   LanguageStrings [1] = WriteNewStringToIniFile (LanguageFile, "Error", "1", "File '%path%' doesn't exsists!");
+  LanguageStrings [3] = WriteNewStringToIniFile (LanguageFile, "Button", "1", "Play");
+  LanguageStrings [4] = WriteNewStringToIniFile (LanguageFile, "Button", "2", "Set additional maps");
+  LanguageStrings [5] = WriteNewStringToIniFile (LanguageFile, "Button", "3", "About SWBF I The Sith Launcher");
+  LanguageStrings [6] = WriteNewStringToIniFile (LanguageFile, "Label", "1", "Coming Soon");
   LanguageFile -> UpdateFile ();
   //Apply
   FormLogo -> Caption = LanguageStrings [2];
   FormMainMenu -> Caption = LanguageStrings [2];
+  FormMainMenu -> sBitBtnPlay -> Caption = LanguageStrings [3];
+  FormMainMenu -> sBitBtnSetAdditionalMap -> Caption = LanguageStrings [4];
+  FormMainMenu -> sBitBtnAboutLauncher -> Caption = LanguageStrings [5];
+  FormMainMenu -> sLabelComingSoon -> Caption = LanguageStrings [6];
+  FormMainMenu -> sLabelComingSoon -> Left = (FormMainMenu -> Width - FormMainMenu -> sLabelComingSoon -> Width) / 2; //change pos for this label to center of form with
  }
 
 //Set form position to screen center

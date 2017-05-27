@@ -14,6 +14,8 @@ License GPL-3.0
 #include <tchar.h>
 
 USEFORM ("UnitLogo.cpp", FormLogo);
+USEFORM ("API.cpp", APIdata);
+USEFORM ("UnitMainMenu.cpp", FormMainMenu);
 
 int WINAPI _tWinMain (HINSTANCE, HINSTANCE, LPTSTR, int)
  {
@@ -22,6 +24,8 @@ int WINAPI _tWinMain (HINSTANCE, HINSTANCE, LPTSTR, int)
 	Application -> Initialize ();
 	Application -> MainFormOnTaskBar = true;
 	Application -> CreateForm (__classid (TFormLogo), &FormLogo);
+	Application -> CreateForm (__classid (TAPIdata), &APIdata);
+	Application -> CreateForm (__classid (TFormMainMenu), &FormMainMenu);
 	Application -> Run ();
    }
   catch (Exception &exception)

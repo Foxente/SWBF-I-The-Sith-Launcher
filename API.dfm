@@ -2,8 +2,8 @@ object APIdata: TAPIdata
   Left = 0
   Top = 0
   BorderStyle = bsNone
-  ClientHeight = 0
-  ClientWidth = 0
+  ClientHeight = 7
+  ClientWidth = 4
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

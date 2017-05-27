@@ -16,10 +16,18 @@ License GPL-3.0
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
+#include "sBitBtn.hpp"
+#include "sLabel.hpp"
+#include <Vcl.Buttons.hpp>
 
 class TFormMainMenu : public TForm
  {
   __published:	// IDE-managed Components
+	TsBitBtn *sBitBtnPlay;
+	TsBitBtn *sBitBtnSetAdditionalMap;
+	TsBitBtn *sBitBtnAboutLauncher;
+	TsLabel *sLabelComingSoon;
+	TsBitBtn *sBitBtnSettings;
 	void __fastcall FormClose (TObject *Sender, TCloseAction &Action);
   private:	// User declarations
   public:		// User declarations

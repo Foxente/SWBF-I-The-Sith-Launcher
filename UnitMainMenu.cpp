@@ -15,6 +15,8 @@ License GPL-3.0
 #include "UnitMainMenu.h"
 
 #pragma package(smart_init)
+#pragma link "sBitBtn"
+#pragma link "sLabel"
 #pragma resource "*.dfm"
 
 TFormMainMenu *FormMainMenu;
