@@ -13,9 +13,10 @@ License GPL-3.0
 #pragma hdrstop
 #include <tchar.h>
 
-USEFORM ("UnitLogo.cpp", FormLogo);
 USEFORM ("API.cpp", APIdata);
+USEFORM ("UnitLogo.cpp", FormLogo);
 USEFORM ("UnitMainMenu.cpp", FormMainMenu);
+USEFORM ("UnitSettings.cpp", FormSettings);
 
 int WINAPI _tWinMain (HINSTANCE, HINSTANCE, LPTSTR, int)
  {
@@ -26,6 +27,7 @@ int WINAPI _tWinMain (HINSTANCE, HINSTANCE, LPTSTR, int)
 	Application -> CreateForm (__classid (TFormLogo), &FormLogo);
 	Application -> CreateForm (__classid (TAPIdata), &APIdata);
 	Application -> CreateForm (__classid (TFormMainMenu), &FormMainMenu);
+	Application -> CreateForm (__classid (TFormSettings), &FormSettings);
 	Application -> Run ();
    }
   catch (Exception &exception)

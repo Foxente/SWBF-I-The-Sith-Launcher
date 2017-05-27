@@ -43,6 +43,7 @@ UnicodeString GetLauncherDataPath ();
 UnicodeString GetOnlyFileName (UnicodeString FilePath);
 UnicodeString WriteNewStringToIniFile (TMemIniFile *IniFile, UnicodeString Section, UnicodeString Ident, UnicodeString Value);
 UnicodeString ReplaceStringMask (UnicodeString CurrentString, UnicodeString Mask, UnicodeString Replacement);
+String BoolToRealString (bool Value);
 void RequiredFileExists (UnicodeString FilePath);
 void ApplyLanguageFromFile (UnicodeString FilePath);
 void SetFormToScreenCenter (TForm* Form);

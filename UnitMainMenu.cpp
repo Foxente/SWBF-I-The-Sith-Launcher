@@ -13,6 +13,9 @@ License GPL-3.0
 #pragma hdrstop
 
 #include "UnitMainMenu.h"
+#include "API.h"
+
+#include "UnitSettings.h"
 
 #pragma package(smart_init)
 #pragma link "sBitBtn"
@@ -28,4 +31,10 @@ __fastcall TFormMainMenu::TFormMainMenu (TComponent* Owner) : TForm (Owner)
 void __fastcall TFormMainMenu::FormClose (TObject *Sender, TCloseAction &Action)
  {
   Application -> Terminate ();
+ }
+
+void __fastcall TFormMainMenu::sBitBtnSettingsClick (TObject *Sender)
+ {
+  SetFormToScreenCenter (FormSettings);
+  FormSettings -> ShowModal ();
  }

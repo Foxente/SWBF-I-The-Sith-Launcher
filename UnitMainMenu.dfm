@@ -125,5 +125,6 @@ object FormMainMenu: TFormMainMenu
       8683828200D8FF00D8FF00D8FF00D8FF00D8FF00D8FF00D8FF00D8FF00D8FF00
       D8FF00D8FFFF}
     TabOrder = 3
+    OnClick = sBitBtnSettingsClick
   end
 end
