@@ -50,7 +50,7 @@ void __fastcall TFormLogo::FormShow (TObject *Sender)
   WriteNewStringToIniFile (SettingsFile, "Multiplayer", "Current_version", "1.3");
   if (SettingsFile -> ReadString ("Multiplayer", "Current_version", "1.3").Length () > 44)
    {
-	SettingsFile -> WriteString ("Multiplayer", "Current_version", "1.3");
+    SettingsFile -> WriteString ("Multiplayer", "Current_version", "1.3");
     ShowErrorM (LanguageStrings [21]);
    }
   SettingsFile -> UpdateFile ();

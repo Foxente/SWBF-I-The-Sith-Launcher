@@ -55,12 +55,12 @@ UnicodeString GetHostsFilePath ()
   // Win NT, 2000, XP, 2003, Vista, 7, 8, 10
   if (Registry -> OpenKeyReadOnly ("SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters"))
    {
-	return GetAbsPath (Registry -> ReadString ("DataBasePath")) + "\\hosts";
+    return GetAbsPath (Registry -> ReadString ("DataBasePath")) + "\\hosts";
    }
   // Win Mobile
   if (Registry -> OpenKeyReadOnly ("Comm\\Tcpip"))
    {
-	return GetAbsPath (Registry -> ReadString ("Hosts")) + "\\hosts";
+    return GetAbsPath (Registry -> ReadString ("Hosts")) + "\\hosts";
    }
   // Win 95, 98, Me
   if (FileExists (GetAbsPath ("%windir%\\hosts"))) return GetAbsPath ("%windir%\\hosts");

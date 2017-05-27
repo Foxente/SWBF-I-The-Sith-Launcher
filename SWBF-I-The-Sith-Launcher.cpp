@@ -22,12 +22,12 @@ int WINAPI _tWinMain (HINSTANCE, HINSTANCE, LPTSTR, int)
  {
   try
    {
-	Application -> Initialize ();
-	Application -> MainFormOnTaskBar = true;
-	Application -> CreateForm (__classid (TFormLogo), &FormLogo);
-	Application -> CreateForm (__classid (TAPIdata), &APIdata);
-	Application -> CreateForm (__classid (TFormMainMenu), &FormMainMenu);
-	Application -> CreateForm (__classid (TFormSettings), &FormSettings);
+    Application -> Initialize ();
+    Application -> MainFormOnTaskBar = true;
+    Application -> CreateForm (__classid (TFormLogo), &FormLogo);
+    Application -> CreateForm (__classid (TAPIdata), &APIdata);
+    Application -> CreateForm (__classid (TFormMainMenu), &FormMainMenu);
+    Application -> CreateForm (__classid (TFormSettings), &FormSettings);
     Application -> Run ();
    }
   catch (Exception &exception)
@@ -36,14 +36,14 @@ int WINAPI _tWinMain (HINSTANCE, HINSTANCE, LPTSTR, int)
    }
   catch (...)
    {
-	try
-	 {
-	  throw Exception ("");
-	 }
-	catch (Exception &exception)
-	 {
+    try
+     {
+      throw Exception ("");
+     }
+    catch (Exception &exception)
+     {
       Application -> ShowException (&exception);
-	 }
+     }
    }
   return 0;
 }
