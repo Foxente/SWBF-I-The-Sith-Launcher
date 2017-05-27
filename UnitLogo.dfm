@@ -1,9 +1,11 @@
 object FormLogo: TFormLogo
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
   Caption = 'FormLogo'
-  ClientHeight = 655
-  ClientWidth = 821
+  ClientHeight = 657
+  ClientWidth = 823
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -7231,5 +7233,10 @@ object FormLogo: TFormLogo
     ThirdParty.ThirdScrollBar = ' '
     ThirdParty.ThirdStaticText = ' '
     ThirdParty.ThirdNativePaint = ' '
+  end
+  object TimerNextForm: TTimer
+    Interval = 3000
+    OnTimer = TimerNextFormTimer
+    Left = 32
   end
 end

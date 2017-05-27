@@ -15,6 +15,8 @@ License GPL-3.0
 #include "UnitLogo.h"
 #include "API.h"
 
+#include "UnitMainMenu.h"
+
 #pragma package(smart_init)
 #pragma link "sSkinManager"
 #pragma link "acImage"
@@ -32,6 +34,7 @@ void __fastcall TFormLogo::FormShow (TObject *Sender)
   SetFormToScreenCenter (FormLogo);
   //Load language file or create if doesn't exists
   ApplyLanguageFromFile (GetLauncherDataPath () + "Languages/" + SettingsFile -> ReadString ("Language", "Name", "English") + ".ini");
+  Caption = ReplaceStringMask (LanguageStrings [0], "name", Author);
   //Generate new Settings.ini if doesnt exists
   WriteNewStringToIniFile (SettingsFile, "Game_launch", "Window_mode", "false");
   WriteNewStringToIniFile (SettingsFile, "Game_launch", "Skip_logos", "false");
@@ -206,4 +209,14 @@ void __fastcall TFormLogo::FormShow (TObject *Sender)
   RequiredFileExists (GetGameDataPath () + "Data/_LVL_PC/SIDE/evc_rep_212.lvl");
   RequiredFileExists (GetGameDataPath () + "Data/_LVL_PC/SIDE/evc_rep_41st.lvl");
   RequiredFileExists (GetGameDataPath () + "Data/_LVL_PC/SIDE/evc_rep_501.lvl");
+ }
+
+void __fastcall TFormLogo::TimerNextFormTimer (TObject *Sender)
+ {
+  //Go to the next form
+  TimerNextForm -> Enabled = false;
+  SetFormToScreenCenter (FormMainMenu);
+  UnvisibleForm (FormLogo);
+  Caption = LanguageStrings [2];
+  FormMainMenu -> ShowModal ();
  }

@@ -42,9 +42,11 @@ UnicodeString GetGameDataPath ();
 UnicodeString GetLauncherDataPath ();
 UnicodeString GetOnlyFileName (UnicodeString FilePath);
 UnicodeString WriteNewStringToIniFile (TMemIniFile *IniFile, UnicodeString Section, UnicodeString Ident, UnicodeString Value);
+UnicodeString ReplaceStringMask (UnicodeString CurrentString, UnicodeString Mask, UnicodeString Replacement);
 void RequiredFileExists (UnicodeString FilePath);
 void ApplyLanguageFromFile (UnicodeString FilePath);
 void SetFormToScreenCenter (TForm* Form);
+void UnvisibleForm (TForm* Form);
 void ShowErrorM (UnicodeString Error);
 
 #endif

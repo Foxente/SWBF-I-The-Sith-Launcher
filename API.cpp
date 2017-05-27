@@ -15,6 +15,7 @@ License GPL-3.0
 #include "API.h"
 
 #include "UnitLogo.h"
+#include "UnitMainMenu.h"
 
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -80,11 +81,13 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
  {
   //Loading
   LanguageFile = new TMemIniFile (FilePath);
+  LanguageStrings [2] = WriteNewStringToIniFile (LanguageFile, "FormCaption", "Name", "SWBF I The Sith Launcher");
   LanguageStrings [0] = WriteNewStringToIniFile (LanguageFile, "FormCaption", "Logo", "Created by %name%");
   LanguageStrings [1] = WriteNewStringToIniFile (LanguageFile, "Error", "1", "File '%path%' doesn't exsists!");
   LanguageFile -> UpdateFile ();
   //Apply
-  FormLogo -> Caption = ReplaceStringMask (LanguageStrings [0], "name", Author);
+  FormLogo -> Caption = LanguageStrings [2];
+  FormMainMenu -> Caption = LanguageStrings [2];
  }
 
 //Set form position to screen center
@@ -92,6 +95,14 @@ void SetFormToScreenCenter (TForm* Form)
  {
   Form -> Left = (Screen -> Width - Form -> Width) / 2;
   Form -> Top = (Screen -> Height - Form -> Height) / 2;
+ }
+
+//Unvisible form
+void UnvisibleForm (TForm* Form)
+ {
+  Form -> Enabled = false;
+  Form -> Left = -99999;
+  Form -> Top = -99999;
  }
 
 //Show error message

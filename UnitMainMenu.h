@@ -9,31 +9,23 @@ Created by FOXente (Aradam)
 License GPL-3.0
 */
 
-#ifndef UnitLogoH
-#define UnitLogoH
+#ifndef UnitMainMenuH
+#define UnitMainMenuH
 
 #include <System.Classes.hpp>
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
-#include "sSkinManager.hpp"
-#include "acImage.hpp"
-#include <Vcl.ExtCtrls.hpp>
-#include <Vcl.Imaging.jpeg.hpp>
 
-class TFormLogo : public TForm
+class TFormMainMenu : public TForm
  {
-  __published :	// IDE-managed Components
-	TsSkinManager *sSkinManager;
-	TsImage *sImageFOXenteLogo;
-	TTimer *TimerNextForm;
-	void __fastcall FormShow (TObject *Sender);
-	void __fastcall TimerNextFormTimer (TObject *Sender);
-  private :	// User declarations
-  public :		// User declarations
-	__fastcall TFormLogo (TComponent* Owner);
+  __published:	// IDE-managed Components
+	void __fastcall FormClose (TObject *Sender, TCloseAction &Action);
+  private:	// User declarations
+  public:		// User declarations
+	__fastcall TFormMainMenu (TComponent* Owner);
  };
 
-extern PACKAGE TFormLogo *FormLogo;
+extern PACKAGE TFormMainMenu *FormMainMenu;
 
 #endif
