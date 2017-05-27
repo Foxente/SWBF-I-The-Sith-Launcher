@@ -38,13 +38,33 @@ UnicodeString Author = "FOXente (Aradam)";
 //Get GameData folder's path
 UnicodeString GetGameDataPath ()
  {
-  return ExtractFilePath (Application -> ExeName) + "GameData/";
+  return ExtractFilePath (Application -> ExeName) + "GameData\\";
  }
 
 //Get LauncherData folder's path
 UnicodeString GetLauncherDataPath ()
  {
-  return ExtractFilePath (Application -> ExeName) + "LauncherData/";
+  return ExtractFilePath (Application -> ExeName) + "LauncherData\\";
+ }
+
+//Get hosts file's path
+UnicodeString GetHostsFilePath ()
+ {
+  TRegistry *Registry = new TRegistry (KEY_READ | KEY_WOW64_64KEY);
+  Registry -> RootKey = HKEY_LOCAL_MACHINE;
+  // Win NT, 2000, XP, 2003, Vista, 7, 8, 10
+  if (Registry -> OpenKeyReadOnly ("SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters"))
+   {
+	return GetAbsPath (Registry -> ReadString ("DataBasePath")) + "\\hosts";
+   }
+  // Win Mobile
+  if (Registry -> OpenKeyReadOnly ("Comm\\Tcpip"))
+   {
+	return GetAbsPath (Registry -> ReadString ("Hosts")) + "\\hosts";
+   }
+  // Win 95, 98, Me
+  if (FileExists (GetAbsPath ("%windir%\\hosts"))) return GetAbsPath ("%windir%\\hosts");
+  if (FileExists (GetAbsPath ("%SystemDrive%\\Windows\\System32\\drivers\\etc\\hosts"))) return GetAbsPath ("%SystemDrive%\\Windows\\System32\\drivers\\etc\\hosts");
  }
 
 //Get file name without extension
@@ -67,10 +87,24 @@ UnicodeString ReplaceStringMask (UnicodeString CurrentString, UnicodeString Mask
   return StringReplace (CurrentString, "%" + Mask + "%", Replacement, TReplaceFlags () << rfReplaceAll);
  }
 
+//Get absolute path from environnment string
+UnicodeString GetAbsPath (UnicodeString Path)
+ {
+  wchar_t* ReturnPath;
+  ExpandEnvironmentStrings (Path.w_str (), ReturnPath, MAX_PATH);
+  return UnicodeString (ReturnPath);
+ }
+
 //Converte boolean to string type
 String BoolToRealString (bool Value)
  {
   if (Value) return "true"; else return "false";
+ }
+
+//Checking is Battlefront.exe running
+bool IsBattlefrontRunning ()
+ {
+  return FindWindow (NULL, L"Star Wars Battlefront") != 0;
  }
 
 //If file doesn't exists that will be error shown and the application terminate
@@ -92,7 +126,7 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   LanguageStrings [0] = WriteNewStringToIniFile (LanguageFile, "FormCaption", "Logo", "Created by %name%");
   LanguageStrings [7] = WriteNewStringToIniFile (LanguageFile, "FormCaption", "Settings", "Settings");
   LanguageStrings [1] = WriteNewStringToIniFile (LanguageFile, "Error", "1", "File '%path%' doesn't exsists!");
-  LanguageStrings [21] = WriteNewStringToIniFile (LanguageFile, "Error", "2", "The version identifier must consist of exactly 3 characters!");
+  LanguageStrings [21] = WriteNewStringToIniFile (LanguageFile, "Error", "2", "The version identifier must be no more than 44 characters long!");
   LanguageStrings [3] = WriteNewStringToIniFile (LanguageFile, "Button", "1", "Play");
   LanguageStrings [4] = WriteNewStringToIniFile (LanguageFile, "Button", "2", "Set additional maps");
   LanguageStrings [5] = WriteNewStringToIniFile (LanguageFile, "Button", "3", "About SWBF I The Sith Launcher");

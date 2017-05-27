@@ -5,7 +5,7 @@ object FormMainMenu: TFormMainMenu
   BorderStyle = bsSingle
   Caption = 'FormMainMenu'
   ClientHeight = 163
-  ClientWidth = 489
+  ClientWidth = 337
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,7 +17,7 @@ object FormMainMenu: TFormMainMenu
   PixelsPerInch = 96
   TextHeight = 13
   object sLabelComingSoon: TsLabel
-    Left = 128
+    Left = 56
     Top = 127
     Width = 224
     Height = 33
@@ -32,16 +32,17 @@ object FormMainMenu: TFormMainMenu
   object sBitBtnPlay: TsBitBtn
     Left = 8
     Top = 8
-    Width = 441
+    Width = 289
     Height = 33
     Caption = 'sBitBtnPlay'
     TabOrder = 0
+    OnClick = sBitBtnPlayClick
     ShowFocus = False
   end
   object sBitBtnSetAdditionalMap: TsBitBtn
     Left = 8
     Top = 47
-    Width = 473
+    Width = 321
     Height = 34
     Caption = 'sBitBtnSetAdditionalMap'
     TabOrder = 1
@@ -50,14 +51,14 @@ object FormMainMenu: TFormMainMenu
   object sBitBtnAboutLauncher: TsBitBtn
     Left = 8
     Top = 87
-    Width = 473
+    Width = 321
     Height = 34
     Caption = 'sBitBtnAboutLauncher'
     TabOrder = 2
     ShowFocus = False
   end
   object sBitBtnSettings: TsBitBtn
-    Left = 447
+    Left = 295
     Top = 8
     Width = 34
     Height = 33

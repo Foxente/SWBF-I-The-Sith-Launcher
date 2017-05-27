@@ -560,7 +560,7 @@ object FormSettings: TFormSettings
   object sEditVersion: TsEdit
     Left = 163
     Top = 239
-    Width = 32
+    Width = 230
     Height = 21
     Color = clBlack
     Font.Charset = DEFAULT_CHARSET
@@ -568,7 +568,7 @@ object FormSettings: TFormSettings
     Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
-    MaxLength = 3
+    MaxLength = 44
     ParentFont = False
     TabOrder = 10
     Text = '1.3'

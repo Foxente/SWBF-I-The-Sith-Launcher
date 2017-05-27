@@ -90,11 +90,6 @@ void __fastcall TFormSettings::sBitBtnSaveClick (TObject *Sender)
   if (sEditHost -> Text == "") sEditHost -> Text = "162.248.92.172";
   SettingsFile -> WriteString ("Multiplayer", "Host", sEditHost -> Text);
   SettingsFile -> WriteString ("Multiplayer", "Current_version", sEditVersion -> Text);
-  if (SettingsFile -> ReadString ("Multiplayer", "Current_version", "1.3").Length () != 3)
-   {
-	SettingsFile -> WriteString ("Multiplayer", "Current_version", "1.3");
-	ShowErrorM (LanguageStrings [21]);
-   }
   SettingsFile -> UpdateFile ();
   Close ();
  }

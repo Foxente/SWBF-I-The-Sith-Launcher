@@ -18,6 +18,7 @@ License GPL-3.0
 #include <Vcl.Forms.hpp>
 
 #include <IniFiles.hpp>
+#include <Registry.hpp>
 
 class TAPIdata : public TForm
  {
@@ -40,10 +41,13 @@ extern PACKAGE UnicodeString Author;
 //Api methods
 UnicodeString GetGameDataPath ();
 UnicodeString GetLauncherDataPath ();
+UnicodeString GetHostsFilePath ();
 UnicodeString GetOnlyFileName (UnicodeString FilePath);
 UnicodeString WriteNewStringToIniFile (TMemIniFile *IniFile, UnicodeString Section, UnicodeString Ident, UnicodeString Value);
 UnicodeString ReplaceStringMask (UnicodeString CurrentString, UnicodeString Mask, UnicodeString Replacement);
+UnicodeString GetAbsPath (UnicodeString Path);
 String BoolToRealString (bool Value);
+bool IsBattlefrontRunning ();
 void RequiredFileExists (UnicodeString FilePath);
 void ApplyLanguageFromFile (UnicodeString FilePath);
 void SetFormToScreenCenter (TForm* Form);
