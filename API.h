@@ -31,14 +31,19 @@ extern PACKAGE TAPIdata *APIdata;
 
 //Api data
 extern PACKAGE TMemIniFile *SettingsFile;
+extern PACKAGE TMemIniFile *LanguageFile;
 extern PACKAGE UnicodeString LanguageStrings [100];
+
+//Consts
+extern PACKAGE UnicodeString Author;
 
 //Api methods
 UnicodeString GetGameDataPath ();
 UnicodeString GetLauncherDataPath ();
 UnicodeString GetOnlyFileName (UnicodeString FilePath);
-void WriteNewStringToIniFile (TMemIniFile *IniFile, UnicodeString Section, UnicodeString Ident, UnicodeString Value);
+UnicodeString WriteNewStringToIniFile (TMemIniFile *IniFile, UnicodeString Section, UnicodeString Ident, UnicodeString Value);
 void RequiredFileExists (UnicodeString FilePath);
+void ApplyLanguageFromFile (UnicodeString FilePath);
 void SetFormToScreenCenter (TForm* Form);
 void ShowErrorM (UnicodeString Error);
 

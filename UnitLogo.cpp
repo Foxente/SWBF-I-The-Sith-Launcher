@@ -30,6 +30,8 @@ void __fastcall TFormLogo::FormShow (TObject *Sender)
  {
   //Position to center
   SetFormToScreenCenter (FormLogo);
+  //Load language file or create if doesn't exists
+  ApplyLanguageFromFile (GetLauncherDataPath () + "Languages/" + SettingsFile -> ReadString ("Language", "Name", "English") + ".ini");
   //Generate new Settings.ini if doesnt exists
   WriteNewStringToIniFile (SettingsFile, "Game_launch", "Window_mode", "false");
   WriteNewStringToIniFile (SettingsFile, "Game_launch", "Skip_logos", "false");
@@ -46,7 +48,7 @@ void __fastcall TFormLogo::FormShow (TObject *Sender)
   if (SettingsFile -> ReadString ("Multiplayer", "Current_version", "1.3").Length () != 3)
    {
 	SettingsFile -> WriteString ("Multiplayer", "Current_version", "1.3");
-	//ShowMessage
+	ShowErrorM ("The version identifier must consist of exactly 3 characters!");
    }
   SettingsFile -> UpdateFile ();
   //Check all required files

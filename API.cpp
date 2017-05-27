@@ -14,6 +14,8 @@ License GPL-3.0
 
 #include "API.h"
 
+#include "UnitLogo.h"
+
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 
@@ -25,18 +27,22 @@ __fastcall TAPIdata::TAPIdata (TComponent* Owner) : TForm (Owner)
 
 //Vars for saving main data
 TMemIniFile *SettingsFile = new TMemIniFile (GetLauncherDataPath () + "Settings.ini");
+TMemIniFile *LanguageFile = new TMemIniFile ("");
 UnicodeString LanguageStrings [100];
+
+//Don't change theese consts
+UnicodeString Author = "FOXente (Aradam)";
 
 //Get GameData folder's path
 UnicodeString GetGameDataPath ()
  {
-  return ExtractFilePath (Application -> ExeName) + "GameData\\";
+  return ExtractFilePath (Application -> ExeName) + "GameData/";
  }
 
 //Get LauncherData folder's path
 UnicodeString GetLauncherDataPath ()
  {
-  return ExtractFilePath (Application -> ExeName) + "LauncherData\\";
+  return ExtractFilePath (Application -> ExeName) + "LauncherData/";
  }
 
 //Get file name without extension
@@ -46,10 +52,17 @@ UnicodeString GetOnlyFileName (UnicodeString FilePath)
  }
 
 //If ident doesnt exists that will writed this value in new ident
-void WriteNewStringToIniFile (TMemIniFile *IniFile, UnicodeString Section, UnicodeString Ident, UnicodeString Value)
+UnicodeString WriteNewStringToIniFile (TMemIniFile *IniFile, UnicodeString Section, UnicodeString Ident, UnicodeString Value)
  {
   Value = IniFile -> ReadString (Section, Ident, Value);
   IniFile -> WriteString (Section, Ident, Value);
+  return Value;
+ }
+
+//Replace string mask with replacement
+UnicodeString ReplaceStringMask (UnicodeString CurrentString, UnicodeString Mask, UnicodeString Replacement)
+ {
+  return StringReplace (CurrentString, "%" + Mask + "%", Replacement, TReplaceFlags () << rfReplaceAll);
  }
 
 //If file doesn't exists that will be error shown and the application terminate
@@ -57,9 +70,21 @@ void RequiredFileExists (UnicodeString FilePath)
  {
   if (!FileExists (FilePath))
    {
-    ShowErrorM ("File '" + FilePath + "' doesn't exsists!");
+	ShowErrorM (ReplaceStringMask (LanguageStrings [1], "path", FilePath));
     Application -> Terminate ();
    }
+ }
+
+//Apply new program's language from file
+void ApplyLanguageFromFile (UnicodeString FilePath)
+ {
+  //Loading
+  LanguageFile = new TMemIniFile (FilePath);
+  LanguageStrings [0] = WriteNewStringToIniFile (LanguageFile, "FormCaption", "Logo", "Created by %name%");
+  LanguageStrings [1] = WriteNewStringToIniFile (LanguageFile, "Error", "1", "File '%path%' doesn't exsists!");
+  LanguageFile -> UpdateFile ();
+  //Apply
+  FormLogo -> Caption = ReplaceStringMask (LanguageStrings [0], "name", Author);
  }
 
 //Set form position to screen center
