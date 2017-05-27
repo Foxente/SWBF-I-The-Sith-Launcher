@@ -25,7 +25,7 @@ class TAPIdata : public TForm
   __published:
   private:
   public:
-	__fastcall TAPIdata (TComponent* Owner);
+    __fastcall TAPIdata (TComponent* Owner);
  };
 
 extern PACKAGE TAPIdata *APIdata;

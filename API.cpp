@@ -112,7 +112,7 @@ void RequiredFileExists (UnicodeString FilePath)
  {
   if (!FileExists (FilePath))
    {
-	ShowErrorM (ReplaceStringMask (LanguageStrings [1], "path", FilePath));
+    ShowErrorM (ReplaceStringMask (LanguageStrings [1], "path", FilePath));
     Application -> Terminate ();
    }
  }

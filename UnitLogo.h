@@ -28,9 +28,9 @@ class TFormLogo : public TForm
 	TsImage *sImageFOXenteLogo;
 	TTimer *TimerNextForm;
 	void __fastcall FormShow (TObject *Sender);
-	void __fastcall TimerNextFormTimer (TObject *Sender);
-  private :	// User declarations
-  public :		// User declarations
+    void __fastcall TimerNextFormTimer (TObject *Sender);
+  private :	 // User declarations
+  public :  // User declarations
 	__fastcall TFormLogo (TComponent* Owner);
  };
 

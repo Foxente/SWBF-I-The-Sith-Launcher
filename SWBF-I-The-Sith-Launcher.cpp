@@ -28,11 +28,11 @@ int WINAPI _tWinMain (HINSTANCE, HINSTANCE, LPTSTR, int)
 	Application -> CreateForm (__classid (TAPIdata), &APIdata);
 	Application -> CreateForm (__classid (TFormMainMenu), &FormMainMenu);
 	Application -> CreateForm (__classid (TFormSettings), &FormSettings);
-	Application -> Run ();
+    Application -> Run ();
    }
   catch (Exception &exception)
    {
-	Application -> ShowException (&exception);
+    Application -> ShowException (&exception);
    }
   catch (...)
    {
@@ -42,7 +42,7 @@ int WINAPI _tWinMain (HINSTANCE, HINSTANCE, LPTSTR, int)
 	 }
 	catch (Exception &exception)
 	 {
-	  Application -> ShowException (&exception);
+      Application -> ShowException (&exception);
 	 }
    }
   return 0;

@@ -72,7 +72,7 @@ class TFormSettings : public TForm
 	void __fastcall sBitBtnGameRangerVideoClick (TObject *Sender);
   private:	// User declarations
   public:		// User declarations
-	__fastcall TFormSettings (TComponent* Owner);
+    __fastcall TFormSettings (TComponent* Owner);
  };
 
 extern PACKAGE TFormSettings *FormSettings;

@@ -38,7 +38,7 @@ void __fastcall TFormMainMenu::sBitBtnSettingsClick (TObject *Sender)
   if (!IsBattlefrontRunning ())
    {
 	SetFormToScreenCenter (FormSettings);
-	FormSettings -> ShowModal ();
+    FormSettings -> ShowModal ();
    }
  }
 
@@ -60,7 +60,7 @@ void __fastcall TFormMainMenu::sBitBtnPlayClick (TObject *Sender)
 	if (SettingsFile -> ReadString ("Game_launch", "Skip_menu_background", "false") == "true") cmdline += " /nomovies";
 	if (SettingsFile -> ReadString ("Game_launch", "Audio_buffer_enable", "false") == "true") cmdline += " /audiomixbuffer " + SettingsFile -> ReadString ("Game_launch", "Audio_buffer_ms", "200");
 	if (SettingsFile -> ReadString ("Game_launch", "Audio_rate_enable", "false") == "true") cmdline += " /audiosamplerate " + SettingsFile -> ReadString ("Game_launch", "Audio_rate", "11000");
-    STARTUPINFO si;
+	STARTUPINFO si;
 	PROCESS_INFORMATION pi;
 	memset (&pi, 0, sizeof (pi));
 	memset (&si, 0, sizeof (si));
@@ -95,16 +95,16 @@ void __fastcall TFormMainMenu::sBitBtnPlayClick (TObject *Sender)
 			if ((hosts -> Strings [i].Pos (oldDomens -> Strings [j]) > 0) || (hosts -> Strings [i] == "#Star Wars Battlefront Multiplayer Servers"))
 			 {
 			  hosts -> Delete (i);
-              break;
-             }
-           }
+			  break;
+			 }
+		   }
 		}
 	  //Cyclic pass for adding redirects for old swbf domens
 	  hosts -> Add ("#Star Wars Battlefront Multiplayer Servers");
 	  for (int i = 0; i <= oldDomens -> Count - 1; i++)
 		{
 		 hosts -> Add (SettingsFile -> ReadString ("Multiplayer", "Host", "162.248.92.172") + " " + oldDomens -> Strings [i]);
-        }
+		}
 	  hosts -> SaveToFile (GetHostsFilePath ());
 	  hosts -> Free ();
 	  oldDomens -> Free ();

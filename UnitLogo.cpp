@@ -51,7 +51,7 @@ void __fastcall TFormLogo::FormShow (TObject *Sender)
   if (SettingsFile -> ReadString ("Multiplayer", "Current_version", "1.3").Length () > 44)
    {
 	SettingsFile -> WriteString ("Multiplayer", "Current_version", "1.3");
-	ShowErrorM (LanguageStrings [21]);
+    ShowErrorM (LanguageStrings [21]);
    }
   SettingsFile -> UpdateFile ();
   //Check all required files
