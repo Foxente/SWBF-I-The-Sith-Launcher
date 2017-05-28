@@ -9,31 +9,46 @@ Created by FOXente (Aradam)
 License GPL-3.0
 */
 
-#ifndef UnitLogoH
-#define UnitLogoH
+#ifndef UnitAddonsControlH
+#define UnitAddonsControlH
 
 #include <System.Classes.hpp>
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
-#include "sSkinManager.hpp"
+#include "sListBox.hpp"
+#include "sBitBtn.hpp"
+#include "sLabel.hpp"
+#include <Vcl.Buttons.hpp>
 #include "acImage.hpp"
 #include <Vcl.ExtCtrls.hpp>
-#include <Vcl.Imaging.jpeg.hpp>
+#include <Vcl.Graphics.hpp>
 
-class TFormLogo : public TForm
+class TFormAddonsControl : public TForm
  {
   __published :   // IDE-managed Components
-    TsSkinManager *sSkinManager;
-    TsImage *sImageFOXenteLogo;
-    TTimer *TimerNextForm;
+    TsListBox *sListBoxAvailabledAddons;
+    TsListBox *sListBoxSelectedAddons;
+    TsLabel *sLabelAvailabledAddons;
+    TsLabel *sLabelSelectedAddons;
+    TsBitBtn *sBitBtnSelect;
+    TsBitBtn *sBitBtnUnselect;
+    TsBitBtn *sBitBtnOpenExplorer;
+    TsImage *sImageMiniScreen;
+    TsLabel *sLabelMapName;
+    TsLabel *sLabelMapInfo;
+    TsBitBtn *sBitBtnPrevious;
+    TsBitBtn *sBitBtnZoom;
+    TsBitBtn *sBitBtnNext;
     void __fastcall FormShow (TObject *Sender);
-    void __fastcall TimerNextFormTimer (TObject *Sender);
+    void __fastcall sListBoxesClick (TObject *Sender);
+    void __fastcall sBitBtnPreviousClick (TObject *Sender);
+    void __fastcall sBitBtnNextClick (TObject *Sender);
   private :       // User declarations
   public :        // User declarations
-    __fastcall TFormLogo (TComponent* Owner);
+    __fastcall TFormAddonsControl (TComponent* Owner);
  };
 
-extern PACKAGE TFormLogo *FormLogo;
+extern PACKAGE TFormAddonsControl *FormAddonsControl;
 
 #endif

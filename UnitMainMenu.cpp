@@ -16,6 +16,7 @@ License GPL-3.0
 #include "API.h"
 
 #include "UnitSettings.h"
+#include "UnitAddonsControl.h"
 
 #pragma package(smart_init)
 #pragma link "sBitBtn"
@@ -47,7 +48,7 @@ void __fastcall TFormMainMenu::sBitBtnPlayClick (TObject *Sender)
   if (!IsBattlefrontRunning ())
    {
     //Patching .exe for changing game version
-    TFileStream *Stream = new TFileStream (GetGameDataPath () + "Battlefront.exe", fmOpenReadWrite | fmShareDenyWrite);
+    TFileStream *Stream = new TFileStream (GetBattlefrontExePath (), fmOpenReadWrite | fmShareDenyWrite);
     Stream -> Position = 0x2AF12C;
     AnsiString NewVersion = SettingsFile -> ReadString ("Multiplayer", "Current_version", "1.3");
     Stream -> Write (&NewVersion [1], NewVersion.Length () + 1);
@@ -65,7 +66,7 @@ void __fastcall TFormMainMenu::sBitBtnPlayClick (TObject *Sender)
     memset (&pi, 0, sizeof (pi));
     memset (&si, 0, sizeof (si));
     si.cb = sizeof (si);
-    CreateProcess ((GetGameDataPath () + "Battlefront.exe").w_str (), cmdline.w_str (),  0, 0, true, 0, 0, GetGameDataPath ().w_str (), &si, &pi);
+    CreateProcess (GetBattlefrontExePath ().w_str (), cmdline.w_str (),  0, 0, true, 0, 0, GetGameDataPath ().w_str (), &si, &pi);
     //Patching hosts file for Internet multiplayer game
     if (SettingsFile -> ReadString ("Multiplayer", "Use_user_host", "true") == "true")
      {
@@ -111,3 +112,13 @@ void __fastcall TFormMainMenu::sBitBtnPlayClick (TObject *Sender)
      }
    }
  }
+
+void __fastcall TFormMainMenu::sBitBtnSetAdditionalMapClick (TObject *Sender)
+ {
+  if (!IsBattlefrontRunning ())
+   {
+    SetFormToScreenCenter (FormAddonsControl);
+    FormAddonsControl -> ShowModal ();
+   }
+ }
+

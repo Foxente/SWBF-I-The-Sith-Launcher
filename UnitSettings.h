@@ -30,7 +30,7 @@ License GPL-3.0
 
 class TFormSettings : public TForm
  {
-  __published:  // IDE-managed Components
+  __published :   // IDE-managed Components
     TsLabel *sLabelLaunchSettings;
     TsCheckBox *sCheckBoxWindowedMode;
     TsCheckBox *sCheckBoxSkipSpalshScreens;
@@ -70,8 +70,8 @@ class TFormSettings : public TForm
     void __fastcall sBitBtnTunngleVideoClick (TObject *Sender);
     void __fastcall sBitBtnDownloadGameRangerClick (TObject *Sender);
     void __fastcall sBitBtnGameRangerVideoClick (TObject *Sender);
-  private:  // User declarations
-  public:   // User declarations
+  private :       // User declarations
+  public :        // User declarations
     __fastcall TFormSettings (TComponent* Owner);
  };
 

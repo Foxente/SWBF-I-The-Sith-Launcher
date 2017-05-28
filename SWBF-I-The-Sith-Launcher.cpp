@@ -17,6 +17,7 @@ USEFORM ("API.cpp", APIdata);
 USEFORM ("UnitLogo.cpp", FormLogo);
 USEFORM ("UnitMainMenu.cpp", FormMainMenu);
 USEFORM ("UnitSettings.cpp", FormSettings);
+USEFORM ("UnitAddonsControl.cpp", FormAddonsControl);
 
 int WINAPI _tWinMain (HINSTANCE, HINSTANCE, LPTSTR, int)
  {
@@ -28,6 +29,7 @@ int WINAPI _tWinMain (HINSTANCE, HINSTANCE, LPTSTR, int)
     Application -> CreateForm (__classid (TAPIdata), &APIdata);
     Application -> CreateForm (__classid (TFormMainMenu), &FormMainMenu);
     Application -> CreateForm (__classid (TFormSettings), &FormSettings);
+    Application -> CreateForm (__classid (TFormAddonsControl), &FormAddonsControl);
     Application -> Run ();
    }
   catch (Exception &exception)

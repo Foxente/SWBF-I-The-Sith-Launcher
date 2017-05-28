@@ -55,7 +55,7 @@ void __fastcall TFormLogo::FormShow (TObject *Sender)
    }
   SettingsFile -> UpdateFile ();
   //Check all required files
-  RequiredFileExists (GetGameDataPath () + "Battlefront.exe");
+  RequiredFileExists (GetBattlefrontExePath ());
   RequiredFileExists (GetGameDataPath () + "binkw32.dll");
   RequiredFileExists (GetGameDataPath () + "eax.dll");
   RequiredFileExists (GetGameDataPath () + "unicows.dll");
@@ -209,6 +209,8 @@ void __fastcall TFormLogo::FormShow (TObject *Sender)
   RequiredFileExists (GetGameDataPath () + "Data\\_LVL_PC\\SIDE\\evc_rep_212.lvl");
   RequiredFileExists (GetGameDataPath () + "Data\\_LVL_PC\\SIDE\\evc_rep_41st.lvl");
   RequiredFileExists (GetGameDataPath () + "Data\\_LVL_PC\\SIDE\\evc_rep_501.lvl");
+  //Create some directories
+  CreateDir (GetAddOnPath ());
  }
 
 void __fastcall TFormLogo::TimerNextFormTimer (TObject *Sender)

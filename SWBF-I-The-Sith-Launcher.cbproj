@@ -131,6 +131,12 @@
         <CppCompile Include="SWBF-I-The-Sith-Launcher.cpp">
             <BuildOrder>0</BuildOrder>
         </CppCompile>
+        <CppCompile Include="UnitAddonsControl.cpp">
+            <Form>FormAddonsControl</Form>
+            <FormType>dfm</FormType>
+            <DependentOn>UnitAddonsControl.h</DependentOn>
+            <BuildOrder>6</BuildOrder>
+        </CppCompile>
         <CppCompile Include="UnitLogo.cpp">
             <Form>FormLogo</Form>
             <FormType>dfm</FormType>
@@ -153,6 +159,7 @@
         <FormResources Include="UnitMainMenu.dfm"/>
         <FormResources Include="UnitSettings.dfm"/>
         <FormResources Include="API.dfm"/>
+        <FormResources Include="UnitAddonsControl.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

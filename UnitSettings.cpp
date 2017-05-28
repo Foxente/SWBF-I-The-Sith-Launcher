@@ -93,6 +93,7 @@ void __fastcall TFormSettings::sBitBtnSaveClick (TObject *Sender)
   SettingsFile -> UpdateFile ();
   Close ();
  }
+
 void __fastcall TFormSettings::sBitBtnDownloadTunngleClick (TObject *Sender)
  {
   ShellExecute (Handle, L"open", LanguageStrings [24].w_str (), 0, 0, SW_NORMAL);

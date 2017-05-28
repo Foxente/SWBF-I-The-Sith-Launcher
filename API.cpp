@@ -47,6 +47,37 @@ UnicodeString GetLauncherDataPath ()
   return ExtractFilePath (Application -> ExeName) + "LauncherData\\";
  }
 
+//Get Battlefront.exe path
+UnicodeString GetBattlefrontExePath ()
+ {
+  return GetGameDataPath () + "Battlefront.exe";
+ }
+
+//Get Addon directory path
+UnicodeString GetAddOnPath ()
+ {
+  return GetGameDataPath () + "AddOn\\";
+ }
+
+//Get Allmaps directory path
+UnicodeString GetAllMapsPath ()
+ {
+  return GetLauncherDataPath () + "AllMaps\\";
+ }
+
+//Get addon's mapinfo file's path
+UnicodeString GetAddOnMapinfoPath (UnicodeString AddonName)
+ {
+  return GetAllMapsPath () + AddonName + "\\mapinfo.txt";
+ }
+
+//Get addon's screens folder path
+UnicodeString GetAddOnScreensPath (UnicodeString AddonName)
+ {
+  return GetAllMapsPath () + AddonName + "\\Screens\\";
+ }
+
+
 //Get hosts file's path
 UnicodeString GetHostsFilePath ()
  {
@@ -101,10 +132,28 @@ String BoolToRealString (bool Value)
   if (Value) return "true"; else return "false";
  }
 
+//Get file count in folder
+int GetFileCount (UnicodeString Path)
+ {
+  return TDirectory::GetFiles (Path).Length;
+ }
+
 //Checking is Battlefront.exe running
 bool IsBattlefrontRunning ()
  {
   return FindWindow (NULL, L"Star Wars Battlefront") != 0;
+ }
+
+//Checking is addon has mapinfo.txt
+bool hasAddOnMapinfo (UnicodeString AddonName)
+ {
+  return FileExists (GetAddOnMapinfoPath (AddonName));
+ }
+
+//Checking is addon has screens
+bool hasAddOnScreensFolder (UnicodeString AddonName)
+ {
+  return DirectoryExists (GetAddOnScreensPath (AddonName));
  }
 
 //If file doesn't exists that will be error shown and the application terminate
@@ -139,6 +188,14 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   LanguageStrings [11] = WriteNewStringToIniFile (LanguageFile, "Label", "3", "Multiplayer settings");
   LanguageStrings [19] = WriteNewStringToIniFile (LanguageFile, "Label", "4", "The current version identifier of the game");
   LanguageStrings [20] = WriteNewStringToIniFile (LanguageFile, "Label", "5", "Global LAN network");
+  LanguageStrings [28] = WriteNewStringToIniFile (LanguageFile, "Label", "6", "Available maps (%count%):");
+  LanguageStrings [29] = WriteNewStringToIniFile (LanguageFile, "Label", "7", "Selected maps (%count%):");
+  LanguageStrings [30] = WriteNewStringToIniFile (LanguageFile, "Label", "8", "Name: %name%");
+  LanguageStrings [31] = WriteNewStringToIniFile (LanguageFile, "Label", "9", "Eras:");
+  LanguageStrings [32] = WriteNewStringToIniFile (LanguageFile, "Label", "10", "Clone Wars");
+  LanguageStrings [33] = WriteNewStringToIniFile (LanguageFile, "Label", "11", "Galactic Civil War");
+  LanguageStrings [34] = WriteNewStringToIniFile (LanguageFile, "Label", "12", "|          |");
+  LanguageStrings [35] = WriteNewStringToIniFile (LanguageFile, "Label", "13", "Unknown");
   LanguageStrings [12] = WriteNewStringToIniFile (LanguageFile, "CheckBox", "1", "Run the game in the windowed mode");
   LanguageStrings [13] = WriteNewStringToIniFile (LanguageFile, "CheckBox", "2", "Skip logos and splash screens");
   LanguageStrings [14] = WriteNewStringToIniFile (LanguageFile, "CheckBox", "3", "Skip music at startup");
