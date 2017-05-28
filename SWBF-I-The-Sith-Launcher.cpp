@@ -20,6 +20,7 @@ USEFORM ("UnitSettings.cpp", FormSettings);
 USEFORM ("UnitAddonsControl.cpp", FormAddonsControl);
 USEFORM ("UnitScreenZoom.cpp", FormScreenZoom);
 USEFORM ("UnitGlobalProcess.cpp", FormGlobalProcess);
+USEFORM ("UnitAboutLauncher.cpp", FormAboutLauncher);
 
 int WINAPI _tWinMain (HINSTANCE, HINSTANCE, LPTSTR, int)
  {
@@ -34,6 +35,7 @@ int WINAPI _tWinMain (HINSTANCE, HINSTANCE, LPTSTR, int)
     Application -> CreateForm (__classid (TFormAddonsControl), &FormAddonsControl);
     Application -> CreateForm (__classid (TFormScreenZoom), &FormScreenZoom);
     Application -> CreateForm (__classid (TFormGlobalProcess), &FormGlobalProcess);
+    Application -> CreateForm (__classid (TFormAboutLauncher), &FormAboutLauncher);
     Application -> Run ();
    }
   catch (Exception &exception)

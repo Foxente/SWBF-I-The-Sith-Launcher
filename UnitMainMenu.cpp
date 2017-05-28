@@ -14,6 +14,7 @@ License GPL-3.0
 
 #include "UnitMainMenu.h"
 #include "API.h"
+#include "UnitAboutLauncher.h"
 
 #include "UnitSettings.h"
 #include "UnitAddonsControl.h"
@@ -122,3 +123,8 @@ void __fastcall TFormMainMenu::sBitBtnSetAdditionalMapClick (TObject *Sender)
    }
  }
 
+void __fastcall TFormMainMenu::sBitBtnAboutLauncherClick (TObject *Sender)
+ {
+  SetFormToScreenCenter (FormAboutLauncher);
+  FormAboutLauncher -> ShowModal ();
+ }

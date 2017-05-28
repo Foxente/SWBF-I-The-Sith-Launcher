@@ -9,35 +9,25 @@ Created by FOXente (Aradam)
 License GPL-3.0
 */
 
-#ifndef UnitMainMenuH
-#define UnitMainMenuH
+#ifndef UnitAboutLauncherH
+#define UnitAboutLauncherH
 
 #include <System.Classes.hpp>
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
-#include "sBitBtn.hpp"
-#include "sLabel.hpp"
-#include <Vcl.Buttons.hpp>
+#include "sRichEdit.hpp"
+#include <Vcl.ComCtrls.hpp>
 
-class TFormMainMenu : public TForm
+class TFormAboutLauncher : public TForm
  {
   __published :   // IDE-managed Components
-    TsBitBtn *sBitBtnPlay;
-    TsBitBtn *sBitBtnSetAdditionalMap;
-    TsBitBtn *sBitBtnAboutLauncher;
-    TsLabel *sLabelComingSoon;
-    TsBitBtn *sBitBtnSettings;
-    void __fastcall FormClose (TObject *Sender, TCloseAction &Action);
-    void __fastcall sBitBtnSettingsClick (TObject *Sender);
-    void __fastcall sBitBtnPlayClick (TObject *Sender);
-    void __fastcall sBitBtnSetAdditionalMapClick (TObject *Sender);
-    void __fastcall sBitBtnAboutLauncherClick (TObject *Sender);
+    TsRichEdit *sRichEditInfo;
   private :       // User declarations
   public :        // User declarations
-    __fastcall TFormMainMenu (TComponent* Owner);
+    __fastcall TFormAboutLauncher (TComponent* Owner);
  };
 
-extern PACKAGE TFormMainMenu *FormMainMenu;
+extern PACKAGE TFormAboutLauncher *FormAboutLauncher;
 
 #endif

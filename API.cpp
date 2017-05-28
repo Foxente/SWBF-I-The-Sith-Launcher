@@ -17,8 +17,10 @@ License GPL-3.0
 #include "UnitLogo.h"
 #include "UnitMainMenu.h"
 #include "UnitSettings.h"
+#include "UnitAddonsControl.h"
 #include "UnitScreenZoom.h"
 #include "UnitGlobalProcess.h"
+#include "UnitAboutLauncher.h"
 
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -36,8 +38,15 @@ UnicodeString LanguageStrings [100];
 
 //Consts
 const int CurrentAddonsLimit = 26; //ToDo Try to fix it using 1.3 version
+const UnicodeString LauncherVersion = "0.5 BETA";
+const UnicodeString OfficialLanguages = "English / Русский";
+const UnicodeString CompilationDate = "28.05.2017 23:52";
 //Don't change theese consts
 const UnicodeString Author = "FOXente (Aradam)";
+const UnicodeString OfficialTopic = "swbfgamers.com/index.php?topic=11975.0";
+const UnicodeString FOXenteVk = "vk.com/FOXEnte";
+const UnicodeString GitHub = "github.com/Foxente/SWBF-I-The-Sith-Launcher";
+const UnicodeString License = "GPL-3.0";
 
 //Get GameData folder's path
 UnicodeString GetGameDataPath ()
@@ -180,14 +189,14 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   LanguageStrings [2] = WriteNewStringToIniFile (LanguageFile, "FormCaption", "Name", "SWBF I The Sith Launcher");
   LanguageStrings [0] = WriteNewStringToIniFile (LanguageFile, "FormCaption", "Logo", "Created by %name%");
   LanguageStrings [7] = WriteNewStringToIniFile (LanguageFile, "FormCaption", "Settings", "Settings");
-  LanguageStrings [36] = WriteNewStringToIniFile (LanguageFile, "FormCaption", "ScreenViewer", "Settings");
+  LanguageStrings [36] = WriteNewStringToIniFile (LanguageFile, "FormCaption", "ScreenViewer", "Screen Viewer");
   LanguageStrings [37] = WriteNewStringToIniFile (LanguageFile, "FormCaption", "Process", "Process is in progress: %name%");
   LanguageStrings [1] = WriteNewStringToIniFile (LanguageFile, "Error", "1", "File '%path%' doesn't exsists!");
   LanguageStrings [21] = WriteNewStringToIniFile (LanguageFile, "Error", "2", "The version identifier must be no more than 44 characters long!");
   LanguageStrings [41] = WriteNewStringToIniFile (LanguageFile, "Error", "2", "SWBF limit of simultaneously installed maps - %number%. Exceeding the limit threatens the inability of some maps and crash games!");
   LanguageStrings [3] = WriteNewStringToIniFile (LanguageFile, "Button", "1", "Play");
   LanguageStrings [4] = WriteNewStringToIniFile (LanguageFile, "Button", "2", "Set additional maps");
-  LanguageStrings [5] = WriteNewStringToIniFile (LanguageFile, "Button", "3", "About SWBF I The Sith Launcher");
+  LanguageStrings [5] = WriteNewStringToIniFile (LanguageFile, "Button", "3", "About %name%");
   LanguageStrings [8] = WriteNewStringToIniFile (LanguageFile, "Button", "4", "Save");
   LanguageStrings [9] = WriteNewStringToIniFile (LanguageFile, "Button", "5", "Cancel");
   LanguageStrings [22] = WriteNewStringToIniFile (LanguageFile, "Button", "6", "Download");
@@ -219,14 +228,27 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   LanguageStrings [27] = WriteNewStringToIniFile (LanguageFile, "Link", "GameRangerInstruction", "");
   LanguageStrings [38] = WriteNewStringToIniFile (LanguageFile, "Process", "1", "Deletion");
   LanguageStrings [39] = WriteNewStringToIniFile (LanguageFile, "Process", "2", "Copying");
+  LanguageStrings [42] = WriteNewStringToIniFile (LanguageFile, "Information", "1", "The game Star Wars Battlefront I belongs to @ 2004 Lucasfilm Entertainment Company, LLC.");
+  LanguageStrings [43] = WriteNewStringToIniFile (LanguageFile, "Information", "2", "%projectname% was developed by @ 2017 %name%.");
+  LanguageStrings [44] = WriteNewStringToIniFile (LanguageFile, "Information", "3", "The copyright for additional maps (addons) belongs to the creators of these maps.");
+  LanguageStrings [45] = WriteNewStringToIniFile (LanguageFile, "Information", "4", "Launcher Version: %number%");
+  LanguageStrings [46] = WriteNewStringToIniFile (LanguageFile, "Information", "5", "Languages Of The Project: %names%");
+  LanguageStrings [47] = WriteNewStringToIniFile (LanguageFile, "Information", "6", "Compilation Date: %date%");
+  LanguageStrings [48] = WriteNewStringToIniFile (LanguageFile, "Information", "7", "Developer: %name%");
+  LanguageStrings [49] = WriteNewStringToIniFile (LanguageFile, "Information", "8", "Official topic on SWBFGamers.com: %link%");
+  LanguageStrings [50] = WriteNewStringToIniFile (LanguageFile, "Information", "9", "FOXEnte in vk.com: %link%");
+  LanguageStrings [51] = WriteNewStringToIniFile (LanguageFile, "Information", "10", "The Sith Launcher - software for SWBF I. Allows you to manage addons and extends the number of gaming opportunities.");
+  LanguageStrings [52] = WriteNewStringToIniFile (LanguageFile, "Information", "11", "Contacting Me (%name%):");
+  LanguageStrings [53] = WriteNewStringToIniFile (LanguageFile, "Information", "12", "Source Code: %link% (%license%)");
   LanguageFile -> UpdateFile ();
   //Apply
   FormLogo -> Caption = LanguageStrings [2];
   FormMainMenu -> Caption = LanguageStrings [2];
   FormMainMenu -> sBitBtnPlay -> Caption = LanguageStrings [3];
   FormMainMenu -> sBitBtnSetAdditionalMap -> Caption = LanguageStrings [4];
-  FormMainMenu -> sBitBtnAboutLauncher -> Caption = LanguageStrings [5];
+  FormMainMenu -> sBitBtnAboutLauncher -> Caption = ReplaceStringMask (LanguageStrings [5], "name", LanguageStrings [2]);
   FormMainMenu -> sLabelComingSoon -> Caption = LanguageStrings [6];
+  FormAddonsControl -> Caption = LanguageStrings [4];
   FormSettings -> Caption = LanguageStrings [7];
   FormSettings -> sBitBtnSave -> Caption = LanguageStrings [8];
   FormSettings -> sBitBtnCancel -> Caption = LanguageStrings [9];
@@ -247,6 +269,32 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   FormSettings -> sBitBtnGameRangerVideo -> Caption = LanguageStrings [23];
   FormScreenZoom -> Caption = LanguageStrings [36];
   FormGlobalProcess -> sLabelWait -> Caption = LanguageStrings [40];
+  FormAboutLauncher -> Caption = FormMainMenu -> sBitBtnAboutLauncher -> Caption;
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Clear ();
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add (LanguageStrings [42]);
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add (ReplaceStringMask (ReplaceStringMask (LanguageStrings [43], "name", Author), "projectname", LanguageStrings [2]));
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add (LanguageStrings [44]);
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("");
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add (LanguageStrings [51]);
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add (ReplaceStringMask (ReplaceStringMask (LanguageStrings [53], "link", GitHub), "license", License));
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("");
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add (ReplaceStringMask (LanguageStrings [45], "number", LauncherVersion));
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add (ReplaceStringMask (LanguageStrings [46], "names", OfficialLanguages));
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add (ReplaceStringMask (LanguageStrings [47], "date", CompilationDate));
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add (ReplaceStringMask (LanguageStrings [48], "name", Author));
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("");
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add (ReplaceStringMask (LanguageStrings [49], "link", OfficialTopic));
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add (ReplaceStringMask (LanguageStrings [50], "link", FOXenteVk));
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("");
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add (ReplaceStringMask (LanguageStrings [52], "name", "Aradam"));
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("aradam@o-coder.pp.ua");
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("swbfgamers.com/index.php?action=profile;u=16289");
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("vk.com/aradam");
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("ok.ru/aradam");
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("facebook.com/ara2am");
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("web.telegram.org/#/im?p=@ara2am");
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("gitter.im/ara2am");
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("twitter.com/ara2am");
   //Changing elements positions
   FormMainMenu -> sLabelComingSoon -> Left = (FormMainMenu -> Width - FormMainMenu -> sLabelComingSoon -> Width) / 2; //change pos for this label to center of form with
   FormSettings -> sEditMilliseconds -> Left = FormSettings -> sCheckBoxAudioBufferSize -> Left + FormSettings -> sCheckBoxAudioBufferSize -> Width + 5;

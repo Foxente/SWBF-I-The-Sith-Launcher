@@ -1,0 +1,34 @@
+object FormAboutLauncher: TFormAboutLauncher
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
+  Caption = 'FormAboutLauncher'
+  ClientHeight = 335
+  ClientWidth = 609
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object sRichEditInfo: TsRichEdit
+    Left = 0
+    Top = 0
+    Width = 609
+    Height = 337
+    Color = clBlack
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = 12171716
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    ReadOnly = True
+    TabOrder = 0
+    Zoom = 100
+  end
+end

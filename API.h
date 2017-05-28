@@ -38,7 +38,14 @@ extern PACKAGE UnicodeString LanguageStrings [100];
 
 //Consts
 extern PACKAGE const int CurrentAddonsLimit;
+extern PACKAGE const UnicodeString LauncherVersion;
+extern PACKAGE const UnicodeString OfficialLanguages;
+extern PACKAGE const UnicodeString CompilationDate;
 extern PACKAGE const UnicodeString Author;
+extern PACKAGE const UnicodeString OfficialTopic;
+extern PACKAGE const UnicodeString FOXenteVk;
+extern PACKAGE const UnicodeString GitHub;
+extern PACKAGE const UnicodeString License;
 
 //Api methods
 UnicodeString GetGameDataPath ();

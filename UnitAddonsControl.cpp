@@ -184,6 +184,7 @@ void __fastcall TFormAddonsControl::sBitBtnNextClick (TObject *Sender)
   sImageMiniScreen -> Picture -> LoadFromFile (GetAddOnScreensPath (LastObject -> Items -> Strings [LastObject -> ItemIndex]) + "scr_" + IntToStr (CurScreenIndex) + ".jpg");
  }
 
+//Open screen in original size
 void __fastcall TFormAddonsControl::sBitBtnZoomClick (TObject *Sender)
  {
   FormScreenZoom -> ShowModal ();

@@ -56,6 +56,7 @@ object FormMainMenu: TFormMainMenu
     Height = 34
     Caption = 'sBitBtnAboutLauncher'
     TabOrder = 2
+    OnClick = sBitBtnAboutLauncherClick
     ShowFocus = False
   end
   object sBitBtnSettings: TsBitBtn
