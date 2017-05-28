@@ -44,7 +44,10 @@ class TFormAddonsControl : public TForm
     void __fastcall sListBoxesClick (TObject *Sender);
     void __fastcall sBitBtnPreviousClick (TObject *Sender);
     void __fastcall sBitBtnNextClick (TObject *Sender);
-    void __fastcall sBitBtnZoomClick(TObject *Sender);
+    void __fastcall sBitBtnZoomClick (TObject *Sender);
+    void __fastcall sBitBtnUnselectClick (TObject *Sender);
+    void __fastcall sBitBtnSelectClick (TObject *Sender);
+    void __fastcall sBitBtnOpenExplorerClick(TObject *Sender);
   private :       // User declarations
   public :        // User declarations
     __fastcall TFormAddonsControl (TComponent* Owner);

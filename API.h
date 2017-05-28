@@ -37,7 +37,8 @@ extern PACKAGE TMemIniFile *LanguageFile;
 extern PACKAGE UnicodeString LanguageStrings [100];
 
 //Consts
-extern PACKAGE UnicodeString Author;
+extern PACKAGE const int CurrentAddonsLimit;
+extern PACKAGE const UnicodeString Author;
 
 //Api methods
 UnicodeString GetGameDataPath ();

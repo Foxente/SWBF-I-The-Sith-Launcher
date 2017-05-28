@@ -9,33 +9,39 @@ Created by FOXente (Aradam)
 License GPL-3.0
 */
 
-#ifndef UnitScreenZoomH
-#define UnitScreenZoomH
+#ifndef UnitGlobalProcessH
+#define UnitGlobalProcessH
 
 #include <System.Classes.hpp>
 #include <Vcl.Controls.hpp>
 #include <Vcl.StdCtrls.hpp>
 #include <Vcl.Forms.hpp>
-#include "acImage.hpp"
-#include <Vcl.ExtCtrls.hpp>
-#include <Vcl.Graphics.hpp>
-#include "sBitBtn.hpp"
-#include <Vcl.Buttons.hpp>
+#include "sLabel.hpp"
+#include <IOUtils.hpp>
 
-class TFormScreenZoom : public TForm
+class TFormGlobalProcess : public TForm
  {
   __published :   // IDE-managed Components
-    TsImage *sImageFullScreen;
-    TsBitBtn *sBitBtnNext;
-    TsBitBtn *sBitBtnPrevious;
-    void __fastcall sBitBtnPreviousClick (TObject *Sender);
-    void __fastcall sBitBtnNextClick (TObject *Sender);
+    TsLabel *sLabelWait;
     void __fastcall FormShow (TObject *Sender);
   private :       // User declarations
   public :        // User declarations
-    __fastcall TFormScreenZoom (TComponent* Owner);
+    __fastcall TFormGlobalProcess (TComponent* Owner);
  };
 
-extern PACKAGE TFormScreenZoom *FormScreenZoom;
+class TGlobalProcessThread : public TThread
+ {
+  private :
+  protected :
+    void __fastcall Execute ();
+    void __fastcall FormClosing ();
+  public :
+    __fastcall TGlobalProcessThread (bool CreateSuspended);
+ };
+
+extern PACKAGE TFormGlobalProcess *FormGlobalProcess;
+extern PACKAGE int ProcessId;
+extern PACKAGE UnicodeString ProcessName;
+extern PACKAGE UnicodeString ProcessArguments [10];
 
 #endif

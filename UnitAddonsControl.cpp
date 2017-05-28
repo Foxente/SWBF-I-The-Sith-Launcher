@@ -16,6 +16,7 @@ License GPL-3.0
 #include "API.h"
 
 #include "UnitScreenZoom.h"
+#include "UnitGlobalProcess.h"
 
 #pragma package(smart_init)
 #pragma link "sListBox"
@@ -145,14 +146,14 @@ void __fastcall TFormAddonsControl::FormShow (TObject *Sender)
   for (int i = FindFirst (GetAddOnPath () + "*", faDirectory, sr); !i; i = FindNext (sr))
     {
      if ((sr.Name == ".") || (sr.Name == "..")) continue;
-     if ((sr.Attr == 16) || (sr.Attr == 48)) sListBoxSelectedAddons -> Items -> Add (sr.Name); //Added folders only
+     if (sr.Attr & faDirectory) sListBoxSelectedAddons -> Items -> Add (sr.Name); //Added folders only
     }
   FindClose (sr);
   //Uploading all available maps
   for (int i = FindFirst (GetAllMapsPath () + "*", faDirectory, sr); !i; i = FindNext (sr))
     {
      if ((sr.Name == ".") || (sr.Name == "..") || (sListBoxSelectedAddons -> Items -> IndexOf (sr.Name) > -1)) continue;
-     if ((sr.Attr == 16) || (sr.Attr == 48)) sListBoxAvailabledAddons -> Items -> Add (sr.Name); //Added folders only
+     if (sr.Attr & faDirectory) sListBoxAvailabledAddons -> Items -> Add (sr.Name); //Added folders only
     }
   FindClose (sr);
   //Update all labels, images and etc.
@@ -186,5 +187,67 @@ void __fastcall TFormAddonsControl::sBitBtnNextClick (TObject *Sender)
 void __fastcall TFormAddonsControl::sBitBtnZoomClick (TObject *Sender)
  {
   FormScreenZoom -> ShowModal ();
+ }
+
+//Unsellect map
+void __fastcall TFormAddonsControl::sBitBtnUnselectClick (TObject *Sender)
+ {
+  if (sListBoxSelectedAddons -> ItemIndex != -1)
+   {
+    int curIndex = sListBoxSelectedAddons -> ItemIndex;
+    UnicodeString MapName = sListBoxSelectedAddons -> Items -> Strings [sListBoxSelectedAddons -> ItemIndex];
+    //Creating thread
+    ProcessName = LanguageStrings [38];
+    ProcessId = 1;
+    ProcessArguments [0] = GetAddOnPath () + MapName;
+    FormGlobalProcess -> ShowModal ();
+    //Updating information
+    sListBoxAvailabledAddons -> Items -> Add (MapName);
+    sListBoxAvailabledAddons -> ItemIndex = sListBoxAvailabledAddons -> Items -> IndexOf (MapName);
+    sListBoxSelectedAddons -> Items -> Delete (sListBoxSelectedAddons -> ItemIndex);
+    if (sListBoxSelectedAddons -> Items -> Count - 1 < curIndex) curIndex -= 1;
+    sListBoxSelectedAddons -> ItemIndex = curIndex;
+    ChangeInfo (sListBoxSelectedAddons);
+   }
+ }
+
+//Sellect map
+void __fastcall TFormAddonsControl::sBitBtnSelectClick (TObject *Sender)
+ {
+  if (sListBoxAvailabledAddons -> ItemIndex != -1)
+   {
+    if (sListBoxSelectedAddons -> Count >= CurrentAddonsLimit)
+     {
+      ShowErrorM (ReplaceStringMask (LanguageStrings [41], "number", IntToStr (CurrentAddonsLimit)));
+     } else
+     {
+      int curIndex = sListBoxAvailabledAddons -> ItemIndex;
+      UnicodeString MapName = sListBoxAvailabledAddons -> Items -> Strings [sListBoxAvailabledAddons -> ItemIndex];
+      //Creating thread
+      ProcessName = LanguageStrings [39];
+      ProcessId = 2;
+      ProcessArguments [0] =  MapName;
+      FormGlobalProcess -> ShowModal ();
+      //Updating information
+      sListBoxSelectedAddons -> Items -> Add (MapName);
+      sListBoxSelectedAddons -> ItemIndex = sListBoxSelectedAddons -> Items -> IndexOf (MapName);
+      sListBoxAvailabledAddons -> Items -> Delete (sListBoxAvailabledAddons -> ItemIndex);
+      if (sListBoxAvailabledAddons -> Items -> Count - 1 < curIndex) curIndex -= 1;
+      sListBoxAvailabledAddons -> ItemIndex = curIndex;
+      ChangeInfo (sListBoxAvailabledAddons);
+     }
+   }
+ }
+
+ //Open the addon in folder
+void __fastcall TFormAddonsControl::sBitBtnOpenExplorerClick (TObject *Sender)
+ {
+  if (LastObject -> ItemIndex > -1)
+   {
+    //Open addon in AddOn
+    if (LastObject == sListBoxAvailabledAddons) ShellExecute (Handle, L"open", (GetAllMapsPath () + LastObject -> Items -> Strings [LastObject -> ItemIndex]).w_str (), NULL, NULL, SW_RESTORE);
+    //Open addon in AllMaps
+    else ShellExecute (Handle, L"open", (GetAddOnPath () + LastObject -> Items -> Strings [LastObject -> ItemIndex]).w_str (), NULL, NULL, SW_SHOW);
+   }
  }
 

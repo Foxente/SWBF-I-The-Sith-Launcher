@@ -17,6 +17,8 @@ License GPL-3.0
 #include "UnitLogo.h"
 #include "UnitMainMenu.h"
 #include "UnitSettings.h"
+#include "UnitScreenZoom.h"
+#include "UnitGlobalProcess.h"
 
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -32,8 +34,10 @@ TMemIniFile *SettingsFile = new TMemIniFile (GetLauncherDataPath () + "Settings.
 TMemIniFile *LanguageFile = new TMemIniFile ("");
 UnicodeString LanguageStrings [100];
 
+//Consts
+const int CurrentAddonsLimit = 26; //ToDo Try to fix it using 1.3 version
 //Don't change theese consts
-UnicodeString Author = "FOXente (Aradam)";
+const UnicodeString Author = "FOXente (Aradam)";
 
 //Get GameData folder's path
 UnicodeString GetGameDataPath ()
@@ -96,6 +100,8 @@ UnicodeString GetHostsFilePath ()
   // Win 95, 98, Me
   if (FileExists (GetAbsPath ("%windir%\\hosts"))) return GetAbsPath ("%windir%\\hosts");
   if (FileExists (GetAbsPath ("%SystemDrive%\\Windows\\System32\\drivers\\etc\\hosts"))) return GetAbsPath ("%SystemDrive%\\Windows\\System32\\drivers\\etc\\hosts");
+  //else
+  return "C:\WINDOWS\system32\drivers\etc\hosts";
  }
 
 //Get file name without extension
@@ -174,8 +180,11 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   LanguageStrings [2] = WriteNewStringToIniFile (LanguageFile, "FormCaption", "Name", "SWBF I The Sith Launcher");
   LanguageStrings [0] = WriteNewStringToIniFile (LanguageFile, "FormCaption", "Logo", "Created by %name%");
   LanguageStrings [7] = WriteNewStringToIniFile (LanguageFile, "FormCaption", "Settings", "Settings");
+  LanguageStrings [36] = WriteNewStringToIniFile (LanguageFile, "FormCaption", "ScreenViewer", "Settings");
+  LanguageStrings [37] = WriteNewStringToIniFile (LanguageFile, "FormCaption", "Process", "Process is in progress: %name%");
   LanguageStrings [1] = WriteNewStringToIniFile (LanguageFile, "Error", "1", "File '%path%' doesn't exsists!");
   LanguageStrings [21] = WriteNewStringToIniFile (LanguageFile, "Error", "2", "The version identifier must be no more than 44 characters long!");
+  LanguageStrings [41] = WriteNewStringToIniFile (LanguageFile, "Error", "2", "SWBF limit of simultaneously installed maps - %number%. Exceeding the limit threatens the inability of some maps and crash games!");
   LanguageStrings [3] = WriteNewStringToIniFile (LanguageFile, "Button", "1", "Play");
   LanguageStrings [4] = WriteNewStringToIniFile (LanguageFile, "Button", "2", "Set additional maps");
   LanguageStrings [5] = WriteNewStringToIniFile (LanguageFile, "Button", "3", "About SWBF I The Sith Launcher");
@@ -196,6 +205,7 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   LanguageStrings [33] = WriteNewStringToIniFile (LanguageFile, "Label", "11", "Galactic Civil War");
   LanguageStrings [34] = WriteNewStringToIniFile (LanguageFile, "Label", "12", "|          |");
   LanguageStrings [35] = WriteNewStringToIniFile (LanguageFile, "Label", "13", "Unknown");
+  LanguageStrings [40] = WriteNewStringToIniFile (LanguageFile, "Label", "14", "Wait a bit...");
   LanguageStrings [12] = WriteNewStringToIniFile (LanguageFile, "CheckBox", "1", "Run the game in the windowed mode");
   LanguageStrings [13] = WriteNewStringToIniFile (LanguageFile, "CheckBox", "2", "Skip logos and splash screens");
   LanguageStrings [14] = WriteNewStringToIniFile (LanguageFile, "CheckBox", "3", "Skip music at startup");
@@ -207,6 +217,8 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   LanguageStrings [25] = WriteNewStringToIniFile (LanguageFile, "Link", "TunngleVideoInstruction", "https://www.youtube.com/watch?v=WyggZSWwRAE");
   LanguageStrings [26] = WriteNewStringToIniFile (LanguageFile, "Link", "GameRangerDownload", "http://www.gameranger.com/download/");
   LanguageStrings [27] = WriteNewStringToIniFile (LanguageFile, "Link", "GameRangerInstruction", "");
+  LanguageStrings [38] = WriteNewStringToIniFile (LanguageFile, "Process", "1", "Deletion");
+  LanguageStrings [39] = WriteNewStringToIniFile (LanguageFile, "Process", "2", "Copying");
   LanguageFile -> UpdateFile ();
   //Apply
   FormLogo -> Caption = LanguageStrings [2];
@@ -233,6 +245,8 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   FormSettings -> sBitBtnTunngleVideo -> Caption = LanguageStrings [23];
   FormSettings -> sBitBtnDownloadGameRanger -> Caption = LanguageStrings [22];
   FormSettings -> sBitBtnGameRangerVideo -> Caption = LanguageStrings [23];
+  FormScreenZoom -> Caption = LanguageStrings [36];
+  FormGlobalProcess -> sLabelWait -> Caption = LanguageStrings [40];
   //Changing elements positions
   FormMainMenu -> sLabelComingSoon -> Left = (FormMainMenu -> Width - FormMainMenu -> sLabelComingSoon -> Width) / 2; //change pos for this label to center of form with
   FormSettings -> sEditMilliseconds -> Left = FormSettings -> sCheckBoxAudioBufferSize -> Left + FormSettings -> sCheckBoxAudioBufferSize -> Width + 5;
