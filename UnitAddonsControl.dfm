@@ -290,6 +290,7 @@ object FormAddonsControl: TFormAddonsControl
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000}
     TabOrder = 6
+    OnClick = sBitBtnZoomClick
     ShowFocus = False
   end
   object sBitBtnNext: TsBitBtn

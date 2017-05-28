@@ -15,12 +15,15 @@ License GPL-3.0
 #include "UnitAddonsControl.h"
 #include "API.h"
 
+#include "UnitScreenZoom.h"
+
 #pragma package(smart_init)
 #pragma link "sListBox"
 #pragma link "sBitBtn"
 #pragma link "sLabel"
 #pragma link "acImage"
 #pragma resource "*.dfm"
+
 TFormAddonsControl *FormAddonsControl;
 
 TsListBox *LastObject;
@@ -178,5 +181,10 @@ void __fastcall TFormAddonsControl::sBitBtnNextClick (TObject *Sender)
   if (!FileExists (GetAddOnScreensPath (LastObject -> Items -> Strings [LastObject -> ItemIndex]) + "scr_" + IntToStr (CurScreenIndex) + ".jpg"))
    CurScreenIndex = 0;
   sImageMiniScreen -> Picture -> LoadFromFile (GetAddOnScreensPath (LastObject -> Items -> Strings [LastObject -> ItemIndex]) + "scr_" + IntToStr (CurScreenIndex) + ".jpg");
+ }
+
+void __fastcall TFormAddonsControl::sBitBtnZoomClick (TObject *Sender)
+ {
+  FormScreenZoom -> ShowModal ();
  }
 

@@ -23,6 +23,7 @@ License GPL-3.0
 #pragma link "sBitBtn"
 #pragma link "acImage"
 #pragma resource "*.dfm"
+
 TFormSettings *FormSettings;
 
 __fastcall TFormSettings::TFormSettings (TComponent* Owner) : TForm (Owner)
