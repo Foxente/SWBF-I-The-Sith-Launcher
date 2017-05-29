@@ -32,6 +32,9 @@ void __fastcall TFormLogo::FormShow (TObject *Sender)
  {
   //Position to center
   SetFormToScreenCenter (FormLogo);
+  //Create some directories
+  CreateDir (GetAddOnPath ());
+  CreateDir (GetLauncherDataPath () + "Languages\\");
   //Load language file or create if doesn't exists
   ApplyLanguageFromFile (GetLauncherDataPath () + "Languages\\" + SettingsFile -> ReadString ("Language", "Name", "English") + ".ini");
   Caption = ReplaceStringMask (LanguageStrings [0], "name", Author);
@@ -209,8 +212,6 @@ void __fastcall TFormLogo::FormShow (TObject *Sender)
   RequiredFileExists (GetGameDataPath () + "Data\\_LVL_PC\\SIDE\\evc_rep_212.lvl");
   RequiredFileExists (GetGameDataPath () + "Data\\_LVL_PC\\SIDE\\evc_rep_41st.lvl");
   RequiredFileExists (GetGameDataPath () + "Data\\_LVL_PC\\SIDE\\evc_rep_501.lvl");
-  //Create some directories
-  CreateDir (GetAddOnPath ());
  }
 
 void __fastcall TFormLogo::TimerNextFormTimer (TObject *Sender)
