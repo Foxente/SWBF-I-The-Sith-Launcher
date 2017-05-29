@@ -52,8 +52,29 @@ void __fastcall TGlobalProcessThread::Execute ()
    } else
   if (ProcessId == 2)
    {
-    //Coping folder from AllMaps to AddOn
-    TDirectory::Copy (GetAllMapsPath () + ProcessArguments [0], GetAddOnPath () + ProcessArguments [0]);
+    //Coping some files from AllMaps to AddOn
+    TDirectory::CreateDirectoryW (GetAddOnPath () + ProcessArguments [0] + "\\Data\\_lvl_pc\\");
+    CopyFile ((GetAllMapsPath () + ProcessArguments [0] + "\\addme.script").w_str (), (GetAddOnPath () + ProcessArguments [0] + "\\addme.script").w_str (), false);
+    //Unpacking or coping main addon files
+    TSearchRec sr;
+    for (int i = FindFirst (GetAllMapsPath () + ProcessArguments [0] + "\\Data\\_lvl_pc\\*", faAnyFile, sr); !i; i = FindNext (sr))
+      {
+       if ((sr.Name == ".") || (sr.Name == "..")) continue;
+       //Compressed files
+       if (ExtractFileExt (sr.Name) == ".zip")
+        {
+         TZipForge *Archiver = new TZipForge (NULL);
+         Archiver -> FileName = GetAllMapsPath () + ProcessArguments [0] + "\\Data\\_lvl_pc\\" + sr.Name;
+         Archiver -> OpenArchive ();
+         Archiver -> BaseDir = GetAddOnPath () + ProcessArguments [0] + "\\Data\\_lvl_pc\\";
+         Archiver -> ExtractFiles ("*");
+        } else //other files and folders
+        {
+         if (sr.Attr & faDirectory) TDirectory::Copy (GetAllMapsPath () + ProcessArguments [0] + "\\Data\\_lvl_pc\\" + sr.Name, GetAddOnPath () + ProcessArguments [0] + "\\Data\\_lvl_pc\\" + sr.Name);
+         else CopyFile ((GetAllMapsPath () + ProcessArguments [0] + "\\Data\\_lvl_pc\\" + sr.Name).w_str (), (GetAddOnPath () + ProcessArguments [0] + "\\Data\\_lvl_pc\\" + sr.Name).w_str (), false);
+        }
+      }
+    FindClose (sr);
    }
   //Closing form
   Synchronize (FormClosing);

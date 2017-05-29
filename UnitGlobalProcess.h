@@ -18,6 +18,7 @@ License GPL-3.0
 #include <Vcl.Forms.hpp>
 #include "sLabel.hpp"
 #include <IOUtils.hpp>
+#include "ZipForge.hpp"
 
 class TFormGlobalProcess : public TForm
  {

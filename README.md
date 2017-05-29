@@ -4,6 +4,7 @@ It is the launcher for Star Wars Battlefront I, which expend standart game abili
 This software is written on C++ (Embarcadero RAD Studio 10.1 Berlin : C++ Builder).  
 Including packages :  
 [AlphaControls](http://www.alphaskins.com/index.php)  
+[ZipForge](http://www.componentace.com/download/download.php?editionid=12)  
 
 For opening the project you must open **SWBF-I-The-Sith-Launcher.cbproj**  
 
