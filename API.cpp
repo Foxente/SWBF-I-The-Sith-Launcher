@@ -21,6 +21,7 @@ License GPL-3.0
 #include "UnitScreenZoom.h"
 #include "UnitGlobalProcess.h"
 #include "UnitAboutLauncher.h"
+#include "UnitSelectMapMode.h"
 
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -90,6 +91,11 @@ UnicodeString GetAddOnScreensPath (UnicodeString AddonName)
   return GetAllMapsPath () + AddonName + "\\Screens\\";
  }
 
+//Get addon's modes folder path
+UnicodeString GetAddOnModesPath (UnicodeString AddonName)
+ {
+  return GetAllMapsPath () + AddonName + "\\Modes\\";
+ }
 
 //Get hosts file's path
 UnicodeString GetHostsFilePath ()
@@ -171,6 +177,12 @@ bool hasAddOnScreensFolder (UnicodeString AddonName)
   return DirectoryExists (GetAddOnScreensPath (AddonName));
  }
 
+//Checking is addon has additional modes
+bool hasAddOnModesFolder (UnicodeString AddonName)
+ {
+  return DirectoryExists (GetAddOnModesPath (AddonName));
+ }
+
 //If file doesn't exists that will be error shown and the application terminate
 void RequiredFileExists (UnicodeString FilePath)
  {
@@ -191,6 +203,7 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   LanguageStrings [7] = WriteNewStringToIniFile (LanguageFile, "FormCaption", "Settings", "Settings");
   LanguageStrings [36] = WriteNewStringToIniFile (LanguageFile, "FormCaption", "ScreenViewer", "Screen Viewer");
   LanguageStrings [37] = WriteNewStringToIniFile (LanguageFile, "FormCaption", "Process", "Process is in progress: %name%");
+  LanguageStrings [54] = WriteNewStringToIniFile (LanguageFile, "FormCaption", "MapMode", "Select map mode");
   LanguageStrings [1] = WriteNewStringToIniFile (LanguageFile, "Error", "1", "File '%path%' doesn't exsists!");
   LanguageStrings [21] = WriteNewStringToIniFile (LanguageFile, "Error", "2", "The version identifier must be no more than 44 characters long!");
   LanguageStrings [41] = WriteNewStringToIniFile (LanguageFile, "Error", "2", "SWBF limit of simultaneously installed maps - %number%. Exceeding the limit threatens the inability of some maps and crash games!");
@@ -269,6 +282,7 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   FormSettings -> sBitBtnGameRangerVideo -> Caption = LanguageStrings [23];
   FormScreenZoom -> Caption = LanguageStrings [36];
   FormGlobalProcess -> sLabelWait -> Caption = LanguageStrings [40];
+  FormSelectMapMode -> Caption = LanguageStrings [54];
   FormAboutLauncher -> Caption = FormMainMenu -> sBitBtnAboutLauncher -> Caption;
   FormAboutLauncher -> sRichEditInfo -> Lines -> Clear ();
   FormAboutLauncher -> sRichEditInfo -> Lines -> Add (LanguageStrings [42]);

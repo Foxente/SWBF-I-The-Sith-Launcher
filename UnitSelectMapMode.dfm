@@ -1,0 +1,36 @@
+object FormSelectMapMode: TFormSelectMapMode
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
+  Caption = 'FormSelectMapMode'
+  ClientHeight = 42
+  ClientWidth = 213
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object sComboBoxMapMode: TsComboBox
+    Left = 8
+    Top = 8
+    Width = 193
+    Height = 21
+    Alignment = taLeftJustify
+    VerticalAlignment = taAlignTop
+    Color = clBlack
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = 12171716
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ItemIndex = -1
+    ParentFont = False
+    TabOrder = 0
+    Text = 'sComboBoxMapMode'
+  end
+end

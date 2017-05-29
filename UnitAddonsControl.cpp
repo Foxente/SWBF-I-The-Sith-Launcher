@@ -17,6 +17,7 @@ License GPL-3.0
 
 #include "UnitScreenZoom.h"
 #include "UnitGlobalProcess.h"
+#include "UnitSelectMapMode.h"
 
 #pragma package(smart_init)
 #pragma link "sListBox"
@@ -227,8 +228,42 @@ void __fastcall TFormAddonsControl::sBitBtnSelectClick (TObject *Sender)
       //Creating thread
       ProcessName = LanguageStrings [39];
       ProcessId = 2;
-      ProcessArguments [0] =  MapName;
+      ProcessArguments [0] = MapName;
       FormGlobalProcess -> ShowModal ();
+      //Append additional mode
+      if (hasAddOnModesFolder (MapName))
+       {
+        FormSelectMapMode -> sComboBoxMapMode -> Clear ();
+        FormSelectMapMode -> sComboBoxMapMode -> Items -> Add ("Standart");
+        //Uploading all available modes
+        TSearchRec sr;
+        for (int i = FindFirst (GetAddOnModesPath (MapName) + "*", faDirectory, sr); !i; i = FindNext (sr))
+          {
+           if ((sr.Name == ".") || (sr.Name == "..")) continue;
+           if (sr.Attr & faDirectory) FormSelectMapMode -> sComboBoxMapMode -> Items -> Add (sr.Name); //Added folders only
+          }
+        FindClose (sr);
+        FormSelectMapMode -> sComboBoxMapMode -> ItemIndex = 0;
+        //Show dialog of selecting the mode
+        SetFormToScreenCenter (FormSelectMapMode);
+        FormSelectMapMode -> ShowModal ();
+        //if user selects non standrat mode
+        if (FormSelectMapMode -> sComboBoxMapMode -> ItemIndex > 0)
+         {
+          TSearchRec sr;
+          for (int i = FindFirst (GetAddOnModesPath (MapName) + FormSelectMapMode -> sComboBoxMapMode -> Items -> Strings [FormSelectMapMode -> sComboBoxMapMode -> ItemIndex] + "\\*.*", faAnyFile, sr); !i; i = FindNext (sr))
+            {
+             if (!(sr.Attr & faDirectory)) //Copy files only
+              {
+               if (sr.Name == "mission.lvl")
+                {
+                 CopyFile ((GetAddOnModesPath (MapName) + FormSelectMapMode -> sComboBoxMapMode -> Items -> Strings [FormSelectMapMode -> sComboBoxMapMode -> ItemIndex] + "\\mission.lvl").w_str (), (GetAddOnPath () + MapName + "\\Data\\_lvl_pc\\mission.lvl").w_str (), false);
+                }
+              }
+            }
+        FindClose (sr);
+         }
+       }
       //Updating information
       sListBoxSelectedAddons -> Items -> Add (MapName);
       sListBoxSelectedAddons -> ItemIndex = sListBoxSelectedAddons -> Items -> IndexOf (MapName);
