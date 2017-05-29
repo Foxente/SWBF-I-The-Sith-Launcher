@@ -35,7 +35,7 @@ void __fastcall TFormSettings::sBitBtnCancelClick (TObject *Sender)
   Close ();
  }
 
-
+//Loading vars from ini
 void __fastcall TFormSettings::FormShow (TObject *Sender)
  {
   sCheckBoxWindowedMode -> Checked = StrToBool (SettingsFile -> ReadString ("Game_launch", "Window_mode", "false"));
@@ -76,6 +76,7 @@ void __fastcall TFormSettings::sCheckBoxInternetHostClick (TObject *Sender)
   sEditHost -> Enabled = sCheckBoxInternetHost -> Checked;
  }
 
+//Saving vars to ini
 void __fastcall TFormSettings::sBitBtnSaveClick (TObject *Sender)
  {
   SettingsFile -> WriteString ("Game_launch", "Window_mode", BoolToRealString (sCheckBoxWindowedMode -> Checked));
@@ -90,11 +91,16 @@ void __fastcall TFormSettings::sBitBtnSaveClick (TObject *Sender)
   SettingsFile -> WriteString ("Multiplayer", "Use_user_host", BoolToRealString (sCheckBoxInternetHost -> Checked));
   if (sEditHost -> Text == "") sEditHost -> Text = "162.248.92.172";
   SettingsFile -> WriteString ("Multiplayer", "Host", sEditHost -> Text);
+  //Version can not consist of only spaces or be empty ""
+  sEditVersion -> Text = sEditVersion -> Text.Trim (); //deleting all spaces at the beginning and end of the line
+  if (sEditVersion -> Text == "") sEditVersion -> Text = "1.3";
   SettingsFile -> WriteString ("Multiplayer", "Current_version", sEditVersion -> Text);
+  //Save ini
   SettingsFile -> UpdateFile ();
   Close ();
  }
 
+//Opening links
 void __fastcall TFormSettings::sBitBtnDownloadTunngleClick (TObject *Sender)
  {
   ShellExecute (Handle, L"open", LanguageStrings [24].w_str (), 0, 0, SW_NORMAL);
