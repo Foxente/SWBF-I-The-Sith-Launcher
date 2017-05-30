@@ -197,3 +197,4 @@ Win32/Release/GameData/AddOn/
 Win32/Release/SWBF-I-The-Sith-Launcher.exe
 Win32/Release/LauncherData/Settings.ini
 Win32/Release/LauncherData/Languages/English.ini
+Win32/Release/*.obj-eaba*

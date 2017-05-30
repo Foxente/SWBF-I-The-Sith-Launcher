@@ -33,6 +33,7 @@ class TFormMainMenu : public TForm
     void __fastcall sBitBtnPlayClick (TObject *Sender);
     void __fastcall sBitBtnSetAdditionalMapClick (TObject *Sender);
     void __fastcall sBitBtnAboutLauncherClick (TObject *Sender);
+    void __fastcall FormShow (TObject *Sender);
   private :       // User declarations
   public :        // User declarations
     __fastcall TFormMainMenu (TComponent* Owner);
