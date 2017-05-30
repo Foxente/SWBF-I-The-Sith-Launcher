@@ -51,7 +51,7 @@
         <SanitizedProjectName>SWBF-I-The-Sith-Launcher</SanitizedProjectName>
         <ProjectType>CppVCLApplication</ProjectType>
         <Icon_MainIcon>$(BDS)\bin\cbuilder_PROJECTICON.ico</Icon_MainIcon>
-        <AllPackageLibs>rtl.lib;vcl.lib;acntDX10Berlin_R.lib;vclimg.lib;vclie.lib;vclx.lib</AllPackageLibs>
+        <AllPackageLibs>rtl.lib;vcl.lib;acntDX10Berlin_R.lib;vclimg.lib;vclie.lib;vclx.lib;vclZipForged24.lib</AllPackageLibs>
         <_TCHARMapping>wchar_t</_TCHARMapping>
         <DCC_CBuilderOutput>JPHNE</DCC_CBuilderOutput>
         <DynamicRTL>true</DynamicRTL>
@@ -109,12 +109,13 @@
         <TASM_Debugging>None</TASM_Debugging>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <Manifest_File>UAC_Mft.xml</Manifest_File>
         <BCC_UseClassicCompiler>false</BCC_UseClassicCompiler>
         <DynamicRTL>false</DynamicRTL>
         <UsePackages>false</UsePackages>
         <ILINK_LibraryPath>D:\Users\Aradam\Desktop\Lib\AlphaSkins\DX10Berlin;D:\Users\Aradam\Desktop\Lib\AlphaSkins\AlphaDB;D:\Program Files (x86)\ComponentAce\ZipForge\Lib\Delphi 10.1 and C++ Builder 10.1 (Berlin);$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <LinkPackageStatics>rtl.lib;vcl.lib;acntDX10Berlin_R.lib;vclimg.lib;vclie.lib;vclx.lib</LinkPackageStatics>
+        <LinkPackageStatics>rtl.lib;vcl.lib;acntDX10Berlin_R.lib;vclimg.lib;vclie.lib;vclx.lib;vclZipForged24.lib</LinkPackageStatics>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
         <AppEnableHighDPI>true</AppEnableHighDPI>
@@ -286,12 +287,27 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployClass Name="ProjectiOSDeviceResourceRules">
+                <DeployClass Name="DependencyModule">
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                        <Extensions>.dll;.bpl</Extensions>
+                    </Platform>
                     <Platform Name="iOSDevice64">
                         <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
                     </Platform>
                     <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
                     </Platform>
                 </DeployClass>
                 <DeployClass Name="ProjectOSXResource">
@@ -642,27 +658,12 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <DeployClass Name="DependencyModule">
-                    <Platform Name="Win32">
-                        <Operation>0</Operation>
-                        <Extensions>.dll;.bpl</Extensions>
-                    </Platform>
+                <DeployClass Name="ProjectiOSDeviceResourceRules">
                     <Platform Name="iOSDevice64">
                         <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
-                    </Platform>
-                    <Platform Name="OSX32">
-                        <RemoteDir>Contents\MacOS</RemoteDir>
-                        <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
                     </Platform>
                     <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
-                    </Platform>
-                    <Platform Name="iOSSimulator">
-                        <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
                     </Platform>
                 </DeployClass>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>

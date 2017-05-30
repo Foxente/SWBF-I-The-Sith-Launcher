@@ -15,6 +15,7 @@ __recovery
 *.bpl
 *.dcu
 *.dcp
+*.res
 
 # C++ Builder Compiler output files
 *.bpi
@@ -27,6 +28,7 @@ __recovery
 *.pbi
 *.pch
 *.pdi
+*.obj-eaba*
 
 # 64bit Delphi/C++Builder files
 *.[ao]
@@ -197,4 +199,3 @@ Win32/Release/GameData/AddOn/
 Win32/Release/SWBF-I-The-Sith-Launcher.exe
 Win32/Release/LauncherData/Settings.ini
 Win32/Release/LauncherData/Languages/English.ini
-Win32/Release/*.obj-eaba*
