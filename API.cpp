@@ -116,7 +116,7 @@ UnicodeString GetHostsFilePath ()
   if (FileExists (GetAbsPath ("%windir%\\hosts"))) return GetAbsPath ("%windir%\\hosts");
   if (FileExists (GetAbsPath ("%SystemDrive%\\Windows\\System32\\drivers\\etc\\hosts"))) return GetAbsPath ("%SystemDrive%\\Windows\\System32\\drivers\\etc\\hosts");
   //else
-  return "C:\WINDOWS\system32\drivers\etc\hosts";
+  return "C:\\WINDOWS\\system32\\drivers\\etc\\hosts";
  }
 
 //Get file name without extension

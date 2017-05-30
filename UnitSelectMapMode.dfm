@@ -19,9 +19,10 @@ object FormSelectMapMode: TFormSelectMapMode
     Left = 8
     Top = 8
     Width = 193
-    Height = 21
+    Height = 22
     Alignment = taLeftJustify
     VerticalAlignment = taAlignTop
+    Style = csOwnerDrawFixed
     Color = clBlack
     Font.Charset = DEFAULT_CHARSET
     Font.Color = 12171716
@@ -31,6 +32,5 @@ object FormSelectMapMode: TFormSelectMapMode
     ItemIndex = -1
     ParentFont = False
     TabOrder = 0
-    Text = 'sComboBoxMapMode'
   end
 end

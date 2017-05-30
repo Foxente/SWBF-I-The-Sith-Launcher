@@ -1,0 +1,80 @@
+ucft
+{
+	REQN
+	{
+		"bnk"
+		"align=2048"
+		"global"
+	}
+
+	REQN
+	{
+		"config"
+		"global"
+	}
+
+	REQN
+	{
+		"font"
+		"gamefont_large"
+		"gamefont_medium"
+		"gamefont_small"
+		"gamefont_tiny"
+		"starwars_small"
+		"gamefont_super_tiny"
+	}
+
+	REQN
+	{
+		"loc"
+		"english"
+		"spanish"
+		"italian"
+		"french"
+		"german"
+		"uk_english"
+	}
+
+
+	REQN
+	{
+		"texture"
+		"cube_normalizationmap"
+		"hemisphere_normalizationmap"
+		"specularspot"
+		"attenuation_volume"
+		"linear_ramp"
+		"specularcubemap"
+	}
+
+	REQN
+	{
+		"shader"
+		"normal_shader"
+		"interface_shader"
+		"particle_shader"
+		"terrain_shader"
+		"sprite_shader"
+		"skyfog_shader"
+		"foliage_shader"
+		"lightbeam_shader"
+		"scroll_shader"
+		"flare_shader"
+		"sample_shader"
+		"rain_shader"
+		"normalmapadder_shader"
+		"prereflection_shader"
+		"water_shader"
+		"stencilshadow_shader"
+		"shadowquad_shader"
+		"specular_shader"
+		"detail_shader"
+		"ocean_shader"
+		"refraction_shader"
+		"decal_shader"
+		"filtercopy_shader"
+		"shield_shader"
+		"bump_shader"
+		"zprepass_shader"
+	}
+}

@@ -4,7 +4,7 @@ object FormSettings: TFormSettings
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'FormSettings'
-  ClientHeight = 447
+  ClientHeight = 486
   ClientWidth = 482
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -18,7 +18,7 @@ object FormSettings: TFormSettings
   TextHeight = 13
   object sLabelLaunchSettings: TsLabel
     Left = 8
-    Top = 8
+    Top = 55
     Width = 123
     Height = 13
     Caption = 'sLabelLaunchSettings'
@@ -31,28 +31,28 @@ object FormSettings: TFormSettings
   end
   object sLabelCurQuality: TsLabel
     Left = 391
-    Top = 151
+    Top = 198
     Width = 81
     Height = 13
     Caption = 'sLabelCurQuality'
   end
   object sLabelMaxQuality: TsLabel
     Left = 363
-    Top = 183
+    Top = 230
     Width = 30
     Height = 13
     Caption = '44100'
   end
   object sLabelMinQuality: TsLabel
     Left = 165
-    Top = 183
+    Top = 230
     Width = 30
     Height = 13
     Caption = '11000'
   end
   object sLabeMultiplayerSettings: TsLabel
     Left = 8
-    Top = 200
+    Top = 247
     Width = 144
     Height = 13
     Caption = 'sLabeMultiplayerSettings'
@@ -65,21 +65,21 @@ object FormSettings: TFormSettings
   end
   object sLabelCurrentGameVersion: TsLabel
     Left = 16
-    Top = 242
+    Top = 289
     Width = 129
     Height = 13
     Caption = 'sLabelCurrentGameVersion'
   end
   object sLabelLANNetwork: TsLabel
     Left = 16
-    Top = 281
+    Top = 328
     Width = 89
     Height = 13
     Caption = 'sLabelLANNetwork'
   end
   object sImageGameRanger: TsImage
     Left = 375
-    Top = 266
+    Top = 313
     Width = 46
     Height = 46
     AutoSize = True
@@ -193,7 +193,7 @@ object FormSettings: TFormSettings
   end
   object sImageTunngle: TsImage
     Left = 123
-    Top = 266
+    Top = 313
     Width = 48
     Height = 48
     AutoSize = True
@@ -422,21 +422,41 @@ object FormSettings: TFormSettings
   end
   object sLabelTunngle: TsLabel
     Left = 123
-    Top = 320
+    Top = 367
     Width = 38
     Height = 13
     Caption = 'Tunngle'
   end
   object sLabelGameRanger: TsLabel
     Left = 375
-    Top = 318
+    Top = 365
     Width = 62
     Height = 13
     Caption = 'GameRanger'
   end
-  object sCheckBoxWindowedMode: TsCheckBox
+  object sLabelLanguageSettings: TsLabel
+    Left = 8
+    Top = 8
+    Width = 138
+    Height = 13
+    Caption = 'sLabelLanguageSettings'
+    ParentFont = False
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+  end
+  object sLabelGeneralLanguage: TsLabel
     Left = 16
     Top = 27
+    Width = 114
+    Height = 13
+    Caption = 'sLabelGeneralLanguage'
+  end
+  object sCheckBoxWindowedMode: TsCheckBox
+    Left = 16
+    Top = 74
     Width = 155
     Height = 17
     Caption = 'sCheckBoxWindowedMode'
@@ -447,7 +467,7 @@ object FormSettings: TFormSettings
   end
   object sCheckBoxSkipSpalshScreens: TsCheckBox
     Left = 16
-    Top = 50
+    Top = 97
     Width = 167
     Height = 17
     Caption = 'sCheckBoxSkipSpalshScreens'
@@ -458,7 +478,7 @@ object FormSettings: TFormSettings
   end
   object sCheckBoxSkipStartupMusic: TsCheckBox
     Left = 16
-    Top = 73
+    Top = 120
     Width = 160
     Height = 17
     Caption = 'sCheckBoxSkipStartupMusic'
@@ -469,7 +489,7 @@ object FormSettings: TFormSettings
   end
   object sCheckBoxDisableAnimatedMenuBackground: TsCheckBox
     Left = 16
-    Top = 96
+    Top = 143
     Width = 240
     Height = 17
     Caption = 'sCheckBoxDisableAnimatedMenuBackground'
@@ -480,7 +500,7 @@ object FormSettings: TFormSettings
   end
   object sCheckBoxAudioBufferSize: TsCheckBox
     Left = 16
-    Top = 119
+    Top = 166
     Width = 155
     Height = 17
     Caption = 'sCheckBoxAudioBufferSize'
@@ -492,7 +512,7 @@ object FormSettings: TFormSettings
   end
   object sEditMilliseconds: TsEdit
     Left = 177
-    Top = 117
+    Top = 164
     Width = 88
     Height = 21
     Color = clBlack
@@ -507,7 +527,7 @@ object FormSettings: TFormSettings
   end
   object sCheckBoxSoundQuality: TsCheckBox
     Left = 16
-    Top = 150
+    Top = 197
     Width = 143
     Height = 17
     Caption = 'sCheckBoxSoundQuality'
@@ -519,7 +539,7 @@ object FormSettings: TFormSettings
   end
   object sTrackBarSoundQuality: TsTrackBar
     Left = 165
-    Top = 144
+    Top = 191
     Width = 220
     Height = 33
     Max = 44100
@@ -532,7 +552,7 @@ object FormSettings: TFormSettings
   end
   object sCheckBoxInternetHost: TsCheckBox
     Left = 16
-    Top = 219
+    Top = 266
     Width = 141
     Height = 17
     Caption = 'sCheckBoxInternetHost'
@@ -544,7 +564,7 @@ object FormSettings: TFormSettings
   end
   object sEditHost: TsEdit
     Left = 163
-    Top = 217
+    Top = 264
     Width = 198
     Height = 21
     Color = clBlack
@@ -559,7 +579,7 @@ object FormSettings: TFormSettings
   end
   object sEditVersion: TsEdit
     Left = 163
-    Top = 239
+    Top = 286
     Width = 230
     Height = 21
     Color = clBlack
@@ -575,7 +595,7 @@ object FormSettings: TFormSettings
   end
   object sBitBtnSave: TsBitBtn
     Left = 408
-    Top = 414
+    Top = 461
     Width = 75
     Height = 25
     Caption = 'sBitBtnSave'
@@ -585,7 +605,7 @@ object FormSettings: TFormSettings
   end
   object sBitBtnCancel: TsBitBtn
     Left = 336
-    Top = 414
+    Top = 461
     Width = 75
     Height = 25
     Caption = 'sBitBtnCancel'
@@ -595,7 +615,7 @@ object FormSettings: TFormSettings
   end
   object sBitBtnDownloadTunngle: TsBitBtn
     Left = 84
-    Top = 339
+    Top = 386
     Width = 117
     Height = 25
     Caption = 'sBitBtnDownloadTunngle'
@@ -605,7 +625,7 @@ object FormSettings: TFormSettings
   end
   object sBitBtnTunngleVideo: TsBitBtn
     Left = 84
-    Top = 370
+    Top = 417
     Width = 117
     Height = 25
     Caption = 'sBitBtnTunngleVideo'
@@ -615,7 +635,7 @@ object FormSettings: TFormSettings
   end
   object sBitBtnDownloadGameRanger: TsBitBtn
     Left = 335
-    Top = 337
+    Top = 384
     Width = 117
     Height = 25
     Caption = 'sBitBtnDownloadGameRanger'
@@ -625,12 +645,31 @@ object FormSettings: TFormSettings
   end
   object sBitBtnGameRangerVideo: TsBitBtn
     Left = 335
-    Top = 368
+    Top = 415
     Width = 117
     Height = 25
     Caption = 'sBitBtnGameRangerVideo'
     TabOrder = 16
     OnClick = sBitBtnGameRangerVideoClick
     ShowFocus = False
+  end
+  object sComboBoxLanguages: TsComboBox
+    Left = 136
+    Top = 24
+    Width = 145
+    Height = 22
+    Alignment = taLeftJustify
+    VerticalAlignment = taAlignTop
+    Style = csOwnerDrawFixed
+    Color = clBlack
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = 12171716
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ItemIndex = -1
+    ParentFont = False
+    TabOrder = 17
+    OnSelect = sComboBoxLanguagesSelect
   end
 end

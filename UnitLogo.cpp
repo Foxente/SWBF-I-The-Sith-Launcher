@@ -34,9 +34,9 @@ void __fastcall TFormLogo::FormShow (TObject *Sender)
   SetFormToScreenCenter (FormLogo);
   //Create some directories
   CreateDir (GetAddOnPath ());
-  CreateDir (GetLauncherDataPath () + "Languages\\");
+  CreateDir (GetLauncherDataPath () + "Languages\\English\\");
   //Load language file or create if doesn't exists
-  ApplyLanguageFromFile (GetLauncherDataPath () + "Languages\\" + SettingsFile -> ReadString ("Language", "Name", "English") + ".ini");
+  ApplyLanguageFromFile (GetLauncherDataPath () + "Languages\\" + SettingsFile -> ReadString ("Language", "Name", "English") + "\\Language.ini");
   Caption = ReplaceStringMask (LanguageStrings [0], "name", Author);
  }
 

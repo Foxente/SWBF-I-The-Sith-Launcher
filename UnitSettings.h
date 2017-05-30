@@ -27,6 +27,7 @@ License GPL-3.0
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.Graphics.hpp>
 #include <ShellAPi.hpp>
+#include "sComboBox.hpp"
 
 class TFormSettings : public TForm
  {
@@ -59,6 +60,9 @@ class TFormSettings : public TForm
     TsBitBtn *sBitBtnTunngleVideo;
     TsBitBtn *sBitBtnDownloadGameRanger;
     TsBitBtn *sBitBtnGameRangerVideo;
+    TsLabel *sLabelLanguageSettings;
+    TsLabel *sLabelGeneralLanguage;
+    TsComboBox *sComboBoxLanguages;
     void __fastcall sBitBtnCancelClick (TObject *Sender);
     void __fastcall FormShow (TObject *Sender);
     void __fastcall sTrackBarSoundQualityChange (TObject *Sender);
@@ -70,6 +74,7 @@ class TFormSettings : public TForm
     void __fastcall sBitBtnTunngleVideoClick (TObject *Sender);
     void __fastcall sBitBtnDownloadGameRangerClick (TObject *Sender);
     void __fastcall sBitBtnGameRangerVideoClick (TObject *Sender);
+    void __fastcall sComboBoxLanguagesSelect (TObject *Sender);
   private :       // User declarations
   public :        // User declarations
     __fastcall TFormSettings (TComponent* Owner);

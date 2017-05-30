@@ -198,4 +198,10 @@ Win32/Release/GameData/AddOn/
 # Launcher unique files
 Win32/Release/SWBF-I-The-Sith-Launcher.exe
 Win32/Release/LauncherData/Settings.ini
-Win32/Release/LauncherData/Languages/English.ini
+Win32/Release/LauncherData/Compilation/core.lvl/english.loc
+Win32/Release/LauncherData/Compilation/core.lvl/gamefont_large.font
+Win32/Release/LauncherData/Compilation/core.lvl/gamefont_medium.font
+Win32/Release/LauncherData/Compilation/core.lvl/gamefont_small.font
+Win32/Release/LauncherData/Compilation/core.lvl/gamefont_super_tiny.font
+Win32/Release/LauncherData/Compilation/core.lvl/gamefont_tiny.font
+Win32/Release/LauncherData/Compilation/core.lvl/starwars_small.font

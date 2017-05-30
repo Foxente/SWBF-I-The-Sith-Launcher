@@ -15,6 +15,8 @@ License GPL-3.0
 #include "UnitSettings.h"
 #include "API.h"
 
+#include "UnitGlobalProcess.h"
+
 #pragma package(smart_init)
 #pragma link "sLabel"
 #pragma link "sCheckBox"
@@ -22,6 +24,7 @@ License GPL-3.0
 #pragma link "sTrackBar"
 #pragma link "sBitBtn"
 #pragma link "acImage"
+#pragma link "sComboBox"
 #pragma resource "*.dfm"
 
 TFormSettings *FormSettings;
@@ -54,6 +57,17 @@ void __fastcall TFormSettings::FormShow (TObject *Sender)
   sEditHost -> Enabled = sCheckBoxInternetHost -> Checked;
   sEditHost -> Text = SettingsFile -> ReadString ("Multiplayer", "Host", "162.248.92.172");
   sEditVersion -> Text = SettingsFile -> ReadString ("Multiplayer", "Current_version", "1.3");
+  //Load list of languages
+  sComboBoxLanguages -> Clear ();
+  TSearchRec sr;
+  for (int i = FindFirst (GetLauncherDataPath () + "Languages\\*", faDirectory, sr); !i; i = FindNext (sr))
+    {
+     if ((sr.Name == ".") || (sr.Name == "..")) continue;
+     if (sr.Attr & faDirectory) sComboBoxLanguages -> Items -> Add (sr.Name); //Added folders only
+    }
+  sComboBoxLanguages -> ItemIndex = sComboBoxLanguages -> Items -> IndexOf (SettingsFile -> ReadString ("Language", "Name", "English"));
+  if (sComboBoxLanguages -> ItemIndex == -1) sComboBoxLanguages -> ItemIndex = 0;
+  FindClose (sr);
  }
 
 void __fastcall TFormSettings::sTrackBarSoundQualityChange (TObject *Sender)
@@ -95,8 +109,13 @@ void __fastcall TFormSettings::sBitBtnSaveClick (TObject *Sender)
   sEditVersion -> Text = sEditVersion -> Text.Trim (); //deleting all spaces at the beginning and end of the line
   if (sEditVersion -> Text == "") sEditVersion -> Text = "1.3";
   SettingsFile -> WriteString ("Multiplayer", "Current_version", sEditVersion -> Text);
+  SettingsFile -> WriteString ("Language", "Name", sComboBoxLanguages -> Text);
   //Save ini
   SettingsFile -> UpdateFile ();
+  //Patching language
+  ProcessName = LanguageStrings [38];
+  ProcessId = 3;
+  FormGlobalProcess -> ShowModal ();
   Close ();
  }
 
@@ -119,4 +138,10 @@ void __fastcall TFormSettings::sBitBtnDownloadGameRangerClick (TObject *Sender)
 void __fastcall TFormSettings::sBitBtnGameRangerVideoClick (TObject *Sender)
  {
   //ShellExecute (Handle, L"open", LanguageStrings [27].w_str (), 0, 0, SW_NORMAL);
+ }
+
+void __fastcall TFormSettings::sComboBoxLanguagesSelect (TObject *Sender)
+ {
+  //Apply language
+  ApplyLanguageFromFile (GetLauncherDataPath () + "Languages\\" + sComboBoxLanguages -> Text + "\\Language.ini");
  }

@@ -1,3 +1,6 @@
 [submodule "Win32/Release/LauncherData/AllMaps"]
 	path = Win32/Release/LauncherData/AllMaps
 	url = https://github.com/Foxente/SWBF-I-Addons.git
+[submodule "Win32/Release/LauncherData/Languages"]
+	path = Win32/Release/LauncherData/Languages
+	url = https://github.com/Foxente/SWBF-I-Languages.git
