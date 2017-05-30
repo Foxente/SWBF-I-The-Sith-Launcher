@@ -142,8 +142,9 @@ UnicodeString ReplaceStringMask (UnicodeString CurrentString, UnicodeString Mask
 //Get absolute path from environnment string
 UnicodeString GetAbsPath (UnicodeString Path)
  {
-  wchar_t* ReturnPath;
-  ExpandEnvironmentStrings (Path.w_str (), ReturnPath, MAX_PATH);
+  const int BUFFER_SIZE = 4096;
+  wchar_t ReturnPath [BUFFER_SIZE] = {0};
+  ExpandEnvironmentStrings (Path.w_str (), ReturnPath, BUFFER_SIZE);
   return UnicodeString (ReturnPath);
  }
 

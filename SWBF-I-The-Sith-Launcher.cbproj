@@ -109,12 +109,14 @@
         <TASM_Debugging>None</TASM_Debugging>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
-        <ILINK_LibraryPath>D:\Users\Aradam\Desktop\Lib\AlphaSkins\DX10Berlin;D:\Users\Aradam\Desktop\Lib\AlphaSkins\AlphaDB;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+        <BCC_UseClassicCompiler>false</BCC_UseClassicCompiler>
+        <DynamicRTL>false</DynamicRTL>
+        <UsePackages>false</UsePackages>
+        <ILINK_LibraryPath>D:\Users\Aradam\Desktop\Lib\AlphaSkins\DX10Berlin;D:\Users\Aradam\Desktop\Lib\AlphaSkins\AlphaDB;D:\Program Files (x86)\ComponentAce\ZipForge\Lib\Delphi 10.1 and C++ Builder 10.1 (Berlin);$(ILINK_LibraryPath)</ILINK_LibraryPath>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <LinkPackageStatics>acntDX10Berlin_R.lib</LinkPackageStatics>
+        <LinkPackageStatics>rtl.lib;vcl.lib;acntDX10Berlin_R.lib;vclimg.lib;vclie.lib;vclx.lib</LinkPackageStatics>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <AppEnableRuntimeThemes>true</AppEnableRuntimeThemes>
-        <LinkPackageImports>rtl.bpi;vcl.bpi;vclimg.bpi;vclie.bpi;vclx.bpi</LinkPackageImports>
         <AppEnableHighDPI>true</AppEnableHighDPI>
     </PropertyGroup>
     <ItemGroup>
@@ -179,15 +181,15 @@
             <DependentOn>UnitSettings.h</DependentOn>
             <BuildOrder>5</BuildOrder>
         </CppCompile>
-        <FormResources Include="UnitLogo.dfm"/>
-        <FormResources Include="UnitGlobalProcess.dfm"/>
         <FormResources Include="UnitMainMenu.dfm"/>
-        <FormResources Include="UnitSettings.dfm"/>
+        <FormResources Include="UnitLogo.dfm"/>
         <FormResources Include="UnitScreenZoom.dfm"/>
+        <FormResources Include="UnitSettings.dfm"/>
+        <FormResources Include="UnitSelectMapMode.dfm"/>
+        <FormResources Include="UnitGlobalProcess.dfm"/>
         <FormResources Include="API.dfm"/>
         <FormResources Include="UnitAddonsControl.dfm"/>
         <FormResources Include="UnitAboutLauncher.dfm"/>
-        <FormResources Include="UnitSelectMapMode.dfm"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -284,27 +286,12 @@
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
-                <DeployClass Name="DependencyModule">
-                    <Platform Name="Win32">
-                        <Operation>0</Operation>
-                        <Extensions>.dll;.bpl</Extensions>
-                    </Platform>
+                <DeployClass Name="ProjectiOSDeviceResourceRules">
                     <Platform Name="iOSDevice64">
                         <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
-                    </Platform>
-                    <Platform Name="OSX32">
-                        <RemoteDir>Contents\MacOS</RemoteDir>
-                        <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
                     </Platform>
                     <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
-                    </Platform>
-                    <Platform Name="iOSSimulator">
-                        <Operation>1</Operation>
-                        <Extensions>.dylib</Extensions>
                     </Platform>
                 </DeployClass>
                 <DeployClass Name="ProjectOSXResource">
@@ -655,12 +642,27 @@
                         <Operation>1</Operation>
                     </Platform>
                 </DeployClass>
-                <DeployClass Name="ProjectiOSDeviceResourceRules">
+                <DeployClass Name="DependencyModule">
+                    <Platform Name="Win32">
+                        <Operation>0</Operation>
+                        <Extensions>.dll;.bpl</Extensions>
+                    </Platform>
                     <Platform Name="iOSDevice64">
                         <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="OSX32">
+                        <RemoteDir>Contents\MacOS</RemoteDir>
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
                     </Platform>
                     <Platform Name="iOSDevice32">
                         <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
+                    </Platform>
+                    <Platform Name="iOSSimulator">
+                        <Operation>1</Operation>
+                        <Extensions>.dylib</Extensions>
                     </Platform>
                 </DeployClass>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
