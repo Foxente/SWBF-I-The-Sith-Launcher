@@ -39,6 +39,16 @@ class TFormMainMenu : public TForm
     __fastcall TFormMainMenu (TComponent* Owner);
  };
 
+class TErrorSearchThread : public TThread
+ {
+  private:
+  protected:
+    void __fastcall Execute ();
+    void __fastcall ShowErr ();
+  public:
+    __fastcall TErrorSearchThread (bool CreateSuspended);
+ };
+
 extern PACKAGE TFormMainMenu *FormMainMenu;
 
 #endif

@@ -62,7 +62,8 @@ UnicodeString WriteNewStringToIniFile (TMemIniFile *IniFile, UnicodeString Secti
 UnicodeString ReplaceStringMask (UnicodeString CurrentString, UnicodeString Mask, UnicodeString Replacement);
 UnicodeString GetAbsPath (UnicodeString Path);
 String BoolToRealString (bool Value);
-int GetFileCount (UnicodeString Path);
+int GetFilesCount (UnicodeString Path);
+int GetDirectoriesCount (UnicodeString Path);
 bool IsBattlefrontRunning ();
 bool hasAddOnMapinfo (UnicodeString AddonName);
 bool hasAddOnScreensFolder (UnicodeString AddonName);

@@ -9,6 +9,7 @@ Created by FOXente (Aradam)
 License GPL-3.0
 */
 
+#include <System.hpp>
 #include <vcl.h>
 #pragma hdrstop
 
@@ -25,8 +26,13 @@ License GPL-3.0
 #pragma resource "*.dfm"
 
 TFormMainMenu *FormMainMenu;
+UnicodeString ErrorMessage;
 
 __fastcall TFormMainMenu::TFormMainMenu (TComponent* Owner) : TForm (Owner)
+ {
+ }
+
+__fastcall TErrorSearchThread::TErrorSearchThread (bool CreateSuspended) : TThread (CreateSuspended)
  {
  }
 
@@ -278,6 +284,7 @@ void __fastcall TFormMainMenu::sBitBtnAboutLauncherClick (TObject *Sender)
 
 void __fastcall TFormMainMenu::FormShow (TObject *Sender)
  {
+  TErrorSearchThread *ErrorSearchThread = new TErrorSearchThread (false);
   //Generate new Settings.ini if doesnt exists
   WriteNewStringToIniFile (SettingsFile, "Game_launch", "Window_mode", "false");
   WriteNewStringToIniFile (SettingsFile, "Game_launch", "Skip_logos", "false");
@@ -297,4 +304,81 @@ void __fastcall TFormMainMenu::FormShow (TObject *Sender)
     ShowErrorM (LanguageStrings [21]);
    }
   SettingsFile -> UpdateFile ();
+ }
+
+//Search errors in addons
+void __fastcall TErrorSearchThread::Execute ()
+ {
+  //Checking AddOn folder
+  if (GetDirectoriesCount (GetAddOnPath ()) > CurrentAddonsLimit)
+   {
+    ErrorMessage = ReplaceStringMask (LanguageStrings [41], "number", CurrentAddonsLimit);
+    Synchronize (ShowErr);
+   }
+  for (int i = 0; i < GetDirectoriesCount (GetAddOnPath ()); i++)
+    {
+     UnicodeString curAddonPath = TDirectory::GetDirectories (GetAddOnPath ()) [i];
+     UnicodeString curAddonName = ExtractFileName (curAddonPath);
+     if (!FileExists (curAddonPath + "\\addme.script"))
+      {
+       ErrorMessage = ReplaceStringMask (ReplaceStringMask (LanguageStrings [58], "name", "addme.script"), "addon", curAddonName);
+       Synchronize (ShowErr);
+      }
+     if (!FileExists (curAddonPath + "\\Data\\_lvl_pc\\mission.lvl"))
+      {
+       ErrorMessage = ReplaceStringMask (ReplaceStringMask (LanguageStrings [58], "name", "mission.lvl"), "addon", curAddonName);
+       Synchronize (ShowErr);
+      }
+     if (!FileExists (curAddonPath + "\\Data\\_lvl_pc\\core.lvl"))
+      {
+       ErrorMessage = ReplaceStringMask (ReplaceStringMask (LanguageStrings [58], "name", "core.lvl"), "addon", curAddonName);
+       Synchronize (ShowErr);
+      }
+     if (!DirectoryExists (GetAllMapsPath () + curAddonName + "\\"))
+      {
+       ErrorMessage = ReplaceStringMask (LanguageStrings [59], "name", curAddonName);
+       Synchronize (ShowErr);
+      }
+    }
+  //Checking AllMAps folder
+  for (int i = 0; i < GetDirectoriesCount (GetAllMapsPath ()); i++)
+    {
+     UnicodeString curAddonPath = TDirectory::GetDirectories (GetAllMapsPath ()) [i];
+     UnicodeString curAddonName = ExtractFileName (curAddonPath);
+     if (!FileExists (curAddonPath + "\\addme.script"))
+      {
+       ErrorMessage = ReplaceStringMask (ReplaceStringMask (LanguageStrings [58], "name", "addme.script"), "addon", curAddonName);
+       Synchronize (ShowErr);
+      }
+     if (!FileExists (curAddonPath + "\\Data\\_lvl_pc\\mission.lvl"))
+      {
+       ErrorMessage = ReplaceStringMask (ReplaceStringMask (LanguageStrings [58], "name", "mission.lvl"), "addon", curAddonName);
+       Synchronize (ShowErr);
+      }
+     if (!FileExists (curAddonPath + "\\Data\\_lvl_pc\\core.lvl"))
+      {
+       ErrorMessage = ReplaceStringMask (ReplaceStringMask (LanguageStrings [58], "name", "core.lvl"), "addon", curAddonName);
+       Synchronize (ShowErr);
+      }
+     //Checking screens numbering
+     if (DirectoryExists (GetAddOnScreensPath (curAddonName)))
+      {
+       for (int j = 0; j < GetFilesCount (GetAddOnScreensPath (curAddonName)); j++)
+         {
+          UnicodeString curScreenPath = GetAddOnScreensPath (curAddonName) + "scr_" + IntToStr (j) + ".jpg";
+          if (!FileExists (curScreenPath))
+           {
+            ErrorMessage = ReplaceStringMask (ReplaceStringMask (LanguageStrings [60], "addon", curAddonName), "name", "scr_" + IntToStr (j) + ".jpg");
+            Synchronize (ShowErr);
+            break;
+           }
+         }
+      }
+    }
+ }
+
+//Show error from thread
+void __fastcall TErrorSearchThread::ShowErr ()
+ {
+  ShowErrorM (ErrorMessage);
  }

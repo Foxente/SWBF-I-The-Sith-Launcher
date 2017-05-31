@@ -155,9 +155,15 @@ String BoolToRealString (bool Value)
  }
 
 //Get file count in folder
-int GetFileCount (UnicodeString Path)
+int GetFilesCount (UnicodeString Path)
  {
   return TDirectory::GetFiles (Path).Length;
+ }
+
+//Get directories count in folder
+int GetDirectoriesCount (UnicodeString Path)
+ {
+  return TDirectory::GetDirectories (Path).Length;
  }
 
 //Checking is Battlefront.exe running
@@ -190,7 +196,7 @@ void RequiredFileExists (UnicodeString FilePath)
   if (!FileExists (FilePath))
    {
     ShowErrorM (ReplaceStringMask (LanguageStrings [1], "path", FilePath));
-    FormMainMenu -> Close ();
+    exit (777);
    }
  }
 
@@ -205,9 +211,12 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   LanguageStrings [36] = WriteNewStringToIniFile (LanguageFile, "FormCaption", "ScreenViewer", "Screen Viewer");
   LanguageStrings [37] = WriteNewStringToIniFile (LanguageFile, "FormCaption", "Process", "Process is in progress: %name%");
   LanguageStrings [54] = WriteNewStringToIniFile (LanguageFile, "FormCaption", "MapMode", "Select map mode");
-  LanguageStrings [1] = WriteNewStringToIniFile (LanguageFile, "Error", "1", "File '%path%' doesn't exsists!");
+  LanguageStrings [1] = WriteNewStringToIniFile (LanguageFile, "Error", "1", "File '%path%' doesn't exists!");
   LanguageStrings [21] = WriteNewStringToIniFile (LanguageFile, "Error", "2", "The version identifier must be no more than 44 characters long!");
-  LanguageStrings [41] = WriteNewStringToIniFile (LanguageFile, "Error", "2", "SWBF limit of simultaneously installed maps - %number%. Exceeding the limit threatens the inability of some maps and crash games!");
+  LanguageStrings [41] = WriteNewStringToIniFile (LanguageFile, "Error", "3", "SWBF limit of simultaneously installed maps - %number%. Exceeding the limit threatens the inability of some maps and crash games!");
+  LanguageStrings [58] = WriteNewStringToIniFile (LanguageFile, "Error", "4", "File '%name%' is missing in the addon '%addon%'!");
+  LanguageStrings [59] = WriteNewStringToIniFile (LanguageFile, "Error", "5", "Map '%name%' exists only in the AddOn folder. Copy it to AllMaps folder!");
+  LanguageStrings [60] = WriteNewStringToIniFile (LanguageFile, "Error", "6", "Numbering screenshots in the addon '%addon%' is wrong. File '%name%' doesn't exist!");
   LanguageStrings [3] = WriteNewStringToIniFile (LanguageFile, "Button", "1", "Play");
   LanguageStrings [4] = WriteNewStringToIniFile (LanguageFile, "Button", "2", "Set additional maps");
   LanguageStrings [5] = WriteNewStringToIniFile (LanguageFile, "Button", "3", "About %name%");
@@ -229,6 +238,8 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   LanguageStrings [34] = WriteNewStringToIniFile (LanguageFile, "Label", "12", "|          |");
   LanguageStrings [35] = WriteNewStringToIniFile (LanguageFile, "Label", "13", "Unknown");
   LanguageStrings [40] = WriteNewStringToIniFile (LanguageFile, "Label", "14", "Wait a bit...");
+  LanguageStrings [56] = WriteNewStringToIniFile (LanguageFile, "Label", "15", "Language settings");
+  LanguageStrings [57] = WriteNewStringToIniFile (LanguageFile, "Label", "16", "Current language");
   LanguageStrings [12] = WriteNewStringToIniFile (LanguageFile, "CheckBox", "1", "Run the game in the windowed mode");
   LanguageStrings [13] = WriteNewStringToIniFile (LanguageFile, "CheckBox", "2", "Skip logos and splash screens");
   LanguageStrings [14] = WriteNewStringToIniFile (LanguageFile, "CheckBox", "3", "Skip music at startup");
@@ -242,6 +253,7 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   LanguageStrings [27] = WriteNewStringToIniFile (LanguageFile, "Link", "GameRangerInstruction", "");
   LanguageStrings [38] = WriteNewStringToIniFile (LanguageFile, "Process", "1", "Deletion");
   LanguageStrings [39] = WriteNewStringToIniFile (LanguageFile, "Process", "2", "Copying");
+  LanguageStrings [55] = WriteNewStringToIniFile (LanguageFile, "Process", "3", "Compilation");
   LanguageStrings [42] = WriteNewStringToIniFile (LanguageFile, "Information", "1", "The game Star Wars Battlefront I belongs to @ 2004 Lucasfilm Entertainment Company, LLC.");
   LanguageStrings [43] = WriteNewStringToIniFile (LanguageFile, "Information", "2", "%projectname% was developed by @ 2017 %name%.");
   LanguageStrings [44] = WriteNewStringToIniFile (LanguageFile, "Information", "3", "The copyright for additional maps (addons) belongs to the creators of these maps.");
@@ -281,6 +293,8 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   FormSettings -> sBitBtnTunngleVideo -> Caption = LanguageStrings [23];
   FormSettings -> sBitBtnDownloadGameRanger -> Caption = LanguageStrings [22];
   FormSettings -> sBitBtnGameRangerVideo -> Caption = LanguageStrings [23];
+  FormSettings -> sLabelLanguageSettings -> Caption = LanguageStrings [56];
+  FormSettings -> sLabelGeneralLanguage -> Caption = LanguageStrings [57];
   FormScreenZoom -> Caption = LanguageStrings [36];
   FormGlobalProcess -> sLabelWait -> Caption = LanguageStrings [40];
   FormSelectMapMode -> Caption = LanguageStrings [54];
@@ -327,6 +341,7 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   FormSettings -> sBitBtnGameRangerVideo -> Left = FormSettings -> sBitBtnDownloadGameRanger -> Left;
   FormSettings -> sImageGameRanger -> Left = FormSettings -> sImageTunngle -> Left + 130;
   FormSettings -> sLabelGameRanger -> Left = FormSettings -> sBitBtnDownloadGameRanger -> Left + FormSettings -> sBitBtnDownloadGameRanger -> Width / 2 - FormSettings -> sLabelGameRanger -> Width / 2;
+  FormSettings -> sComboBoxLanguages -> Left = FormSettings -> sLabelGeneralLanguage -> Left + FormSettings -> sLabelGeneralLanguage -> Width + 8;
  }
 
 //Set form position to screen center

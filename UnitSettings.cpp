@@ -113,7 +113,7 @@ void __fastcall TFormSettings::sBitBtnSaveClick (TObject *Sender)
   //Save ini
   SettingsFile -> UpdateFile ();
   //Patching language
-  ProcessName = LanguageStrings [38];
+  ProcessName = LanguageStrings [55];
   ProcessId = 3;
   FormGlobalProcess -> ShowModal ();
   Close ();

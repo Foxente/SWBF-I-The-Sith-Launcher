@@ -172,7 +172,7 @@ void __fastcall TFormAddonsControl::sBitBtnPreviousClick (TObject *Sender)
  {
   CurScreenIndex -= 1;
   if (!FileExists (GetAddOnScreensPath (LastObject -> Items -> Strings [LastObject -> ItemIndex]) + "scr_" + IntToStr (CurScreenIndex) + ".jpg"))
-   CurScreenIndex = GetFileCount (GetAddOnScreensPath (LastObject -> Items -> Strings [LastObject -> ItemIndex])) - 1;
+   CurScreenIndex = GetFilesCount (GetAddOnScreensPath (LastObject -> Items -> Strings [LastObject -> ItemIndex])) - 1;
   sImageMiniScreen -> Picture -> LoadFromFile (GetAddOnScreensPath (LastObject -> Items -> Strings [LastObject -> ItemIndex]) + "scr_" + IntToStr (CurScreenIndex) + ".jpg");
  }
 
