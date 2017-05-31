@@ -5,7 +5,7 @@ object FormAboutLauncher: TFormAboutLauncher
   BorderStyle = bsSingle
   Caption = 'FormAboutLauncher'
   ClientHeight = 335
-  ClientWidth = 609
+  ClientWidth = 649
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,7 +18,7 @@ object FormAboutLauncher: TFormAboutLauncher
   object sRichEditInfo: TsRichEdit
     Left = 0
     Top = 0
-    Width = 609
+    Width = 649
     Height = 337
     Color = clBlack
     Font.Charset = RUSSIAN_CHARSET

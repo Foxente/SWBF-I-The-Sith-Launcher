@@ -263,7 +263,7 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   LanguageStrings [48] = WriteNewStringToIniFile (LanguageFile, "Information", "7", "Developer: %name%");
   LanguageStrings [49] = WriteNewStringToIniFile (LanguageFile, "Information", "8", "Official topic on SWBFGamers.com: %link%");
   LanguageStrings [50] = WriteNewStringToIniFile (LanguageFile, "Information", "9", "FOXEnte in vk.com: %link%");
-  LanguageStrings [51] = WriteNewStringToIniFile (LanguageFile, "Information", "10", "The Sith Launcher - software for SWBF I. Allows you to manage addons and extends the number of gaming opportunities.");
+  LanguageStrings [51] = WriteNewStringToIniFile (LanguageFile, "Information", "10", "%name% - software for SWBF I. Allows you to manage addons and extends the number of gaming opportunities.");
   LanguageStrings [52] = WriteNewStringToIniFile (LanguageFile, "Information", "11", "Contacting Me (%name%):");
   LanguageStrings [53] = WriteNewStringToIniFile (LanguageFile, "Information", "12", "Source Code: %link% (%license%)");
   LanguageFile -> UpdateFile ();
@@ -304,7 +304,7 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   FormAboutLauncher -> sRichEditInfo -> Lines -> Add (ReplaceStringMask (ReplaceStringMask (LanguageStrings [43], "name", Author), "projectname", LanguageStrings [2]));
   FormAboutLauncher -> sRichEditInfo -> Lines -> Add (LanguageStrings [44]);
   FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("");
-  FormAboutLauncher -> sRichEditInfo -> Lines -> Add (LanguageStrings [51]);
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add (ReplaceStringMask (LanguageStrings [51], "name", LanguageStrings [2]));
   FormAboutLauncher -> sRichEditInfo -> Lines -> Add (ReplaceStringMask (ReplaceStringMask (LanguageStrings [53], "link", GitHub), "license", License));
   FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("");
   FormAboutLauncher -> sRichEditInfo -> Lines -> Add (ReplaceStringMask (LanguageStrings [45], "number", LauncherVersion));
