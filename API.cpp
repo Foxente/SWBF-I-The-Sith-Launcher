@@ -39,9 +39,9 @@ UnicodeString LanguageStrings [100];
 
 //Consts
 const int CurrentAddonsLimit = 26; //ToDo Try to fix it using 1.3 version
-const UnicodeString LauncherVersion = "0.5 BETA";
+const UnicodeString LauncherVersion = "0.6 BETA";
 const UnicodeString OfficialLanguages = "English / Русский";
-const UnicodeString CompilationDate = "28.05.2017 23:52";
+const UnicodeString CompilationDate = "31.05.2017 10:16";
 //Don't change theese consts
 const UnicodeString Author = "FOXente (Aradam)";
 const UnicodeString OfficialTopic = "swbfgamers.com/index.php?topic=11975.0";
