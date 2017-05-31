@@ -35,6 +35,8 @@ __fastcall TFormSettings::TFormSettings (TComponent* Owner) : TForm (Owner)
 
 void __fastcall TFormSettings::sBitBtnCancelClick (TObject *Sender)
  {
+  //Apply old language
+  ApplyLanguageFromFile (GetLauncherDataPath () + "Languages\\" + SettingsFile -> ReadString ("Language", "Name", "English") + "\\Language.ini");
   Close ();
  }
 
