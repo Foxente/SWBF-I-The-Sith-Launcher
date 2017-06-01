@@ -216,7 +216,7 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   LanguageStrings [41] = WriteNewStringToIniFile (LanguageFile, "Error", "3", "SWBF limit of simultaneously installed maps - %number%. Exceeding the limit threatens the inability of some maps and crash games!");
   LanguageStrings [58] = WriteNewStringToIniFile (LanguageFile, "Error", "4", "File '%name%' is missing in the addon '%addon%'!");
   LanguageStrings [59] = WriteNewStringToIniFile (LanguageFile, "Error", "5", "Map '%name%' exists only in the AddOn folder. Copy it to AllMaps folder!");
-  LanguageStrings [60] = WriteNewStringToIniFile (LanguageFile, "Error", "6", "Numbering screenshots in the addon '%addon%' is wrong. File '%name%' doesn't exist!");
+  LanguageStrings [60] = WriteNewStringToIniFile (LanguageFile, "Error", "6", "Listing screenshots in the addon '%addon%' is wrong. File '%name%' doesn't exist!");
   LanguageStrings [3] = WriteNewStringToIniFile (LanguageFile, "Button", "1", "Play");
   LanguageStrings [4] = WriteNewStringToIniFile (LanguageFile, "Button", "2", "Set additional maps");
   LanguageStrings [5] = WriteNewStringToIniFile (LanguageFile, "Button", "3", "About %name%");

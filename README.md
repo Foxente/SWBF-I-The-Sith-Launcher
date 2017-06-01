@@ -16,4 +16,15 @@ Also if you want edit something you must disable **Automatic tabs setting** :
 (it is important for saving readability of code on the any device)  
 - [ ] Tools -> Options -> Editor Options -> Source Options -> Use tab character
 - [x] Tools -> Options -> Editor Options -> Source Options -> Show tab character
-- [x] Tools -> Options -> Editor Options -> Source Options -> Show space character
+- [x] Tools -> Options -> Editor Options -> Source Options -> Show space character  
+
+Some C++ pranks :
+1) Error:  
+> [ILINK32 Warning] Warning: unknown heap name : 0x08000000 / 0x08000000
+> [ILINK32 Warning] Warning: Error detected (LME286)
+> [ILINK32 Warning] Warning: Unable to perform incremental link - performing full link...
+> [ILINK32 Warning] Warning: unknown heap name : 0x08000000 / 0x08000000
+> [ILINK32 Warning] Warning: unknown heap name : 0x08000000 / 0x08000000
+> [ILINK32 Warning] Warning: Error detected (LME286)
+> [ILINK32 Error] Error: Unable to perform link
+Solution: You must run your IDE (bds.exe) with admin privileges.
