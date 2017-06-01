@@ -63,6 +63,9 @@ class TFormSettings : public TForm
     TsLabel *sLabelLanguageSettings;
     TsLabel *sLabelGeneralLanguage;
     TsComboBox *sComboBoxLanguages;
+    TsEdit *sEditMessageText;
+    TsComboBox *sComboBoxSelectingMessage;
+    TsLabel *sLabelMessagesText;
     void __fastcall sBitBtnCancelClick (TObject *Sender);
     void __fastcall FormShow (TObject *Sender);
     void __fastcall sTrackBarSoundQualityChange (TObject *Sender);
@@ -75,6 +78,7 @@ class TFormSettings : public TForm
     void __fastcall sBitBtnDownloadGameRangerClick (TObject *Sender);
     void __fastcall sBitBtnGameRangerVideoClick (TObject *Sender);
     void __fastcall sComboBoxLanguagesSelect (TObject *Sender);
+    void __fastcall sComboBoxSelectingMessageSelect(TObject *Sender);
   private :       // User declarations
   public :        // User declarations
     __fastcall TFormSettings (TComponent* Owner);

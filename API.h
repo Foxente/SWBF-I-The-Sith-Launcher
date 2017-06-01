@@ -20,6 +20,7 @@ License GPL-3.0
 #include <IniFiles.hpp>
 #include <Registry.hpp>
 #include <IOUtils.hpp>
+#include <StrUtils.hpp>
 
 class TAPIdata : public TForm
  {
@@ -61,6 +62,7 @@ UnicodeString GetOnlyFileName (UnicodeString FilePath);
 UnicodeString WriteNewStringToIniFile (TMemIniFile *IniFile, UnicodeString Section, UnicodeString Ident, UnicodeString Value);
 UnicodeString ReplaceStringMask (UnicodeString CurrentString, UnicodeString Mask, UnicodeString Replacement);
 UnicodeString GetAbsPath (UnicodeString Path);
+AnsiString UnicodeStringToCFGFileHEX (UnicodeString Text);
 String BoolToRealString (bool Value);
 int GetFilesCount (UnicodeString Path);
 int GetDirectoriesCount (UnicodeString Path);

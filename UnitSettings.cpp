@@ -28,6 +28,8 @@ License GPL-3.0
 #pragma resource "*.dfm"
 
 TFormSettings *FormSettings;
+UnicodeString QuickMessages [9];
+int LastSelIndex;
 
 __fastcall TFormSettings::TFormSettings (TComponent* Owner) : TForm (Owner)
  {
@@ -70,6 +72,11 @@ void __fastcall TFormSettings::FormShow (TObject *Sender)
   sComboBoxLanguages -> ItemIndex = sComboBoxLanguages -> Items -> IndexOf (SettingsFile -> ReadString ("Language", "Name", "English"));
   if (sComboBoxLanguages -> ItemIndex == -1) sComboBoxLanguages -> ItemIndex = 0;
   FindClose (sr);
+  //loading all quick messages
+  LastSelIndex = 1;
+  sComboBoxSelectingMessageSelect (NULL);
+  for (int i = 1; i <= 8; i++) QuickMessages [i] = SettingsFile -> ReadString ("Language", "Message" + IntToStr (i), "");
+  LastSelIndex = 0;
  }
 
 void __fastcall TFormSettings::sTrackBarSoundQualityChange (TObject *Sender)
@@ -112,6 +119,9 @@ void __fastcall TFormSettings::sBitBtnSaveClick (TObject *Sender)
   if (sEditVersion -> Text == "") sEditVersion -> Text = "1.3";
   SettingsFile -> WriteString ("Multiplayer", "Current_version", sEditVersion -> Text);
   SettingsFile -> WriteString ("Language", "Name", sComboBoxLanguages -> Text);
+  //Saving Quick messages
+  sComboBoxSelectingMessageSelect (NULL);
+  for (int i = 1; i <= 8; i++) SettingsFile -> WriteString ("Language", "Message" + IntToStr (i), QuickMessages [i]);
   //Save ini
   SettingsFile -> UpdateFile ();
   //Patching language
@@ -144,6 +154,26 @@ void __fastcall TFormSettings::sBitBtnGameRangerVideoClick (TObject *Sender)
 
 void __fastcall TFormSettings::sComboBoxLanguagesSelect (TObject *Sender)
  {
+  //Determine is it needed translate the sEditMessageText
+  bool needTranslate = false;
+  if (sEditMessageText -> Text == LanguageStrings [69 + LastSelIndex + 1]) needTranslate = true;
   //Apply language
   ApplyLanguageFromFile (GetLauncherDataPath () + "Languages\\" + sComboBoxLanguages -> Text + "\\Language.ini");
+  //Translating the sEditMessageText
+  if (needTranslate)
+   {
+    sEditMessageText -> Text = LanguageStrings [69 + LastSelIndex + 1];
+   }
+ }
+
+void __fastcall TFormSettings::sComboBoxSelectingMessageSelect (TObject *Sender)
+ {
+  //Remeber entered text
+  if (sEditMessageText -> Text == LanguageStrings [69 + LastSelIndex + 1]) QuickMessages [LastSelIndex + 1] = "";
+  else QuickMessages [LastSelIndex + 1] = sEditMessageText -> Text;
+  //Change text in edit
+  int Index = FormSettings -> sComboBoxSelectingMessage -> ItemIndex + 1;
+  sEditMessageText -> Text = QuickMessages [Index];
+  if (sEditMessageText -> Text == "") sEditMessageText -> Text = LanguageStrings [69 + Index];
+  LastSelIndex = sComboBoxSelectingMessage -> ItemIndex;
  }

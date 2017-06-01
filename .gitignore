@@ -194,6 +194,7 @@ Win32/Release/GameData/Data/_LVL_PC/SIDE/evc_rep_41st.lvl
 Win32/Release/GameData/Data/_LVL_PC/SIDE/evc_rep_501.lvl
 Win32/Release/GameData/SaveGames/
 Win32/Release/GameData/AddOn/
+Win32/Release/GameData/gstats.dat
 
 # Launcher unique files
 Win32/Release/SWBF-I-The-Sith-Launcher.exe

@@ -46,6 +46,7 @@ void __fastcall TFormMainMenu::sBitBtnSettingsClick (TObject *Sender)
   if (!IsBattlefrontRunning ())
    {
     SetFormToScreenCenter (FormSettings);
+    FormSettings -> sComboBoxSelectingMessage -> ItemIndex = 0;
     FormSettings -> ShowModal ();
    }
  }
@@ -295,6 +296,7 @@ void __fastcall TFormMainMenu::FormShow (TObject *Sender)
   WriteNewStringToIniFile (SettingsFile, "Game_launch", "Audio_rate_enable", "false");
   WriteNewStringToIniFile (SettingsFile, "Game_launch", "Audio_rate", "11000");
   WriteNewStringToIniFile (SettingsFile, "Language", "Name", "English");
+  for (int i = 1; i <= 8; i++) WriteNewStringToIniFile (SettingsFile, "Language", "Message" + IntToStr (i), "");
   WriteNewStringToIniFile (SettingsFile, "Multiplayer", "Use_user_host", "true");
   WriteNewStringToIniFile (SettingsFile, "Multiplayer", "Host", "162.248.92.172");
   WriteNewStringToIniFile (SettingsFile, "Multiplayer", "Current_version", "1.3");

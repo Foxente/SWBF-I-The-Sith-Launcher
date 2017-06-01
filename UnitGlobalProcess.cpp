@@ -78,9 +78,42 @@ void __fastcall TGlobalProcessThread::Execute ()
    } else
   if (ProcessId == 3)
    {
+    UnicodeString LanguageName = SettingsFile -> ReadString ("Language", "Name", "English");
+    //Changing quick messages
+    TStringList *LangFile = new TStringList ();
+    LangFile -> LoadFromFile (GetLauncherDataPath () + "Languages\\" + LanguageName + "\\core.lvl\\localize.cfg");
+    int DoneMessages = 0;
+    bool DelNextLines = false;
+    UnicodeString FullMessage;
+    AnsiString HexMessage;
+    for (int i = 0; DoneMessages < 8; i++)
+      {
+       if (LangFile -> Strings [i] == "      {")
+        {
+         DelNextLines = true;
+         continue;
+        }
+       if (LangFile -> Strings [i] == "      }")
+        {
+         DelNextLines = false;
+         DoneMessages += 1;
+         FullMessage = SettingsFile -> ReadString ("Language", "Message" + IntToStr (DoneMessages), "");
+         if (FullMessage == "") FullMessage = LanguageStrings [69 + DoneMessages];
+         HexMessage = UnicodeStringToCFGFileHEX (FullMessage);
+         LangFile -> Insert (i, "        Value(\"" + HexMessage + "\");");
+         LangFile -> Insert (i, "        Size(" + IntToStr (HexMessage.Length () / 2) + ");");
+         i += 2;
+         continue;
+        }
+       if (DelNextLines)
+        {
+         LangFile -> Delete (i);
+         i -= 1;
+        }
+      }
+    LangFile -> SaveToFile (GetLauncherDataPath () + "Languages\\" + LanguageName + "\\core.lvl\\localize.cfg");
     //Compilation core.lvl
     //Copy fonts to Compilation folder
-    UnicodeString LanguageName = SettingsFile -> ReadString ("Language", "Name", "English");
     TSearchRec sr;
     for (int i = FindFirst (GetLauncherDataPath () + "Languages\\" + LanguageName + "\\core.lvl\\Fonts\\*.font", faAnyFile, sr); !i; i = FindNext (sr))
       {

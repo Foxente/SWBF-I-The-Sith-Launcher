@@ -148,6 +148,17 @@ UnicodeString GetAbsPath (UnicodeString Path)
   return UnicodeString (ReturnPath);
  }
 
+//Convert any unicode string to hex string like in SWBF cdg files
+AnsiString UnicodeStringToCFGFileHEX (UnicodeString Text)
+ {
+  AnsiString Result;
+  for (int i = 1; i <= Text.Length (); i++)
+    {
+     Result += AnsiReverseString (IntToHex (Text [i], 4));
+    }
+  return "20000000" + Result;
+ }
+
 //Converte boolean to string type
 String BoolToRealString (bool Value)
  {
@@ -203,7 +214,8 @@ void RequiredFileExists (UnicodeString FilePath)
 //Apply new program's language from file
 void ApplyLanguageFromFile (UnicodeString FilePath)
  {
-  //Loading
+  //Loading of language
+  //Last LanguageStrings index = 77
   LanguageFile = new TMemIniFile (FilePath);
   LanguageStrings [2] = WriteNewStringToIniFile (LanguageFile, "FormCaption", "Name", "SWBF I The Sith Launcher");
   LanguageStrings [0] = WriteNewStringToIniFile (LanguageFile, "FormCaption", "Logo", "Created by %name%");
@@ -240,6 +252,7 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   LanguageStrings [40] = WriteNewStringToIniFile (LanguageFile, "Label", "14", "Wait a bit...");
   LanguageStrings [56] = WriteNewStringToIniFile (LanguageFile, "Label", "15", "Language settings");
   LanguageStrings [57] = WriteNewStringToIniFile (LanguageFile, "Label", "16", "Current language");
+  LanguageStrings [61] = WriteNewStringToIniFile (LanguageFile, "Label", "17", "Auto messages:");
   LanguageStrings [12] = WriteNewStringToIniFile (LanguageFile, "CheckBox", "1", "Run the game in the windowed mode");
   LanguageStrings [13] = WriteNewStringToIniFile (LanguageFile, "CheckBox", "2", "Skip logos and splash screens");
   LanguageStrings [14] = WriteNewStringToIniFile (LanguageFile, "CheckBox", "3", "Skip music at startup");
@@ -266,6 +279,22 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   LanguageStrings [51] = WriteNewStringToIniFile (LanguageFile, "Information", "10", "%name% - software for SWBF I. Allows you to manage addons and extends the number of gaming opportunities.");
   LanguageStrings [52] = WriteNewStringToIniFile (LanguageFile, "Information", "11", "Contacting Me (%name%):");
   LanguageStrings [53] = WriteNewStringToIniFile (LanguageFile, "Information", "12", "Source Code: %link% (%license%)");
+  LanguageStrings [62] = WriteNewStringToIniFile (LanguageFile, "QuickMessage", "Title1", "FOLLOW ME!");
+  LanguageStrings [63] = WriteNewStringToIniFile (LanguageFile, "QuickMessage", "Title2", "DEFEND THIS POSITION!");
+  LanguageStrings [64] = WriteNewStringToIniFile (LanguageFile, "QuickMessage", "Title3", "FALL BACK!");
+  LanguageStrings [65] = WriteNewStringToIniFile (LanguageFile, "QuickMessage", "Title4", "ENEMY SIGHTED!");
+  LanguageStrings [66] = WriteNewStringToIniFile (LanguageFile, "QuickMessage", "Title5", "GRENADE!");
+  LanguageStrings [67] = WriteNewStringToIniFile (LanguageFile, "QuickMessage", "Title6", "PICK ME UP!");
+  LanguageStrings [68] = WriteNewStringToIniFile (LanguageFile, "QuickMessage", "Title7", "I NEED AMMO!");
+  LanguageStrings [69] = WriteNewStringToIniFile (LanguageFile, "QuickMessage", "Title8", "I NEED HEALTH!");
+  LanguageStrings [70] = WriteNewStringToIniFile (LanguageFile, "QuickMessage", "1", "FOLLOW ME!");
+  LanguageStrings [71] = WriteNewStringToIniFile (LanguageFile, "QuickMessage", "2", "DEFEND THIS POSITION!");
+  LanguageStrings [72] = WriteNewStringToIniFile (LanguageFile, "QuickMessage", "3", "FALL BACK!");
+  LanguageStrings [73] = WriteNewStringToIniFile (LanguageFile, "QuickMessage", "4", "ENEMY SIGHTED!");
+  LanguageStrings [74] = WriteNewStringToIniFile (LanguageFile, "QuickMessage", "5", "GRENADE!");
+  LanguageStrings [75] = WriteNewStringToIniFile (LanguageFile, "QuickMessage", "6", "PICK ME UP!");
+  LanguageStrings [76] = WriteNewStringToIniFile (LanguageFile, "QuickMessage", "7", "I NEED AMMO!");
+  LanguageStrings [77] = WriteNewStringToIniFile (LanguageFile, "QuickMessage", "8", "I NEED HEALTH!");
   LanguageFile -> UpdateFile ();
   //Apply
   FormLogo -> Caption = LanguageStrings [2];
@@ -295,6 +324,11 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   FormSettings -> sBitBtnGameRangerVideo -> Caption = LanguageStrings [23];
   FormSettings -> sLabelLanguageSettings -> Caption = LanguageStrings [56];
   FormSettings -> sLabelGeneralLanguage -> Caption = LanguageStrings [57];
+  FormSettings -> sLabelMessagesText -> Caption = LanguageStrings [61];
+  int curIndex = FormSettings -> sComboBoxSelectingMessage -> ItemIndex;
+  FormSettings -> sComboBoxSelectingMessage -> Clear ();
+  for (int i = 62; i <= 69; i++) FormSettings -> sComboBoxSelectingMessage -> Items -> Add (LanguageStrings [i]);
+  FormSettings -> sComboBoxSelectingMessage -> ItemIndex = curIndex;
   FormScreenZoom -> Caption = LanguageStrings [36];
   FormGlobalProcess -> sLabelWait -> Caption = LanguageStrings [40];
   FormSelectMapMode -> Caption = LanguageStrings [54];
