@@ -100,9 +100,22 @@ void __fastcall TGlobalProcessThread::Execute ()
          FullMessage = SettingsFile -> ReadString ("Language", "Message" + IntToStr (DoneMessages), "");
          if (FullMessage == "") FullMessage = LanguageStrings [69 + DoneMessages];
          HexMessage = UnicodeStringToCFGFileHEX (FullMessage);
-         LangFile -> Insert (i, "        Value(\"" + HexMessage + "\");");
          LangFile -> Insert (i, "        Size(" + IntToStr (HexMessage.Length () / 2) + ");");
-         i += 2;
+         while (HexMessage != "")
+           {
+            if (HexMessage.Length () > 64)
+             {
+              LangFile -> Insert (i + 1, "        Value(\"" + HexMessage.SubString (1, 64) + "\");");
+              HexMessage = HexMessage.SubString (65, HexMessage.Length ());
+              i += 1;
+             } else
+             {
+              LangFile -> Insert (i + 1, "        Value(\"" + HexMessage + "\");");
+              HexMessage = "";
+              i += 1;
+             }
+           }
+         i += 1;
          continue;
         }
        if (DelNextLines)

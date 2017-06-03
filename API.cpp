@@ -224,11 +224,12 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   LanguageStrings [37] = WriteNewStringToIniFile (LanguageFile, "FormCaption", "Process", "Process is in progress: %name%");
   LanguageStrings [54] = WriteNewStringToIniFile (LanguageFile, "FormCaption", "MapMode", "Select map mode");
   LanguageStrings [1] = WriteNewStringToIniFile (LanguageFile, "Error", "1", "File '%path%' doesn't exists!");
-  LanguageStrings [21] = WriteNewStringToIniFile (LanguageFile, "Error", "2", "The version identifier must be no more than 44 characters long!");
+  LanguageStrings [21] = WriteNewStringToIniFile (LanguageFile, "Error", "2", "The version identifier must be no more than 41 characters long!");
   LanguageStrings [41] = WriteNewStringToIniFile (LanguageFile, "Error", "3", "SWBF limit of simultaneously installed maps - %number%. Exceeding the limit threatens the inability of some maps and crash games!");
   LanguageStrings [58] = WriteNewStringToIniFile (LanguageFile, "Error", "4", "File '%name%' is missing in the addon '%addon%'!");
   LanguageStrings [59] = WriteNewStringToIniFile (LanguageFile, "Error", "5", "Map '%name%' exists only in the AddOn folder. Copy it to AllMaps folder!");
   LanguageStrings [60] = WriteNewStringToIniFile (LanguageFile, "Error", "6", "Listing screenshots in the addon '%addon%' is wrong. File '%name%' doesn't exist!");
+  LanguageStrings [78] = WriteNewStringToIniFile (LanguageFile, "Error", "7", "The length of a quick message should not exceed 62 characters!");
   LanguageStrings [3] = WriteNewStringToIniFile (LanguageFile, "Button", "1", "Play");
   LanguageStrings [4] = WriteNewStringToIniFile (LanguageFile, "Button", "2", "Set additional maps");
   LanguageStrings [5] = WriteNewStringToIniFile (LanguageFile, "Button", "3", "About %name%");
@@ -252,7 +253,7 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   LanguageStrings [40] = WriteNewStringToIniFile (LanguageFile, "Label", "14", "Wait a bit...");
   LanguageStrings [56] = WriteNewStringToIniFile (LanguageFile, "Label", "15", "Language settings");
   LanguageStrings [57] = WriteNewStringToIniFile (LanguageFile, "Label", "16", "Current language");
-  LanguageStrings [61] = WriteNewStringToIniFile (LanguageFile, "Label", "17", "Auto messages:");
+  LanguageStrings [61] = WriteNewStringToIniFile (LanguageFile, "Label", "17", "Quick messages:");
   LanguageStrings [12] = WriteNewStringToIniFile (LanguageFile, "CheckBox", "1", "Run the game in the windowed mode");
   LanguageStrings [13] = WriteNewStringToIniFile (LanguageFile, "CheckBox", "2", "Skip logos and splash screens");
   LanguageStrings [14] = WriteNewStringToIniFile (LanguageFile, "CheckBox", "3", "Skip music at startup");
@@ -376,6 +377,8 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   FormSettings -> sImageGameRanger -> Left = FormSettings -> sImageTunngle -> Left + 130;
   FormSettings -> sLabelGameRanger -> Left = FormSettings -> sBitBtnDownloadGameRanger -> Left + FormSettings -> sBitBtnDownloadGameRanger -> Width / 2 - FormSettings -> sLabelGameRanger -> Width / 2;
   FormSettings -> sComboBoxLanguages -> Left = FormSettings -> sLabelGeneralLanguage -> Left + FormSettings -> sLabelGeneralLanguage -> Width + 8;
+  FormSettings -> sComboBoxSelectingMessage -> Left = FormSettings -> sLabelMessagesText -> Left + FormSettings -> sLabelMessagesText -> Width + 5;
+  FormSettings -> sEditMessageText -> Left = FormSettings -> sComboBoxSelectingMessage -> Left + FormSettings -> sComboBoxSelectingMessage -> Width + 5;
  }
 
 //Set form position to screen center

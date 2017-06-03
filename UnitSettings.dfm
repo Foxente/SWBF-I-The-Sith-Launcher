@@ -690,6 +690,7 @@ object FormSettings: TFormSettings
     Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
+    MaxLength = 62
     ParentFont = False
     TabOrder = 18
     Text = 'Text for message1'

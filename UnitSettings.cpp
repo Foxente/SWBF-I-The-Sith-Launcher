@@ -74,8 +74,9 @@ void __fastcall TFormSettings::FormShow (TObject *Sender)
   FindClose (sr);
   //loading all quick messages
   LastSelIndex = 1;
-  sComboBoxSelectingMessageSelect (NULL);
   for (int i = 1; i <= 8; i++) QuickMessages [i] = SettingsFile -> ReadString ("Language", "Message" + IntToStr (i), "");
+  sComboBoxSelectingMessageSelect (NULL);
+  QuickMessages [1] = SettingsFile -> ReadString ("Language", "Message1", "");
   LastSelIndex = 0;
  }
 

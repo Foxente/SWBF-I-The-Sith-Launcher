@@ -300,11 +300,21 @@ void __fastcall TFormMainMenu::FormShow (TObject *Sender)
   WriteNewStringToIniFile (SettingsFile, "Multiplayer", "Use_user_host", "true");
   WriteNewStringToIniFile (SettingsFile, "Multiplayer", "Host", "162.248.92.172");
   WriteNewStringToIniFile (SettingsFile, "Multiplayer", "Current_version", "1.3");
-  if (SettingsFile -> ReadString ("Multiplayer", "Current_version", "1.3").Length () > 44)
+  if (SettingsFile -> ReadString ("Multiplayer", "Current_version", "1.3").Length () > 41)
    {
-    SettingsFile -> WriteString ("Multiplayer", "Current_version", "1.3");
+    SettingsFile -> WriteString ("Multiplayer", "Current_version", SettingsFile -> ReadString ("Multiplayer", "Current_version", "1.3").SubString (1, 41));
     ShowErrorM (LanguageStrings [21]);
    }
+  bool QuickMessageError = false;
+  for (int i = 1; i <= 8; i++)
+    {
+     if (SettingsFile -> ReadString ("Language", "Message" + IntToStr (i), LanguageStrings [69 + i]).Length () > 62)
+      {
+       SettingsFile -> WriteString ("Language", "Message" + IntToStr (i), SettingsFile -> ReadString ("Language", "Message" + IntToStr (i), LanguageStrings [69 + i]).SubString (1, 62));
+       QuickMessageError = true;
+      }
+    }
+  if (QuickMessageError) ShowErrorM (LanguageStrings [78]);
   SettingsFile -> UpdateFile ();
  }
 

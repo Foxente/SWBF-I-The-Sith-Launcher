@@ -26,5 +26,6 @@ Some C++/IDE pranks :
 > [ILINK32 Warning] Warning: unknown heap name : 0x08000000 / 0x08000000  
 > [ILINK32 Warning] Warning: unknown heap name : 0x08000000 / 0x08000000  
 > [ILINK32 Warning] Warning: Error detected (LME286)  
-> [ILINK32 Error] Error: Unable to perform link  
+> [ILINK32 Error] Error: Unable to perform link
+
 Solution: You must run your IDE (bds.exe) with admin privileges.  
