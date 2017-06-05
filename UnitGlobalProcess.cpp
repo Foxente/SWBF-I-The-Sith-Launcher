@@ -81,7 +81,7 @@ void __fastcall TGlobalProcessThread::Execute ()
     UnicodeString LanguageName = SettingsFile -> ReadString ("Language", "Name", "English");
     //Changing quick messages
     TStringList *LangFile = new TStringList ();
-    LangFile -> LoadFromFile (GetLauncherDataPath () + "Languages\\" + LanguageName + "\\core.lvl\\localize.cfg");
+    LangFile -> LoadFromFile (GetLauncherDataPath () + "Languages\\" + LanguageName + "\\core.lvl\\english.cfg");
     int DoneMessages = 0;
     bool DelNextLines = false;
     UnicodeString FullMessage;
@@ -124,7 +124,7 @@ void __fastcall TGlobalProcessThread::Execute ()
          i -= 1;
         }
       }
-    LangFile -> SaveToFile (GetLauncherDataPath () + "Languages\\" + LanguageName + "\\core.lvl\\localize.cfg");
+    LangFile -> SaveToFile (GetLauncherDataPath () + "Languages\\" + LanguageName + "\\core.lvl\\english.cfg");
     //Compilation core.lvl
     //Copy fonts to Compilation folder
     TSearchRec sr;
@@ -142,10 +142,8 @@ void __fastcall TGlobalProcessThread::Execute ()
     //Minimized window
     si.dwFlags = STARTF_USESHOWWINDOW;
     si.wShowWindow = false;
-    RenameFile (GetLauncherDataPath () + "Languages\\" + LanguageName + "\\core.lvl\\localize.cfg", GetLauncherDataPath () + "Languages\\" + LanguageName + "\\core.lvl\\english.cfg");
     CreateProcess ((GetLauncherDataPath () + "Tools\\LocalizeMunge.exe").w_str (), L" -inputfile english.cfg", 0, 0, true, 0, 0, (GetLauncherDataPath () + "Languages\\" + LanguageName + "\\core.lvl\\").w_str (), &si, &pi);
     WaitForSingleObject (pi.hProcess, INFINITE);
-    RenameFile (GetLauncherDataPath () + "Languages\\" + LanguageName + "\\core.lvl\\english.cfg", GetLauncherDataPath () + "Languages\\" + LanguageName + "\\core.lvl\\localize.cfg");
     DeleteFile (GetLauncherDataPath () + "Languages\\" + LanguageName + "\\core.lvl\\.log");
     DeleteFile (GetLauncherDataPath () + "Compilation\\core.lvl\\output\\english.loc");
     MoveFile ((GetLauncherDataPath () + "Languages\\" + LanguageName + "\\core.lvl\\english.loc").w_str (), (GetLauncherDataPath () + "Compilation\\core.lvl\\output\\english.loc").w_str ());

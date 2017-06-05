@@ -9,6 +9,7 @@ Including packages :
 Including additional libraries :
 - LevelPack.exe
 - LocalizeMunge.exe
+- Battlebelk's Custom Resolution Launcher (ResolutionChanger.exe)
 
 For opening the project you must open **SWBF-I-The-Sith-Launcher.cbproj**  
 

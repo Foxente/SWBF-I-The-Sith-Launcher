@@ -66,6 +66,11 @@ class TFormSettings : public TForm
     TsEdit *sEditMessageText;
     TsComboBox *sComboBoxSelectingMessage;
     TsLabel *sLabelMessagesText;
+    TsCheckBox *sCheckBoxGameResolution;
+    TsEdit *sEditWidth;
+    TsLabel *sLabelResolutionDelimiter;
+    TsEdit *sEditHeight;
+    TsLabel *sLabelPixels;
     void __fastcall sBitBtnCancelClick (TObject *Sender);
     void __fastcall FormShow (TObject *Sender);
     void __fastcall sTrackBarSoundQualityChange (TObject *Sender);
@@ -78,7 +83,8 @@ class TFormSettings : public TForm
     void __fastcall sBitBtnDownloadGameRangerClick (TObject *Sender);
     void __fastcall sBitBtnGameRangerVideoClick (TObject *Sender);
     void __fastcall sComboBoxLanguagesSelect (TObject *Sender);
-    void __fastcall sComboBoxSelectingMessageSelect(TObject *Sender);
+    void __fastcall sComboBoxSelectingMessageSelect (TObject *Sender);
+    void __fastcall sCheckBoxGameResolutionClick (TObject *Sender);
   private :       // User declarations
   public :        // User declarations
     __fastcall TFormSettings (TComponent* Owner);

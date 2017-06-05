@@ -215,7 +215,7 @@ void RequiredFileExists (UnicodeString FilePath)
 void ApplyLanguageFromFile (UnicodeString FilePath)
  {
   //Loading of language
-  //Last LanguageStrings index = 77
+  //Last LanguageStrings index = 80
   LanguageFile = new TMemIniFile (FilePath);
   LanguageStrings [2] = WriteNewStringToIniFile (LanguageFile, "FormCaption", "Name", "SWBF I The Sith Launcher");
   LanguageStrings [0] = WriteNewStringToIniFile (LanguageFile, "FormCaption", "Logo", "Created by %name%");
@@ -254,6 +254,7 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   LanguageStrings [56] = WriteNewStringToIniFile (LanguageFile, "Label", "15", "Language settings");
   LanguageStrings [57] = WriteNewStringToIniFile (LanguageFile, "Label", "16", "Current language");
   LanguageStrings [61] = WriteNewStringToIniFile (LanguageFile, "Label", "17", "Quick messages:");
+  LanguageStrings [80] = WriteNewStringToIniFile (LanguageFile, "Label", "18", "pixels");
   LanguageStrings [12] = WriteNewStringToIniFile (LanguageFile, "CheckBox", "1", "Run the game in the windowed mode");
   LanguageStrings [13] = WriteNewStringToIniFile (LanguageFile, "CheckBox", "2", "Skip logos and splash screens");
   LanguageStrings [14] = WriteNewStringToIniFile (LanguageFile, "CheckBox", "3", "Skip music at startup");
@@ -261,6 +262,7 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   LanguageStrings [16] = WriteNewStringToIniFile (LanguageFile, "CheckBox", "5", "Size of audio buffer (milliseconds)");
   LanguageStrings [17] = WriteNewStringToIniFile (LanguageFile, "CheckBox", "6", "Sound quality");
   LanguageStrings [18] = WriteNewStringToIniFile (LanguageFile, "CheckBox", "7", "Host of servers (Internet)");
+  LanguageStrings [79] = WriteNewStringToIniFile (LanguageFile, "CheckBox", "8", "In-game resolution");
   LanguageStrings [24] = WriteNewStringToIniFile (LanguageFile, "Link", "TunngleDownload", "http://www.softpedia.com/get/Internet/File-Sharing/Tunngle.shtml#download");
   LanguageStrings [25] = WriteNewStringToIniFile (LanguageFile, "Link", "TunngleVideoInstruction", "https://www.youtube.com/watch?v=WyggZSWwRAE");
   LanguageStrings [26] = WriteNewStringToIniFile (LanguageFile, "Link", "GameRangerDownload", "http://www.gameranger.com/download/");
@@ -317,6 +319,7 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   FormSettings -> sCheckBoxAudioBufferSize -> Caption = LanguageStrings [16];
   FormSettings -> sCheckBoxSoundQuality -> Caption = LanguageStrings [17];
   FormSettings -> sCheckBoxInternetHost -> Caption = LanguageStrings [18];
+  FormSettings -> sCheckBoxGameResolution -> Caption = LanguageStrings [79];
   FormSettings -> sLabelCurrentGameVersion -> Caption = LanguageStrings [19];
   FormSettings -> sLabelLANNetwork -> Caption = LanguageStrings [20];
   FormSettings -> sBitBtnDownloadTunngle -> Caption = LanguageStrings [22];
@@ -326,6 +329,7 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   FormSettings -> sLabelLanguageSettings -> Caption = LanguageStrings [56];
   FormSettings -> sLabelGeneralLanguage -> Caption = LanguageStrings [57];
   FormSettings -> sLabelMessagesText -> Caption = LanguageStrings [61];
+  FormSettings -> sLabelPixels -> Caption = LanguageStrings [80];
   int curIndex = FormSettings -> sComboBoxSelectingMessage -> ItemIndex;
   FormSettings -> sComboBoxSelectingMessage -> Clear ();
   for (int i = 62; i <= 69; i++) FormSettings -> sComboBoxSelectingMessage -> Items -> Add (LanguageStrings [i]);
@@ -379,6 +383,10 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   FormSettings -> sComboBoxLanguages -> Left = FormSettings -> sLabelGeneralLanguage -> Left + FormSettings -> sLabelGeneralLanguage -> Width + 8;
   FormSettings -> sComboBoxSelectingMessage -> Left = FormSettings -> sLabelMessagesText -> Left + FormSettings -> sLabelMessagesText -> Width + 5;
   FormSettings -> sEditMessageText -> Left = FormSettings -> sComboBoxSelectingMessage -> Left + FormSettings -> sComboBoxSelectingMessage -> Width + 5;
+  FormSettings -> sEditWidth -> Left = FormSettings -> sCheckBoxGameResolution -> Left + FormSettings -> sCheckBoxGameResolution -> Width + 5;
+  FormSettings -> sLabelResolutionDelimiter -> Left = FormSettings -> sEditWidth -> Left + FormSettings -> sEditWidth -> Width + 5;
+  FormSettings -> sEditHeight -> Left = FormSettings -> sLabelResolutionDelimiter -> Left + FormSettings -> sLabelResolutionDelimiter -> Width + 5;
+  FormSettings -> sLabelPixels -> Left = FormSettings -> sEditHeight -> Left + FormSettings -> sEditHeight -> Width + 5;
  }
 
 //Set form position to screen center

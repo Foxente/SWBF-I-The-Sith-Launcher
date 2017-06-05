@@ -221,7 +221,34 @@ void __fastcall TFormMainMenu::sBitBtnPlayClick (TObject *Sender)
     memset (&pi, 0, sizeof (pi));
     memset (&si, 0, sizeof (si));
     si.cb = sizeof (si);
-    CreateProcess (GetBattlefrontExePath ().w_str (), cmdline.w_str (),  0, 0, true, 0, 0, GetGameDataPath ().w_str (), &si, &pi);
+    //Run game without changing resolution
+    if (SettingsFile -> ReadString ("Game_launch", "Custom_resolution_enable", "true") == "false")
+     {
+      CreateProcess (GetBattlefrontExePath ().w_str (), cmdline.w_str (),  0, 0, true, 0, 0, GetGameDataPath ().w_str (), &si, &pi);
+     } else //Run game using Battlebelk's Custom Resolution Launcher
+     {
+      //Generate vidmode.ini
+      TStringList *LinesVideoMode = new TStringList ();
+      LinesVideoMode -> LoadFromFile (GetGameDataPath () + "Data\\_LVL_PC\\vidmode.ini");
+      String Device = LinesVideoMode -> Strings [0];
+      LinesVideoMode -> Clear ();
+      LinesVideoMode -> Add (Device);
+      for (int i = 0; i <= 16; i++)
+        for (int j = 0; j <= 16; j++) LinesVideoMode -> Add (SettingsFile -> ReadString ("Game_launch", "Custom_resolution_width", Screen -> Width) + " " + SettingsFile -> ReadString ("Game_launch", "Custom_resolution_height", Screen -> Height) + " " + IntToStr (i) + " " + IntToStr (j) + " 1");
+      LinesVideoMode -> SaveToFile (GetGameDataPath () + "Data\\_LVL_PC\\vidmode.ini");
+      LinesVideoMode -> Free ();
+      //Saving settings for launcher
+      TMemIniFile *LaunchData = new TMemIniFile (GetGameDataPath () + "SWBF1 launcher.ini");
+      LaunchData -> WriteString ("CMD", "COMMAND_LINE", cmdline.Trim ());
+      LaunchData -> WriteString ("IN_GAME_RESOLUTION", "WIDTH", SettingsFile -> ReadString ("Game_launch", "Custom_resolution_width", Screen -> Width));
+      LaunchData -> WriteString ("IN_GAME_RESOLUTION", "HEIGHT", SettingsFile -> ReadString ("Game_launch", "Custom_resolution_height", Screen -> Height));
+      LaunchData -> UpdateFile ();
+      //Run game
+      CreateProcess ((GetLauncherDataPath () + "Tools\\ResolutionChanger.exe").w_str (), L"",  0, 0, true, 0, 0, GetGameDataPath ().w_str (), &si, &pi);
+      WaitForSingleObject(pi.hThread, INFINITE);
+      DeleteFile (GetGameDataPath () + "SWBF1 launcher.ini");
+      LaunchData -> Free ();
+     }
     //Patching hosts file for Internet multiplayer game
     if (SettingsFile -> ReadString ("Multiplayer", "Use_user_host", "true") == "true")
      {
@@ -295,6 +322,9 @@ void __fastcall TFormMainMenu::FormShow (TObject *Sender)
   WriteNewStringToIniFile (SettingsFile, "Game_launch", "Audio_buffer_ms", "200");
   WriteNewStringToIniFile (SettingsFile, "Game_launch", "Audio_rate_enable", "false");
   WriteNewStringToIniFile (SettingsFile, "Game_launch", "Audio_rate", "11000");
+  WriteNewStringToIniFile (SettingsFile, "Game_launch", "Custom_resolution_enable", "true");
+  WriteNewStringToIniFile (SettingsFile, "Game_launch", "Custom_resolution_width", Screen -> Width);
+  WriteNewStringToIniFile (SettingsFile, "Game_launch", "Custom_resolution_height", Screen -> Height);
   WriteNewStringToIniFile (SettingsFile, "Language", "Name", "English");
   for (int i = 1; i <= 8; i++) WriteNewStringToIniFile (SettingsFile, "Language", "Message" + IntToStr (i), "");
   WriteNewStringToIniFile (SettingsFile, "Multiplayer", "Use_user_host", "true");

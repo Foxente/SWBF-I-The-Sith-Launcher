@@ -57,6 +57,11 @@ void __fastcall TFormSettings::FormShow (TObject *Sender)
   sTrackBarSoundQuality -> Enabled = FormSettings -> sCheckBoxSoundQuality -> Checked;
   sTrackBarSoundQuality -> Position = StrToInt (SettingsFile -> ReadString ("Game_launch", "Audio_rate", "11000"));
   sLabelCurQuality -> Caption = IntToStr (sTrackBarSoundQuality -> Position);
+  sCheckBoxGameResolution -> Checked = StrToBool (SettingsFile -> ReadString ("Game_launch", "Custom_resolution_enable", "true"));
+  sEditWidth -> Text = SettingsFile -> ReadString ("Game_launch", "Custom_resolution_width", Screen -> Width);
+  sEditHeight -> Text = SettingsFile -> ReadString ("Game_launch", "Custom_resolution_height", Screen -> Height);
+  sEditWidth -> Enabled = sCheckBoxGameResolution -> Checked;
+  sEditHeight -> Enabled = sCheckBoxGameResolution -> Checked;
   sCheckBoxInternetHost -> Checked = StrToBool (SettingsFile -> ReadString ("Multiplayer", "Use_user_host", "true"));
   sEditHost -> Enabled = sCheckBoxInternetHost -> Checked;
   sEditHost -> Text = SettingsFile -> ReadString ("Multiplayer", "Host", "162.248.92.172");
@@ -112,6 +117,9 @@ void __fastcall TFormSettings::sBitBtnSaveClick (TObject *Sender)
   SettingsFile -> WriteString ("Game_launch", "Audio_buffer_ms", sEditMilliseconds -> Text);
   SettingsFile -> WriteString ("Game_launch", "Audio_rate_enable", BoolToRealString (sCheckBoxSoundQuality -> Checked));
   SettingsFile -> WriteString ("Game_launch", "Audio_rate", IntToStr (sTrackBarSoundQuality -> Position));
+  SettingsFile -> WriteString ("Game_launch", "Custom_resolution_enable", BoolToRealString (sCheckBoxGameResolution -> Checked));
+  SettingsFile -> WriteString ("Game_launch", "Custom_resolution_width", sEditWidth -> Text);
+  SettingsFile -> WriteString ("Game_launch", "Custom_resolution_height", sEditHeight -> Text);
   SettingsFile -> WriteString ("Multiplayer", "Use_user_host", BoolToRealString (sCheckBoxInternetHost -> Checked));
   if (sEditHost -> Text == "") sEditHost -> Text = "162.248.92.172";
   SettingsFile -> WriteString ("Multiplayer", "Host", sEditHost -> Text);
@@ -177,4 +185,10 @@ void __fastcall TFormSettings::sComboBoxSelectingMessageSelect (TObject *Sender)
   sEditMessageText -> Text = QuickMessages [Index];
   if (sEditMessageText -> Text == "") sEditMessageText -> Text = LanguageStrings [69 + Index];
   LastSelIndex = sComboBoxSelectingMessage -> ItemIndex;
+ }
+
+void __fastcall TFormSettings::sCheckBoxGameResolutionClick (TObject *Sender)
+ {
+  sEditWidth -> Enabled = sCheckBoxGameResolution -> Checked;
+  sEditHeight -> Enabled = sCheckBoxGameResolution -> Checked;
  }
