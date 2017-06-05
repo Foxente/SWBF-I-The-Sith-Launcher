@@ -39,14 +39,14 @@ UnicodeString LanguageStrings [100];
 
 //Consts
 const int CurrentAddonsLimit = 26; //ToDo Try to fix it using 1.3 version
-const UnicodeString LauncherVersion = "0.6 BETA";
+const UnicodeString LauncherVersion = "0.7 BETA";
 const UnicodeString OfficialLanguages = "English / Русский";
-const UnicodeString CompilationDate = "31.05.2017 10:16";
+const UnicodeString CompilationDate = "05.06.2017 13:07";
 //Don't change theese consts
 const UnicodeString Author = "FOXente (Aradam)";
-const UnicodeString OfficialTopic = "swbfgamers.com/index.php?topic=11975.0";
-const UnicodeString FOXenteVk = "vk.com/FOXEnte";
-const UnicodeString GitHub = "github.com/Foxente/SWBF-I-The-Sith-Launcher";
+const UnicodeString OfficialTopic = "tinyium.com/30Kp";
+const UnicodeString FOXenteVk = "bluenik.com/2cdS";
+const UnicodeString GitHub = "bluenik.com/2cdN";
 const UnicodeString License = "GPL-3.0";
 
 //Get GameData folder's path
@@ -263,9 +263,9 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   LanguageStrings [17] = WriteNewStringToIniFile (LanguageFile, "CheckBox", "6", "Sound quality");
   LanguageStrings [18] = WriteNewStringToIniFile (LanguageFile, "CheckBox", "7", "Host of servers (Internet)");
   LanguageStrings [79] = WriteNewStringToIniFile (LanguageFile, "CheckBox", "8", "In-game resolution");
-  LanguageStrings [24] = WriteNewStringToIniFile (LanguageFile, "Link", "TunngleDownload", "http://www.softpedia.com/get/Internet/File-Sharing/Tunngle.shtml#download");
-  LanguageStrings [25] = WriteNewStringToIniFile (LanguageFile, "Link", "TunngleVideoInstruction", "https://www.youtube.com/watch?v=WyggZSWwRAE");
-  LanguageStrings [26] = WriteNewStringToIniFile (LanguageFile, "Link", "GameRangerDownload", "http://www.gameranger.com/download/");
+  LanguageStrings [24] = WriteNewStringToIniFile (LanguageFile, "Link", "TunngleDownload", "http://tinyium.com/30Lb");
+  LanguageStrings [25] = WriteNewStringToIniFile (LanguageFile, "Link", "TunngleVideoInstruction", "http://tinyium.com/30Ld");
+  LanguageStrings [26] = WriteNewStringToIniFile (LanguageFile, "Link", "GameRangerDownload", "http://tinyium.com/30Lg");
   LanguageStrings [27] = WriteNewStringToIniFile (LanguageFile, "Link", "GameRangerInstruction", "");
   LanguageStrings [38] = WriteNewStringToIniFile (LanguageFile, "Process", "1", "Deletion");
   LanguageStrings [39] = WriteNewStringToIniFile (LanguageFile, "Process", "2", "Copying");
@@ -355,14 +355,14 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   FormAboutLauncher -> sRichEditInfo -> Lines -> Add (ReplaceStringMask (LanguageStrings [50], "link", FOXenteVk));
   FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("");
   FormAboutLauncher -> sRichEditInfo -> Lines -> Add (ReplaceStringMask (LanguageStrings [52], "name", "Aradam"));
-  FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("aradam@o-coder.pp.ua");
-  FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("swbfgamers.com/index.php?action=profile;u=16289");
-  FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("vk.com/aradam");
-  FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("ok.ru/aradam");
-  FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("facebook.com/ara2am");
-  FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("web.telegram.org/#/im?p=@ara2am");
-  FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("gitter.im/ara2am");
-  FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("twitter.com/ara2am");
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("Mail: aradam@o-coder.pp.ua");
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("PM: microify.com/2f2X");
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("VK: microify.com/2f2a");
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("OK: microify.com/2f2h");
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("Facebook: microify.com/2f2m");
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("Telegram: microify.com/2f2o");
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("Gitter: microify.com/2f2r");
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("Twitter: microify.com/2f2t");
   //Changing elements positions
   FormMainMenu -> sLabelComingSoon -> Left = (FormMainMenu -> Width - FormMainMenu -> sLabelComingSoon -> Width) / 2; //change pos for this label to center of form with
   FormSettings -> sEditMilliseconds -> Left = FormSettings -> sCheckBoxAudioBufferSize -> Left + FormSettings -> sCheckBoxAudioBufferSize -> Width + 5;
