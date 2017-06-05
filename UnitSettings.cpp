@@ -55,6 +55,9 @@ void __fastcall TFormSettings::FormShow (TObject *Sender)
   sEditMilliseconds -> Text = SettingsFile -> ReadString ("Game_launch", "Audio_buffer_ms", "200");
   sCheckBoxSoundQuality -> Checked = StrToBool (SettingsFile -> ReadString ("Game_launch", "Audio_rate_enable", "false"));
   sTrackBarSoundQuality -> Enabled = FormSettings -> sCheckBoxSoundQuality -> Checked;
+  sLabelMinQuality -> Enabled = FormSettings -> sCheckBoxSoundQuality -> Checked;
+  sLabelMaxQuality -> Enabled = FormSettings -> sCheckBoxSoundQuality -> Checked;
+  sLabelCurQuality -> Enabled = FormSettings -> sCheckBoxSoundQuality -> Checked;
   sTrackBarSoundQuality -> Position = StrToInt (SettingsFile -> ReadString ("Game_launch", "Audio_rate", "11000"));
   sLabelCurQuality -> Caption = IntToStr (sTrackBarSoundQuality -> Position);
   sCheckBoxGameResolution -> Checked = StrToBool (SettingsFile -> ReadString ("Game_launch", "Custom_resolution_enable", "true"));
@@ -62,6 +65,8 @@ void __fastcall TFormSettings::FormShow (TObject *Sender)
   sEditHeight -> Text = SettingsFile -> ReadString ("Game_launch", "Custom_resolution_height", Screen -> Height);
   sEditWidth -> Enabled = sCheckBoxGameResolution -> Checked;
   sEditHeight -> Enabled = sCheckBoxGameResolution -> Checked;
+  sLabelResolutionDelimiter -> Enabled = sCheckBoxGameResolution -> Checked;
+  sLabelPixels -> Enabled = sCheckBoxGameResolution -> Checked;
   sCheckBoxInternetHost -> Checked = StrToBool (SettingsFile -> ReadString ("Multiplayer", "Use_user_host", "true"));
   sEditHost -> Enabled = sCheckBoxInternetHost -> Checked;
   sEditHost -> Text = SettingsFile -> ReadString ("Multiplayer", "Host", "162.248.92.172");
@@ -98,6 +103,9 @@ void __fastcall TFormSettings::sCheckBoxAudioBufferSizeClick (TObject *Sender)
 void __fastcall TFormSettings::sCheckBoxSoundQualityClick (TObject *Sender)
  {
   sTrackBarSoundQuality -> Enabled = FormSettings -> sCheckBoxSoundQuality -> Checked;
+  sLabelMinQuality -> Enabled = FormSettings -> sCheckBoxSoundQuality -> Checked;
+  sLabelMaxQuality -> Enabled = FormSettings -> sCheckBoxSoundQuality -> Checked;
+  sLabelCurQuality -> Enabled = FormSettings -> sCheckBoxSoundQuality -> Checked;
  }
 
 void __fastcall TFormSettings::sCheckBoxInternetHostClick (TObject *Sender)
@@ -191,4 +199,6 @@ void __fastcall TFormSettings::sCheckBoxGameResolutionClick (TObject *Sender)
  {
   sEditWidth -> Enabled = sCheckBoxGameResolution -> Checked;
   sEditHeight -> Enabled = sCheckBoxGameResolution -> Checked;
+  sLabelResolutionDelimiter -> Enabled = sCheckBoxGameResolution -> Checked;
+  sLabelPixels -> Enabled = sCheckBoxGameResolution -> Checked;
  }
