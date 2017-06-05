@@ -222,7 +222,7 @@ void __fastcall TFormMainMenu::sBitBtnPlayClick (TObject *Sender)
     memset (&si, 0, sizeof (si));
     si.cb = sizeof (si);
     //Run game without changing resolution
-    if (SettingsFile -> ReadString ("Game_launch", "Custom_resolution_enable", "true") == "false")
+    if ((SettingsFile -> ReadString ("Game_launch", "Custom_resolution_enable", "true") == "false") || (!FileExists (GetGameDataPath () + "Data\\_LVL_PC\\vidmode.ini")))
      {
       CreateProcess (GetBattlefrontExePath ().w_str (), cmdline.w_str (),  0, 0, true, 0, 0, GetGameDataPath ().w_str (), &si, &pi);
      } else //Run game using Battlebelk's Custom Resolution Launcher
