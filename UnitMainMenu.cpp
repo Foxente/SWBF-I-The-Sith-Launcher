@@ -245,7 +245,7 @@ void __fastcall TFormMainMenu::sBitBtnPlayClick (TObject *Sender)
       LaunchData -> UpdateFile ();
       //Run game
       CreateProcess ((GetLauncherDataPath () + "Tools\\ResolutionChanger.exe").w_str (), L"",  0, 0, true, 0, 0, GetGameDataPath ().w_str (), &si, &pi);
-      WaitForSingleObject(pi.hThread, INFINITE);
+      Sleep (2000);
       DeleteFile (GetGameDataPath () + "SWBF1 launcher.ini");
       LaunchData -> Free ();
      }
@@ -288,6 +288,10 @@ void __fastcall TFormMainMenu::sBitBtnPlayClick (TObject *Sender)
         {
          hosts -> Add (SettingsFile -> ReadString ("Multiplayer", "Host", "162.248.92.172") + " " + oldDomens -> Strings [i]);
         }
+      //Set not readonly for file
+      DWORD attr = GetFileAttributes (GetHostsFilePath ().w_str ());
+      if (attr & FILE_ATTRIBUTE_READONLY) SetFileAttributes (GetHostsFilePath ().w_str (), attr ^ FILE_ATTRIBUTE_READONLY);
+      //Save it
       hosts -> SaveToFile (GetHostsFilePath ());
       hosts -> Free ();
       oldDomens -> Free ();
