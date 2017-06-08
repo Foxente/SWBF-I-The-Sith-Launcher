@@ -83,11 +83,10 @@ void __fastcall TFormSettings::FormShow (TObject *Sender)
   if (sComboBoxLanguages -> ItemIndex == -1) sComboBoxLanguages -> ItemIndex = 0;
   FindClose (sr);
   //loading all quick messages
-  LastSelIndex = 1;
   for (int i = 1; i <= 8; i++) QuickMessages [i] = SettingsFile -> ReadString ("Language", "Message" + IntToStr (i), "");
-  sComboBoxSelectingMessageSelect (NULL);
-  QuickMessages [1] = SettingsFile -> ReadString ("Language", "Message1", "");
   LastSelIndex = 0;
+  if (QuickMessages [1] == "") sEditMessageText -> Text = LanguageStrings [70];
+  else sEditMessageText -> Text = QuickMessages [1];
  }
 
 void __fastcall TFormSettings::sTrackBarSoundQualityChange (TObject *Sender)
