@@ -58,7 +58,7 @@ void __fastcall TFormMainMenu::sBitBtnPlayClick (TObject *Sender)
     //Patching .exe for changing game version
     TFileStream *Stream = new TFileStream (GetBattlefrontExePath (), fmOpenReadWrite | fmShareDenyWrite);
     Stream -> Position = 0x2AF12C;
-    AnsiString NewVersion = SettingsFile -> ReadString ("Multiplayer", "Current_version", "1.3");
+    AnsiString NewVersion = SettingsFile -> ReadString ("Multiplayer", "Current_version", "1.2");
     Stream -> Write (&NewVersion [1], NewVersion.Length () + 1);
     Stream -> Free ();
     //Launch the game
@@ -333,10 +333,10 @@ void __fastcall TFormMainMenu::FormShow (TObject *Sender)
   for (int i = 1; i <= 8; i++) WriteNewStringToIniFile (SettingsFile, "Language", "Message" + IntToStr (i), "");
   WriteNewStringToIniFile (SettingsFile, "Multiplayer", "Use_user_host", "true");
   WriteNewStringToIniFile (SettingsFile, "Multiplayer", "Host", "162.248.92.172");
-  WriteNewStringToIniFile (SettingsFile, "Multiplayer", "Current_version", "1.3");
-  if (SettingsFile -> ReadString ("Multiplayer", "Current_version", "1.3").Length () > 41)
+  WriteNewStringToIniFile (SettingsFile, "Multiplayer", "Current_version", "1.2");
+  if (SettingsFile -> ReadString ("Multiplayer", "Current_version", "1.2").Length () > 41)
    {
-    SettingsFile -> WriteString ("Multiplayer", "Current_version", SettingsFile -> ReadString ("Multiplayer", "Current_version", "1.3").SubString (1, 41));
+    SettingsFile -> WriteString ("Multiplayer", "Current_version", SettingsFile -> ReadString ("Multiplayer", "Current_version", "1.2").SubString (1, 41));
     ShowErrorM (LanguageStrings [21]);
    }
   bool QuickMessageError = false;

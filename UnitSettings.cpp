@@ -70,7 +70,7 @@ void __fastcall TFormSettings::FormShow (TObject *Sender)
   sCheckBoxInternetHost -> Checked = StrToBool (SettingsFile -> ReadString ("Multiplayer", "Use_user_host", "true"));
   sEditHost -> Enabled = sCheckBoxInternetHost -> Checked;
   sEditHost -> Text = SettingsFile -> ReadString ("Multiplayer", "Host", "162.248.92.172");
-  sEditVersion -> Text = SettingsFile -> ReadString ("Multiplayer", "Current_version", "1.3");
+  sEditVersion -> Text = SettingsFile -> ReadString ("Multiplayer", "Current_version", "1.2");
   //Load list of languages
   sComboBoxLanguages -> Clear ();
   TSearchRec sr;
@@ -132,7 +132,7 @@ void __fastcall TFormSettings::sBitBtnSaveClick (TObject *Sender)
   SettingsFile -> WriteString ("Multiplayer", "Host", sEditHost -> Text);
   //Version can not consist of only spaces or be empty ""
   sEditVersion -> Text = sEditVersion -> Text.Trim (); //deleting all spaces at the beginning and end of the line
-  if (sEditVersion -> Text == "") sEditVersion -> Text = "1.3";
+  if (sEditVersion -> Text == "") sEditVersion -> Text = "1.2";
   SettingsFile -> WriteString ("Multiplayer", "Current_version", sEditVersion -> Text);
   SettingsFile -> WriteString ("Language", "Name", sComboBoxLanguages -> Text);
   //Saving Quick messages
