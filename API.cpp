@@ -202,20 +202,20 @@ bool hasAddOnModesFolder (UnicodeString AddonName)
  }
 
 //If file doesn't exists that will be error shown and the application terminate
-void RequiredFileExists (UnicodeString FilePath)
+bool isRequiredFileExists (UnicodeString FilePath)
  {
   if (!FileExists (FilePath))
    {
     ShowErrorM (ReplaceStringMask (LanguageStrings [1], "path", FilePath));
-    exit (777);
-   }
+    return false;
+   } else return true;
  }
 
 //Apply new program's language from file
 void ApplyLanguageFromFile (UnicodeString FilePath)
  {
   //Loading of language
-  //Last LanguageStrings index = 80
+  //Last LanguageStrings index = 81
   LanguageFile = new TMemIniFile (FilePath);
   LanguageStrings [2] = WriteNewStringToIniFile (LanguageFile, "FormCaption", "Name", "SWBF I The Sith Launcher");
   LanguageStrings [0] = WriteNewStringToIniFile (LanguageFile, "FormCaption", "Logo", "Created by %name%");
@@ -230,6 +230,7 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   LanguageStrings [59] = WriteNewStringToIniFile (LanguageFile, "Error", "5", "Map '%name%' exists only in the AddOn folder. Copy it to AllMaps folder!");
   LanguageStrings [60] = WriteNewStringToIniFile (LanguageFile, "Error", "6", "Listing screenshots in the addon '%addon%' is wrong. File '%name%' doesn't exist!");
   LanguageStrings [78] = WriteNewStringToIniFile (LanguageFile, "Error", "7", "The length of a quick message should not exceed 62 characters!");
+  LanguageStrings [81] = WriteNewStringToIniFile (LanguageFile, "Error", "8", "Put the game files into GameData folder!");
   LanguageStrings [3] = WriteNewStringToIniFile (LanguageFile, "Button", "1", "Play");
   LanguageStrings [4] = WriteNewStringToIniFile (LanguageFile, "Button", "2", "Set additional maps");
   LanguageStrings [5] = WriteNewStringToIniFile (LanguageFile, "Button", "3", "About %name%");

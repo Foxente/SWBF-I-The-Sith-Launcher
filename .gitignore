@@ -201,6 +201,7 @@ Win32/Release/GameData/gstats.dat
 Win32/Release/SWBF-I-The-Sith-Launcher.exe
 Win32/Release/LauncherData/Settings.ini
 Win32/Release/LauncherData/Compilation/core.lvl/output/english.loc
+Win32/Release/LauncherData/Compilation/core.lvl/core.lvl
 Win32/Release/LauncherData/Compilation/core.lvl/output/gamefont_large.font
 Win32/Release/LauncherData/Compilation/core.lvl/output/gamefont_medium.font
 Win32/Release/LauncherData/Compilation/core.lvl/output/gamefont_small.font

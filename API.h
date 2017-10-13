@@ -70,7 +70,7 @@ bool IsBattlefrontRunning ();
 bool hasAddOnMapinfo (UnicodeString AddonName);
 bool hasAddOnScreensFolder (UnicodeString AddonName);
 bool hasAddOnModesFolder (UnicodeString AddonName);
-void RequiredFileExists (UnicodeString FilePath);
+bool isRequiredFileExists (UnicodeString FilePath);
 void ApplyLanguageFromFile (UnicodeString FilePath);
 void SetFormToScreenCenter (TForm* Form);
 void UnvisibleForm (TForm* Form);
