@@ -2,6 +2,7 @@
 *.~*~
 *.local
 *.identcache
+__astcache
 __history
 __recovery
 

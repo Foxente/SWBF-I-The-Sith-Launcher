@@ -7206,6 +7206,7 @@ object FormLogo: TFormLogo
           FD1347C3A7FF75096E08516FD91DB0BD9D7D19EED35FDC671D4215D6D42F5C23
           E5E278508D06B78D8EC1C8FF771B46D0296DF02037FF23C000A238060717014B
           C70000000049454E44AE426082}
+        OriginName = ''
       end>
     SkinDirectory = 'D:\GIT\SWBF-I-The-Sith-Launcher\Win32\Release\LauncherData'
     SkinName = 'Design (internal)'
