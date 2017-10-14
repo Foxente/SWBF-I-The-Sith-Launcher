@@ -52,44 +52,44 @@ void ChangeInfo (TsListBox *Sender)
     //if addon has mapinfo.txt that we can get some map info
     if (HasAddOnMapinfo (MapName))
      {
-	  TStringList *MapInfo = new TStringList ();
-	  MapInfo -> LoadFromFile (GetAddOnMapinfoPath (MapName));
-	  if (MapInfo -> Count >= 1) //If the file has at least 1 line
+      TStringList *MapInfo = new TStringList ();
+      MapInfo -> LoadFromFile (GetAddOnMapinfoPath (MapName));
+      if (MapInfo -> Count >= 1) //If the file has at least 1 line
        {
         //Divide the 1st line into arguments
-		TStringList *Line = new TStringList ();
-		Line -> Delimiter = ',';
-		Line -> StrictDelimiter = true;
-		Line -> DelimitedText = MapInfo -> Strings [0];
+        TStringList *Line = new TStringList ();
+        Line -> Delimiter = ',';
+        Line -> StrictDelimiter = true;
+        Line -> DelimitedText = MapInfo -> Strings [0];
         if (Line -> Count >= 7) //If the line has at least 7 arguments
          {
           //Filling 1 line of eras label
-		  if (Line  -> Strings [0] == "CW") FormAddonsControl -> sLabelMapInfo -> Caption = FormAddonsControl -> sLabelMapInfo -> Caption + LanguageStrings [32]; //Clone Wars
+          if (Line  -> Strings [0] == "CW") FormAddonsControl -> sLabelMapInfo -> Caption = FormAddonsControl -> sLabelMapInfo -> Caption + LanguageStrings [32]; //Clone Wars
           else FormAddonsControl -> sLabelMapInfo -> Caption = FormAddonsControl -> sLabelMapInfo -> Caption + LanguageStrings [33]; //Galactic Civil War
           //Adding additional data
-		  FormAddonsControl -> sLabelMapInfo -> Caption = FormAddonsControl -> sLabelMapInfo -> Caption + " (" + Line -> Strings [3] + " [" + Line -> Strings [5] + "]" + " / " + Line -> Strings [4] + " [" + Line -> Strings [6] + "])";
-		 }
+          FormAddonsControl -> sLabelMapInfo -> Caption = FormAddonsControl -> sLabelMapInfo -> Caption + " (" + Line -> Strings [3] + " [" + Line -> Strings [5] + "]" + " / " + Line -> Strings [4] + " [" + Line -> Strings [6] + "])";
+         }
 
         if (MapInfo -> Count >= 2) //If the file has at least 2 lines
          {
           //Divide the 2nd line into arguments
           TStringList *line = new TStringList ();
-		  Line -> Delimiter = ',';
-		  Line -> StrictDelimiter = true;
-		  Line -> DelimitedText = MapInfo -> Strings [1];
-		  if (Line -> Count >= 7) //If the line has at least 7 arguments
+          Line -> Delimiter = ',';
+          Line -> StrictDelimiter = true;
+          Line -> DelimitedText = MapInfo -> Strings [1];
+          if (Line -> Count >= 7) //If the line has at least 7 arguments
            {
             //Filling 2 line of eras label
             FormAddonsControl -> sLabelMapInfo -> Caption = FormAddonsControl -> sLabelMapInfo -> Caption + ((char) 13) + String (LanguageStrings [34]).Delete (LanguageStrings [34].Length (), 1).Delete (1, 1); //Go to a new line and add indent
-			if (Line  -> Strings [0] == "CW") FormAddonsControl -> sLabelMapInfo -> Caption = FormAddonsControl -> sLabelMapInfo -> Caption + LanguageStrings [32]; //Clone Wars
+            if (Line  -> Strings [0] == "CW") FormAddonsControl -> sLabelMapInfo -> Caption = FormAddonsControl -> sLabelMapInfo -> Caption + LanguageStrings [32]; //Clone Wars
             else FormAddonsControl -> sLabelMapInfo -> Caption = FormAddonsControl -> sLabelMapInfo -> Caption + LanguageStrings [33]; //Galactic Civil War
             //Adding additional data
             FormAddonsControl -> sLabelMapInfo -> Caption = FormAddonsControl -> sLabelMapInfo -> Caption + " (" + Line -> Strings [3] + " [" + Line -> Strings [5] + "]" + " / " + Line -> Strings [4] + " [" + Line -> Strings [6] + "])";
-		   }
-		 }
-		Line -> Free ();
-	   }
-	  MapInfo -> Free ();
+           }
+         }
+        Line -> Free ();
+       }
+      MapInfo -> Free ();
      }
     //if eras are not filled then we write an unknown
     if (FormAddonsControl -> sLabelMapInfo -> Caption == LanguageStrings [31] + " ") FormAddonsControl -> sLabelMapInfo -> Caption = FormAddonsControl -> sLabelMapInfo -> Caption + LanguageStrings [35];
@@ -148,15 +148,15 @@ void __fastcall TFormAddonsControl::FormShow (TObject *Sender)
   TSearchRec SearchResult;
   for (int I = FindFirst (GetAddOnPath () + "*", faDirectory, SearchResult); !I; I = FindNext (SearchResult))
     {
-	 if ((SearchResult.Name == ".") || (SearchResult.Name == "..")) continue;
-	 if (SearchResult.Attr & faDirectory) sListBoxSelectedAddons -> Items -> Add (SearchResult.Name); //Added folders only
+     if ((SearchResult.Name == ".") || (SearchResult.Name == "..")) continue;
+     if (SearchResult.Attr & faDirectory) sListBoxSelectedAddons -> Items -> Add (SearchResult.Name); //Added folders only
     }
   FindClose (SearchResult);
   //Uploading all available maps
   for (int I = FindFirst (GetAllMapsPath () + "*", faDirectory, SearchResult); !I; I = FindNext (SearchResult))
     {
-	 if ((SearchResult.Name == ".") || (SearchResult.Name == "..") || (sListBoxSelectedAddons -> Items -> IndexOf (SearchResult.Name) > -1)) continue;
-	 if (SearchResult.Attr & faDirectory) sListBoxAvailabledAddons -> Items -> Add (SearchResult.Name); //Added folders only
+     if ((SearchResult.Name == ".") || (SearchResult.Name == "..") || (sListBoxSelectedAddons -> Items -> IndexOf (SearchResult.Name) > -1)) continue;
+     if (SearchResult.Attr & faDirectory) sListBoxAvailabledAddons -> Items -> Add (SearchResult.Name); //Added folders only
     }
   FindClose (SearchResult);
   //Update all labels, images and etc.
@@ -198,7 +198,7 @@ void __fastcall TFormAddonsControl::sBitBtnUnselectClick (TObject *Sender)
  {
   if (sListBoxSelectedAddons -> ItemIndex != -1)
    {
-	int CurIndex = sListBoxSelectedAddons -> ItemIndex;
+    int CurIndex = sListBoxSelectedAddons -> ItemIndex;
     UnicodeString MapName = sListBoxSelectedAddons -> Items -> Strings [sListBoxSelectedAddons -> ItemIndex];
     //Creating thread
     ProcessName = LanguageStrings [38];
@@ -209,8 +209,8 @@ void __fastcall TFormAddonsControl::sBitBtnUnselectClick (TObject *Sender)
     sListBoxAvailabledAddons -> Items -> Add (MapName);
     sListBoxAvailabledAddons -> ItemIndex = sListBoxAvailabledAddons -> Items -> IndexOf (MapName);
     sListBoxSelectedAddons -> Items -> Delete (sListBoxSelectedAddons -> ItemIndex);
-	if (sListBoxSelectedAddons -> Items -> Count - 1 < CurIndex) CurIndex -= 1;
-	sListBoxSelectedAddons -> ItemIndex = CurIndex;
+    if (sListBoxSelectedAddons -> Items -> Count - 1 < CurIndex) CurIndex -= 1;
+    sListBoxSelectedAddons -> ItemIndex = CurIndex;
     ChangeInfo (sListBoxSelectedAddons);
    }
  }
@@ -225,7 +225,7 @@ void __fastcall TFormAddonsControl::sBitBtnSelectClick (TObject *Sender)
       ShowErrorMessage (ReplaceStringMask (LanguageStrings [41], "number", IntToStr (CURRENT_ADDONS_LIMIT)));
      } else
      {
-	  int CurIndex = sListBoxAvailabledAddons -> ItemIndex;
+      int CurIndex = sListBoxAvailabledAddons -> ItemIndex;
       UnicodeString MapName = sListBoxAvailabledAddons -> Items -> Strings [sListBoxAvailabledAddons -> ItemIndex];
       //Creating thread
       ProcessName = LanguageStrings [39];
@@ -238,13 +238,13 @@ void __fastcall TFormAddonsControl::sBitBtnSelectClick (TObject *Sender)
         FormSelectMapMode -> sComboBoxMapMode -> Clear ();
         FormSelectMapMode -> sComboBoxMapMode -> Items -> Add ("Standart");
         //Uploading all available modes
-		TSearchRec SearchResult;
-		for (int I = FindFirst (GetAddOnModesPath (MapName) + "*", faDirectory, SearchResult); !I; I = FindNext (SearchResult))
-		  {
-		   if ((SearchResult.Name == ".") || (SearchResult.Name == "..")) continue;
-		   if (SearchResult.Attr & faDirectory) FormSelectMapMode -> sComboBoxMapMode -> Items -> Add (SearchResult.Name); //Added folders only
+        TSearchRec SearchResult;
+        for (int I = FindFirst (GetAddOnModesPath (MapName) + "*", faDirectory, SearchResult); !I; I = FindNext (SearchResult))
+          {
+           if ((SearchResult.Name == ".") || (SearchResult.Name == "..")) continue;
+           if (SearchResult.Attr & faDirectory) FormSelectMapMode -> sComboBoxMapMode -> Items -> Add (SearchResult.Name); //Added folders only
           }
-		FindClose (SearchResult);
+        FindClose (SearchResult);
         FormSelectMapMode -> sComboBoxMapMode -> ItemIndex = 0;
         //Show dialog of selecting the mode
         SetFormToScreenCenter (FormSelectMapMode);
@@ -252,18 +252,18 @@ void __fastcall TFormAddonsControl::sBitBtnSelectClick (TObject *Sender)
         //if user selects non standrat mode
         if (FormSelectMapMode -> sComboBoxMapMode -> ItemIndex > 0)
          {
-		  TSearchRec SearchResult;
-		  for (int I = FindFirst (GetAddOnModesPath (MapName) + FormSelectMapMode -> sComboBoxMapMode -> Items -> Strings [FormSelectMapMode -> sComboBoxMapMode -> ItemIndex] + "\\*.*", faAnyFile, SearchResult); !I; I = FindNext (SearchResult))
+          TSearchRec SearchResult;
+          for (int I = FindFirst (GetAddOnModesPath (MapName) + FormSelectMapMode -> sComboBoxMapMode -> Items -> Strings [FormSelectMapMode -> sComboBoxMapMode -> ItemIndex] + "\\*.*", faAnyFile, SearchResult); !I; I = FindNext (SearchResult))
             {
-			 if (!(SearchResult.Attr & faDirectory)) //Copy files only
+             if (!(SearchResult.Attr & faDirectory)) //Copy files only
               {
-			   if (SearchResult.Name == "mission.lvl")
+               if (SearchResult.Name == "mission.lvl")
                 {
                  CopyFile ((GetAddOnModesPath (MapName) + FormSelectMapMode -> sComboBoxMapMode -> Items -> Strings [FormSelectMapMode -> sComboBoxMapMode -> ItemIndex] + "\\mission.lvl").w_str (), (GetAddOnPath () + MapName + "\\Data\\_lvl_pc\\mission.lvl").w_str (), false);
                 }
               }
-			}
-		  FindClose (SearchResult);
+            }
+          FindClose (SearchResult);
          }
        }
       //Updating information
@@ -271,7 +271,7 @@ void __fastcall TFormAddonsControl::sBitBtnSelectClick (TObject *Sender)
       sListBoxSelectedAddons -> ItemIndex = sListBoxSelectedAddons -> Items -> IndexOf (MapName);
       sListBoxAvailabledAddons -> Items -> Delete (sListBoxAvailabledAddons -> ItemIndex);
       if (sListBoxAvailabledAddons -> Items -> Count - 1 < CurIndex) CurIndex -= 1;
-	  sListBoxAvailabledAddons -> ItemIndex = CurIndex;
+      sListBoxAvailabledAddons -> ItemIndex = CurIndex;
       ChangeInfo (sListBoxAvailabledAddons);
      }
    }

@@ -76,8 +76,8 @@ void __fastcall TFormSettings::FormShow (TObject *Sender)
   TSearchRec SearchResult;
   for (int I = FindFirst (GetLauncherDataPath () + "Languages\\*", faDirectory, SearchResult); !I; I = FindNext (SearchResult))
     {
-	 if ((SearchResult.Name == ".") || (SearchResult.Name == "..")) continue;
-	 if (SearchResult.Attr & faDirectory) sComboBoxLanguages -> Items -> Add (SearchResult.Name); //Added folders only
+     if ((SearchResult.Name == ".") || (SearchResult.Name == "..")) continue;
+     if (SearchResult.Attr & faDirectory) sComboBoxLanguages -> Items -> Add (SearchResult.Name); //Added folders only
     }
   sComboBoxLanguages -> ItemIndex = sComboBoxLanguages -> Items -> IndexOf (SettingsFile -> ReadString ("Language", "Name", "English"));
   if (sComboBoxLanguages -> ItemIndex == -1) sComboBoxLanguages -> ItemIndex = 0;

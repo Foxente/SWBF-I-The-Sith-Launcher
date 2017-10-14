@@ -154,7 +154,7 @@ AnsiString UnicodeStringToCFGFileHEX (UnicodeString Text)
   AnsiString Result;
   for (int I = 1; I <= Text.Length (); I++)
     {
-	 Result += AnsiReverseString (IntToHex (Text [I], 4));
+     Result += AnsiReverseString (IntToHex (Text [I], 4));
     }
   return "20000000" + Result;
  }
