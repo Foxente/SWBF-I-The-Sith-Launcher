@@ -37,7 +37,7 @@ void __fastcall TFormLogo::FormShow (TObject *Sender)
   CreateDir (GetLauncherDataPath () + "Languages\\English\\");
   //Load language file or create if doesn't exists
   ApplyLanguageFromFile (GetLauncherDataPath () + "Languages\\" + SettingsFile -> ReadString ("Language", "Name", "English") + "\\Language.ini");
-  Caption = ReplaceStringMask (LanguageStrings [0], "name", Author);
+  Caption = ReplaceStringMask (LanguageStrings [0], "name", AUTHOR);
  }
 
 void __fastcall TFormLogo::TimerNextFormTimer (TObject *Sender)

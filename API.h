@@ -38,15 +38,15 @@ extern PACKAGE TMemIniFile *LanguageFile;
 extern PACKAGE UnicodeString LanguageStrings [100];
 
 //Consts
-extern PACKAGE const int CurrentAddonsLimit;
-extern PACKAGE const UnicodeString LauncherVersion;
-extern PACKAGE const UnicodeString OfficialLanguages;
-extern PACKAGE const UnicodeString CompilationDate;
-extern PACKAGE const UnicodeString Author;
-extern PACKAGE const UnicodeString OfficialTopic;
-extern PACKAGE const UnicodeString FOXenteVk;
-extern PACKAGE const UnicodeString GitHub;
-extern PACKAGE const UnicodeString License;
+extern PACKAGE const int CURRENT_ADDONS_LIMIT;
+extern PACKAGE const UnicodeString LAUNCHER_VERSION;
+extern PACKAGE const UnicodeString OFFICIAL_LANGUAGES;
+extern PACKAGE const UnicodeString COMPILATION_DATE;
+extern PACKAGE const UnicodeString AUTHOR;
+extern PACKAGE const UnicodeString OFFICIAL_TOPIC;
+extern PACKAGE const UnicodeString FOXENTE_VK;
+extern PACKAGE const UnicodeString GITHUB;
+extern PACKAGE const UnicodeString LICENSE;
 
 //Api methods
 UnicodeString GetGameDataPath ();
@@ -67,13 +67,13 @@ String BoolToRealString (bool Value);
 int GetFilesCount (UnicodeString Path);
 int GetDirectoriesCount (UnicodeString Path);
 bool IsBattlefrontRunning ();
-bool hasAddOnMapinfo (UnicodeString AddonName);
-bool hasAddOnScreensFolder (UnicodeString AddonName);
-bool hasAddOnModesFolder (UnicodeString AddonName);
-bool isRequiredFileExists (UnicodeString FilePath);
+bool HasAddOnMapinfo (UnicodeString AddonName);
+bool HasAddOnScreensFolder (UnicodeString AddonName);
+bool HasAddOnModesFolder (UnicodeString AddonName);
+bool IsRequiredFileExists (UnicodeString FilePath);
 void ApplyLanguageFromFile (UnicodeString FilePath);
 void SetFormToScreenCenter (TForm* Form);
 void UnvisibleForm (TForm* Form);
-void ShowErrorM (UnicodeString Error);
+void ShowErrorMessage (UnicodeString Error);
 
 #endif

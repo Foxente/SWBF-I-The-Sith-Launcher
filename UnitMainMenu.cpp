@@ -202,11 +202,12 @@ void __fastcall TFormMainMenu::sBitBtnPlayClick (TObject *Sender)
 	RequiredFileList -> Add (GetGameDataPath () + "Data\\_LVL_PC\\SIDE\\ewk.lvl");
 	RequiredFileList -> Add (GetGameDataPath () + "Data\\_LVL_PC\\SIDE\\des.lvl");
 	RequiredFileList -> Add (GetGameDataPath () + "Data\\_LVL_PC\\SIDE\\gar.lvl");
-	for (int i = 0; i < RequiredFileList -> Count; i++)
+	for (int I = 0; I < RequiredFileList -> Count; I++)
 	  {
-	   if (!isRequiredFileExists (RequiredFileList -> Strings [1]))
+	   if (!IsRequiredFileExists (RequiredFileList -> Strings [1]))
 		{
-		 ShowErrorM (LanguageStrings [81]);
+		 ShowErrorMessage (LanguageStrings [81]);
+         RequiredFileList -> Free ();
 		 return;
 		}
 	  }
@@ -218,43 +219,43 @@ void __fastcall TFormMainMenu::sBitBtnPlayClick (TObject *Sender)
     Stream -> Write (&NewVersion [1], NewVersion.Length () + 1);
 	Stream -> Free ();
     //Launch the game
-	UnicodeString cmdline = "";
-	if (SettingsFile -> ReadString ("Game_launch", "Window_mode", "false") == "true") cmdline += " /win";
-	if (SettingsFile -> ReadString ("Game_launch", "Skip_logos", "false") == "true") cmdline += " /nointro";
-	if (SettingsFile -> ReadString ("Game_launch", "Skip_startup_music", "false") == "true") cmdline += " /nostartupmusic";
-	if (SettingsFile -> ReadString ("Game_launch", "Skip_menu_background", "false") == "true") cmdline += " /nomovies";
-	if (SettingsFile -> ReadString ("Game_launch", "Audio_buffer_enable", "false") == "true") cmdline += " /audiomixbuffer " + SettingsFile -> ReadString ("Game_launch", "Audio_buffer_ms", "200");
-	if (SettingsFile -> ReadString ("Game_launch", "Audio_rate_enable", "false") == "true") cmdline += " /audiosamplerate " + SettingsFile -> ReadString ("Game_launch", "Audio_rate", "11000");
+	UnicodeString CmdLine = "";
+	if (SettingsFile -> ReadString ("Game_launch", "Window_mode", "false") == "true") CmdLine += " /win";
+	if (SettingsFile -> ReadString ("Game_launch", "Skip_logos", "false") == "true") CmdLine += " /nointro";
+	if (SettingsFile -> ReadString ("Game_launch", "Skip_startup_music", "false") == "true") CmdLine += " /nostartupmusic";
+	if (SettingsFile -> ReadString ("Game_launch", "Skip_menu_background", "false") == "true") CmdLine += " /nomovies";
+	if (SettingsFile -> ReadString ("Game_launch", "Audio_buffer_enable", "false") == "true") CmdLine += " /audiomixbuffer " + SettingsFile -> ReadString ("Game_launch", "Audio_buffer_ms", "200");
+	if (SettingsFile -> ReadString ("Game_launch", "Audio_rate_enable", "false") == "true") CmdLine += " /audiosamplerate " + SettingsFile -> ReadString ("Game_launch", "Audio_rate", "11000");
     //Run the game
-	STARTUPINFO si;
-    PROCESS_INFORMATION pi;
-    memset (&pi, 0, sizeof (pi));
-	memset (&si, 0, sizeof (si));
-	si.cb = sizeof (si);
+	STARTUPINFO StartupInfo;
+	PROCESS_INFORMATION ProcesInfo;
+	memset (&ProcesInfo, 0, sizeof (ProcesInfo));
+	memset (&StartupInfo, 0, sizeof (StartupInfo));
+	StartupInfo.cb = sizeof (StartupInfo);
 	//Run game without changing resolution
     if ((SettingsFile -> ReadString ("Game_launch", "Custom_resolution_enable", "true") == "false") || (!FileExists (GetGameDataPath () + "Data\\_LVL_PC\\vidmode.ini")))
 	 {
-      CreateProcess (GetBattlefrontExePath ().w_str (), cmdline.w_str (),  0, 0, true, 0, 0, GetGameDataPath ().w_str (), &si, &pi);
+	  CreateProcess (GetBattlefrontExePath ().w_str (), CmdLine.w_str (),  0, 0, true, 0, 0, GetGameDataPath ().w_str (), &StartupInfo, &ProcesInfo);
      } else //Run game using Battlebelk's Custom Resolution Launcher
      {
       //Generate vidmode.ini
-      TStringList *LinesVideoMode = new TStringList ();
-      LinesVideoMode -> LoadFromFile (GetGameDataPath () + "Data\\_LVL_PC\\vidmode.ini");
+	  TStringList *LinesVideoMode = new TStringList ();
+	  LinesVideoMode -> LoadFromFile (GetGameDataPath () + "Data\\_LVL_PC\\vidmode.ini");
       String Device = LinesVideoMode -> Strings [0];
       LinesVideoMode -> Clear ();
       LinesVideoMode -> Add (Device);
-      for (int i = 0; i <= 16; i++)
-        for (int j = 0; j <= 16; j++) LinesVideoMode -> Add (SettingsFile -> ReadString ("Game_launch", "Custom_resolution_width", Screen -> Width) + " " + SettingsFile -> ReadString ("Game_launch", "Custom_resolution_height", Screen -> Height) + " " + IntToStr (i) + " " + IntToStr (j) + " 1");
+	  for (int I = 0; I <= 16; I++)
+		for (int J = 0; J <= 16; J++) LinesVideoMode -> Add (SettingsFile -> ReadString ("Game_launch", "Custom_resolution_width", Screen -> Width) + " " + SettingsFile -> ReadString ("Game_launch", "Custom_resolution_height", Screen -> Height) + " " + IntToStr (I) + " " + IntToStr (J) + " 1");
       LinesVideoMode -> SaveToFile (GetGameDataPath () + "Data\\_LVL_PC\\vidmode.ini");
       LinesVideoMode -> Free ();
       //Saving settings for launcher
       TMemIniFile *LaunchData = new TMemIniFile (GetGameDataPath () + "SWBF1 launcher.ini");
-      LaunchData -> WriteString ("CMD", "COMMAND_LINE", cmdline.Trim ());
+      LaunchData -> WriteString ("CMD", "COMMAND_LINE", CmdLine.Trim ());
       LaunchData -> WriteString ("IN_GAME_RESOLUTION", "WIDTH", SettingsFile -> ReadString ("Game_launch", "Custom_resolution_width", Screen -> Width));
       LaunchData -> WriteString ("IN_GAME_RESOLUTION", "HEIGHT", SettingsFile -> ReadString ("Game_launch", "Custom_resolution_height", Screen -> Height));
       LaunchData -> UpdateFile ();
       //Run game
-      CreateProcess ((GetLauncherDataPath () + "Tools\\ResolutionChanger.exe").w_str (), L"",  0, 0, true, 0, 0, GetGameDataPath ().w_str (), &si, &pi);
+	  CreateProcess ((GetLauncherDataPath () + "Tools\\ResolutionChanger.exe").w_str (), L"",  0, 0, true, 0, 0, GetGameDataPath ().w_str (), &StartupInfo, &ProcesInfo);
       Sleep (2000);
       DeleteFile (GetGameDataPath () + "SWBF1 launcher.ini");
       LaunchData -> Free ();
@@ -262,49 +263,49 @@ void __fastcall TFormMainMenu::sBitBtnPlayClick (TObject *Sender)
     //Patching hosts file for Internet multiplayer game
     if (SettingsFile -> ReadString ("Multiplayer", "Use_user_host", "true") == "true")
      {
-      TStringList *oldDomens = new TStringList ();
-      oldDomens -> Delimiter = ' ';
-      oldDomens -> DelimitedText = "swbfrontpc.ms4.gamespy.com swbfrontpc.available.gamespy.com available.gamespy.com master.gamespy.com swbfrontpc.master.gamespy.com key.gamespy.com peerchat.gamespy.com gpsp.gamespy.com gpcm.gamespy.com natneg1.gamespy.com swbfront2pc.ms4.gamespy.com swbfront2pc.ms5.gamespy.com swbfront2pc.ms6.gamespy.com swbfront2pc.available.gamespy.com swbfront2pc.master.gamespy.com natneg2.gamespy.com swbfront2pc.gamestats.gamespy.com gamestats.gamespy.com swbfrontps2.ms10.gamespy.com swbfrontps2.available.gamespy.com swbfrontps2.master.gamespy.com swbfront2ps2.ms4.gamespy.com swbfront2ps2.available.gamespy.com swbfront2ps2.master.gamespy.com";
-      TStringList *hosts = new TStringList ();
-      hosts -> LoadFromFile (GetHostsFilePath ());
+	  TStringList *OldDomens = new TStringList ();
+	  OldDomens -> Delimiter = ' ';
+	  OldDomens -> DelimitedText = "swbfrontpc.ms4.gamespy.com swbfrontpc.available.gamespy.com available.gamespy.com master.gamespy.com swbfrontpc.master.gamespy.com key.gamespy.com peerchat.gamespy.com gpsp.gamespy.com gpcm.gamespy.com natneg1.gamespy.com swbfront2pc.ms4.gamespy.com swbfront2pc.ms5.gamespy.com swbfront2pc.ms6.gamespy.com swbfront2pc.available.gamespy.com swbfront2pc.master.gamespy.com natneg2.gamespy.com swbfront2pc.gamestats.gamespy.com gamestats.gamespy.com swbfrontps2.ms10.gamespy.com swbfrontps2.available.gamespy.com swbfrontps2.master.gamespy.com swbfront2ps2.ms4.gamespy.com swbfront2ps2.available.gamespy.com swbfront2ps2.master.gamespy.com";
+	  TStringList *Hosts = new TStringList ();
+	  Hosts -> LoadFromFile (GetHostsFilePath ());
       //Get start and end positions for cyclic pass
-      int StartPos = hosts -> IndexOf ("#Star Wars Battlefront Multiplayer Servers");
+	  int StartPos = Hosts -> IndexOf ("#Star Wars Battlefront Multiplayer Servers");
       int EndPos;
       if (StartPos == -1)
        {
-        StartPos = hosts -> Count - 1;
+        StartPos = Hosts -> Count - 1;
         EndPos = 0;
        } else
        {
         EndPos = StartPos;
-        StartPos = EndPos + oldDomens -> Count;
-        if (StartPos > hosts -> Count - 1) StartPos = hosts -> Count - 1;
+        StartPos = EndPos + OldDomens -> Count;
+		if (StartPos > Hosts -> Count - 1) StartPos = Hosts -> Count - 1;
        }
       //Cyclic pass for deleting exists swbf domens
-      for (int i = StartPos; i >= EndPos; i--)
+	  for (int I = StartPos; I >= EndPos; I--)
         {
-         for (int j = 0; j <= oldDomens -> Count - 1; j++)
+		 for (int J = 0; J <= OldDomens -> Count - 1; J++)
            {
-            if ((hosts -> Strings [i].Pos (oldDomens -> Strings [j]) > 0) || (hosts -> Strings [i] == "#Star Wars Battlefront Multiplayer Servers"))
+			if ((Hosts -> Strings [I].Pos (OldDomens -> Strings [J]) > 0) || (Hosts -> Strings [I] == "#Star Wars Battlefront Multiplayer Servers"))
              {
-              hosts -> Delete (i);
+			  Hosts -> Delete (I);
               break;
              }
            }
         }
       //Cyclic pass for adding redirects for old swbf domens
-      hosts -> Add ("#Star Wars Battlefront Multiplayer Servers");
-      for (int i = 0; i <= oldDomens -> Count - 1; i++)
+	  Hosts -> Add ("#Star Wars Battlefront Multiplayer Servers");
+	  for (int I = 0; I <= OldDomens -> Count - 1; I++)
         {
-         hosts -> Add (SettingsFile -> ReadString ("Multiplayer", "Host", "162.248.92.172") + " " + oldDomens -> Strings [i]);
+		 Hosts -> Add (SettingsFile -> ReadString ("Multiplayer", "Host", "162.248.92.172") + " " + OldDomens -> Strings [I]);
         }
       //Set not readonly for file
-      DWORD attr = GetFileAttributes (GetHostsFilePath ().w_str ());
-      if (attr & FILE_ATTRIBUTE_READONLY) SetFileAttributes (GetHostsFilePath ().w_str (), attr ^ FILE_ATTRIBUTE_READONLY);
+	  DWORD Attributes = GetFileAttributes (GetHostsFilePath ().w_str ());
+	  if (Attributes & FILE_ATTRIBUTE_READONLY) SetFileAttributes (GetHostsFilePath ().w_str (), Attributes ^ FILE_ATTRIBUTE_READONLY);
       //Save it
-      hosts -> SaveToFile (GetHostsFilePath ());
-      hosts -> Free ();
-      oldDomens -> Free ();
+	  Hosts -> SaveToFile (GetHostsFilePath ());
+	  Hosts -> Free ();
+      OldDomens -> Free ();
      }
    }
  }
@@ -340,25 +341,25 @@ void __fastcall TFormMainMenu::FormShow (TObject *Sender)
   WriteNewStringToIniFile (SettingsFile, "Game_launch", "Custom_resolution_width", Screen -> Width);
   WriteNewStringToIniFile (SettingsFile, "Game_launch", "Custom_resolution_height", Screen -> Height);
   WriteNewStringToIniFile (SettingsFile, "Language", "Name", "English");
-  for (int i = 1; i <= 8; i++) WriteNewStringToIniFile (SettingsFile, "Language", "Message" + IntToStr (i), "");
+  for (int I = 1; I <= 8; I++) WriteNewStringToIniFile (SettingsFile, "Language", "Message" + IntToStr (I), "");
   WriteNewStringToIniFile (SettingsFile, "Multiplayer", "Use_user_host", "true");
   WriteNewStringToIniFile (SettingsFile, "Multiplayer", "Host", "162.248.92.172");
   WriteNewStringToIniFile (SettingsFile, "Multiplayer", "Current_version", "1.2");
   if (SettingsFile -> ReadString ("Multiplayer", "Current_version", "1.2").Length () > 41)
    {
     SettingsFile -> WriteString ("Multiplayer", "Current_version", SettingsFile -> ReadString ("Multiplayer", "Current_version", "1.2").SubString (1, 41));
-    ShowErrorM (LanguageStrings [21]);
+    ShowErrorMessage (LanguageStrings [21]);
    }
   bool QuickMessageError = false;
-  for (int i = 1; i <= 8; i++)
+  for (int I = 1; I <= 8; I++)
     {
-     if (SettingsFile -> ReadString ("Language", "Message" + IntToStr (i), LanguageStrings [69 + i]).Length () > 62)
-      {
-       SettingsFile -> WriteString ("Language", "Message" + IntToStr (i), SettingsFile -> ReadString ("Language", "Message" + IntToStr (i), LanguageStrings [69 + i]).SubString (1, 62));
+	 if (SettingsFile -> ReadString ("Language", "Message" + IntToStr (I), LanguageStrings [69 + I]).Length () > 62)
+	  {
+	   SettingsFile -> WriteString ("Language", "Message" + IntToStr (I), SettingsFile -> ReadString ("Language", "Message" + IntToStr (I), LanguageStrings [69 + I]).SubString (1, 62));
        QuickMessageError = true;
       }
     }
-  if (QuickMessageError) ShowErrorM (LanguageStrings [78]);
+  if (QuickMessageError) ShowErrorMessage (LanguageStrings [78]);
   SettingsFile -> UpdateFile ();
  }
 
@@ -366,65 +367,65 @@ void __fastcall TFormMainMenu::FormShow (TObject *Sender)
 void __fastcall TErrorSearchThread::Execute ()
  {
   //Checking AddOn folder
-  if (GetDirectoriesCount (GetAddOnPath ()) > CurrentAddonsLimit)
+  if (GetDirectoriesCount (GetAddOnPath ()) > CURRENT_ADDONS_LIMIT)
    {
-    ErrorMessage = ReplaceStringMask (LanguageStrings [41], "number", CurrentAddonsLimit);
+    ErrorMessage = ReplaceStringMask (LanguageStrings [41], "number", CURRENT_ADDONS_LIMIT);
     Synchronize (ShowErr);
    }
-  for (int i = 0; i < GetDirectoriesCount (GetAddOnPath ()); i++)
+  for (int I = 0; I < GetDirectoriesCount (GetAddOnPath ()); I++)
     {
-     UnicodeString curAddonPath = TDirectory::GetDirectories (GetAddOnPath ()) [i];
-     UnicodeString curAddonName = ExtractFileName (curAddonPath);
-     if (!FileExists (curAddonPath + "\\addme.script"))
-      {
-       ErrorMessage = ReplaceStringMask (ReplaceStringMask (LanguageStrings [58], "name", "addme.script"), "addon", curAddonName);
+	 UnicodeString CurAddonPath = TDirectory::GetDirectories (GetAddOnPath ()) [I];
+	 UnicodeString CurAddonName = ExtractFileName (CurAddonPath);
+	 if (!FileExists (CurAddonPath + "\\addme.script"))
+	  {
+	   ErrorMessage = ReplaceStringMask (ReplaceStringMask (LanguageStrings [58], "name", "addme.script"), "addon", CurAddonName);
        Synchronize (ShowErr);
       }
-     if (!FileExists (curAddonPath + "\\Data\\_lvl_pc\\mission.lvl"))
+	 if (!FileExists (CurAddonPath + "\\Data\\_lvl_pc\\mission.lvl"))
       {
-       ErrorMessage = ReplaceStringMask (ReplaceStringMask (LanguageStrings [58], "name", "mission.lvl"), "addon", curAddonName);
+	   ErrorMessage = ReplaceStringMask (ReplaceStringMask (LanguageStrings [58], "name", "mission.lvl"), "addon", CurAddonName);
        Synchronize (ShowErr);
       }
-     if (!FileExists (curAddonPath + "\\Data\\_lvl_pc\\core.lvl"))
+	 if (!FileExists (CurAddonPath + "\\Data\\_lvl_pc\\core.lvl"))
       {
-       ErrorMessage = ReplaceStringMask (ReplaceStringMask (LanguageStrings [58], "name", "core.lvl"), "addon", curAddonName);
+	   ErrorMessage = ReplaceStringMask (ReplaceStringMask (LanguageStrings [58], "name", "core.lvl"), "addon", CurAddonName);
        Synchronize (ShowErr);
       }
-     if (!DirectoryExists (GetAllMapsPath () + curAddonName + "\\"))
+	 if (!DirectoryExists (GetAllMapsPath () + CurAddonName + "\\"))
       {
-       ErrorMessage = ReplaceStringMask (LanguageStrings [59], "name", curAddonName);
+	   ErrorMessage = ReplaceStringMask (LanguageStrings [59], "name", CurAddonName);
        Synchronize (ShowErr);
       }
     }
   //Checking AllMAps folder
-  for (int i = 0; i < GetDirectoriesCount (GetAllMapsPath ()); i++)
+  for (int I = 0; I < GetDirectoriesCount (GetAllMapsPath ()); I++)
     {
-     UnicodeString curAddonPath = TDirectory::GetDirectories (GetAllMapsPath ()) [i];
-     UnicodeString curAddonName = ExtractFileName (curAddonPath);
-     if (!FileExists (curAddonPath + "\\addme.script"))
-      {
-       ErrorMessage = ReplaceStringMask (ReplaceStringMask (LanguageStrings [58], "name", "addme.script"), "addon", curAddonName);
+	 UnicodeString CurAddonPath = TDirectory::GetDirectories (GetAllMapsPath ()) [I];
+	 UnicodeString CurAddonName = ExtractFileName (CurAddonPath);
+	 if (!FileExists (CurAddonPath + "\\addme.script"))
+	  {
+	   ErrorMessage = ReplaceStringMask (ReplaceStringMask (LanguageStrings [58], "name", "addme.script"), "addon", CurAddonName);
        Synchronize (ShowErr);
       }
-     if (!FileExists (curAddonPath + "\\Data\\_lvl_pc\\mission.lvl"))
+	 if (!FileExists (CurAddonPath + "\\Data\\_lvl_pc\\mission.lvl"))
       {
-       ErrorMessage = ReplaceStringMask (ReplaceStringMask (LanguageStrings [58], "name", "mission.lvl"), "addon", curAddonName);
+	   ErrorMessage = ReplaceStringMask (ReplaceStringMask (LanguageStrings [58], "name", "mission.lvl"), "addon", CurAddonName);
        Synchronize (ShowErr);
       }
-     if (!FileExists (curAddonPath + "\\Data\\_lvl_pc\\core.lvl"))
+	 if (!FileExists (CurAddonPath + "\\Data\\_lvl_pc\\core.lvl"))
       {
-       ErrorMessage = ReplaceStringMask (ReplaceStringMask (LanguageStrings [58], "name", "core.lvl"), "addon", curAddonName);
+	   ErrorMessage = ReplaceStringMask (ReplaceStringMask (LanguageStrings [58], "name", "core.lvl"), "addon", CurAddonName);
        Synchronize (ShowErr);
       }
      //Checking screens numbering
-     if (DirectoryExists (GetAddOnScreensPath (curAddonName)))
+     if (DirectoryExists (GetAddOnScreensPath (CurAddonName)))
       {
-       for (int j = 0; j < GetFilesCount (GetAddOnScreensPath (curAddonName)); j++)
+	   for (int J = 0; J < GetFilesCount (GetAddOnScreensPath (CurAddonName)); J++)
          {
-          UnicodeString curScreenPath = GetAddOnScreensPath (curAddonName) + "scr_" + IntToStr (j) + ".jpg";
-          if (!FileExists (curScreenPath))
+		  UnicodeString CurScreenPath = GetAddOnScreensPath (CurAddonName) + "scr_" + IntToStr (J) + ".jpg";
+          if (!FileExists (CurScreenPath))
            {
-            ErrorMessage = ReplaceStringMask (ReplaceStringMask (LanguageStrings [60], "addon", curAddonName), "name", "scr_" + IntToStr (j) + ".jpg");
+			ErrorMessage = ReplaceStringMask (ReplaceStringMask (LanguageStrings [60], "addon", CurAddonName), "name", "scr_" + IntToStr (J) + ".jpg");
             Synchronize (ShowErr);
             break;
            }
@@ -436,5 +437,5 @@ void __fastcall TErrorSearchThread::Execute ()
 //Show error from thread
 void __fastcall TErrorSearchThread::ShowErr ()
  {
-  ShowErrorM (ErrorMessage);
+  ShowErrorMessage (ErrorMessage);
  }

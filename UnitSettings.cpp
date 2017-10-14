@@ -73,17 +73,17 @@ void __fastcall TFormSettings::FormShow (TObject *Sender)
   sEditVersion -> Text = SettingsFile -> ReadString ("Multiplayer", "Current_version", "1.2");
   //Load list of languages
   sComboBoxLanguages -> Clear ();
-  TSearchRec sr;
-  for (int i = FindFirst (GetLauncherDataPath () + "Languages\\*", faDirectory, sr); !i; i = FindNext (sr))
+  TSearchRec SearchResult;
+  for (int I = FindFirst (GetLauncherDataPath () + "Languages\\*", faDirectory, SearchResult); !I; I = FindNext (SearchResult))
     {
-     if ((sr.Name == ".") || (sr.Name == "..")) continue;
-     if (sr.Attr & faDirectory) sComboBoxLanguages -> Items -> Add (sr.Name); //Added folders only
+	 if ((SearchResult.Name == ".") || (SearchResult.Name == "..")) continue;
+	 if (SearchResult.Attr & faDirectory) sComboBoxLanguages -> Items -> Add (SearchResult.Name); //Added folders only
     }
   sComboBoxLanguages -> ItemIndex = sComboBoxLanguages -> Items -> IndexOf (SettingsFile -> ReadString ("Language", "Name", "English"));
   if (sComboBoxLanguages -> ItemIndex == -1) sComboBoxLanguages -> ItemIndex = 0;
-  FindClose (sr);
+  FindClose (SearchResult);
   //loading all quick messages
-  for (int i = 1; i <= 8; i++) QuickMessages [i] = SettingsFile -> ReadString ("Language", "Message" + IntToStr (i), "");
+  for (int I = 1; I <= 8; I++) QuickMessages [I] = SettingsFile -> ReadString ("Language", "Message" + IntToStr (I), "");
   LastSelIndex = 0;
   if (QuickMessages [1] == "") sEditMessageText -> Text = LanguageStrings [70];
   else sEditMessageText -> Text = QuickMessages [1];
@@ -171,12 +171,12 @@ void __fastcall TFormSettings::sBitBtnGameRangerVideoClick (TObject *Sender)
 void __fastcall TFormSettings::sComboBoxLanguagesSelect (TObject *Sender)
  {
   //Determine is it needed translate the sEditMessageText
-  bool needTranslate = false;
-  if (sEditMessageText -> Text == LanguageStrings [69 + LastSelIndex + 1]) needTranslate = true;
+  bool NeedTranslate = false;
+  if (sEditMessageText -> Text == LanguageStrings [69 + LastSelIndex + 1]) NeedTranslate = true;
   //Apply language
   ApplyLanguageFromFile (GetLauncherDataPath () + "Languages\\" + sComboBoxLanguages -> Text + "\\Language.ini");
   //Translating the sEditMessageText
-  if (needTranslate)
+  if (NeedTranslate)
    {
     sEditMessageText -> Text = LanguageStrings [69 + LastSelIndex + 1];
    }

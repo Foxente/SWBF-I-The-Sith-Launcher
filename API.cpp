@@ -38,16 +38,16 @@ TMemIniFile *LanguageFile = new TMemIniFile ("");
 UnicodeString LanguageStrings [100];
 
 //Consts
-const int CurrentAddonsLimit = 26; //ToDo Try to fix it using 1.3 version
-const UnicodeString LauncherVersion = "0.7 BETA";
-const UnicodeString OfficialLanguages = "English / Русский";
-const UnicodeString CompilationDate = "05.06.2017 13:07";
+const int CURRENT_ADDONS_LIMIT = 26; //ToDo Try to fix it using 1.3 version
+const UnicodeString LAUNCHER_VERSION = "0.7 BETA";
+const UnicodeString OFFICIAL_LANGUAGES = "English / Русский";
+const UnicodeString COMPILATION_DATE = "05.06.2017 13:07";
 //Don't change theese consts
-const UnicodeString Author = "FOXente (Aradam)";
-const UnicodeString OfficialTopic = "tinyium.com/30Kp";
-const UnicodeString FOXenteVk = "bluenik.com/2cdS";
-const UnicodeString GitHub = "bluenik.com/2cdN";
-const UnicodeString License = "GPL-3.0";
+const UnicodeString AUTHOR = "FOXente (Aradam)";
+const UnicodeString OFFICIAL_TOPIC = "tinyium.com/30Kp";
+const UnicodeString FOXENTE_VK = "bluenik.com/2cdS";
+const UnicodeString GITHUB = "bluenik.com/2cdN";
+const UnicodeString LICENSE = "GPL-3.0";
 
 //Get GameData folder's path
 UnicodeString GetGameDataPath ()
@@ -152,9 +152,9 @@ UnicodeString GetAbsPath (UnicodeString Path)
 AnsiString UnicodeStringToCFGFileHEX (UnicodeString Text)
  {
   AnsiString Result;
-  for (int i = 1; i <= Text.Length (); i++)
+  for (int I = 1; I <= Text.Length (); I++)
     {
-     Result += AnsiReverseString (IntToHex (Text [i], 4));
+	 Result += AnsiReverseString (IntToHex (Text [I], 4));
     }
   return "20000000" + Result;
  }
@@ -184,29 +184,29 @@ bool IsBattlefrontRunning ()
  }
 
 //Checking is addon has mapinfo.txt
-bool hasAddOnMapinfo (UnicodeString AddonName)
+bool HasAddOnMapinfo (UnicodeString AddonName)
  {
   return FileExists (GetAddOnMapinfoPath (AddonName));
  }
 
 //Checking is addon has screens
-bool hasAddOnScreensFolder (UnicodeString AddonName)
+bool HasAddOnScreensFolder (UnicodeString AddonName)
  {
   return DirectoryExists (GetAddOnScreensPath (AddonName));
  }
 
 //Checking is addon has additional modes
-bool hasAddOnModesFolder (UnicodeString AddonName)
+bool HasAddOnModesFolder (UnicodeString AddonName)
  {
   return DirectoryExists (GetAddOnModesPath (AddonName));
  }
 
 //If file doesn't exists that will be error shown and the application terminate
-bool isRequiredFileExists (UnicodeString FilePath)
+bool IsRequiredFileExists (UnicodeString FilePath)
  {
   if (!FileExists (FilePath))
    {
-    ShowErrorM (ReplaceStringMask (LanguageStrings [1], "path", FilePath));
+    ShowErrorMessage (ReplaceStringMask (LanguageStrings [1], "path", FilePath));
     return false;
    } else return true;
  }
@@ -331,29 +331,29 @@ void ApplyLanguageFromFile (UnicodeString FilePath)
   FormSettings -> sLabelGeneralLanguage -> Caption = LanguageStrings [57];
   FormSettings -> sLabelMessagesText -> Caption = LanguageStrings [61];
   FormSettings -> sLabelPixels -> Caption = LanguageStrings [80];
-  int curIndex = FormSettings -> sComboBoxSelectingMessage -> ItemIndex;
+  int CurIndex = FormSettings -> sComboBoxSelectingMessage -> ItemIndex;
   FormSettings -> sComboBoxSelectingMessage -> Clear ();
-  for (int i = 62; i <= 69; i++) FormSettings -> sComboBoxSelectingMessage -> Items -> Add (LanguageStrings [i]);
-  FormSettings -> sComboBoxSelectingMessage -> ItemIndex = curIndex;
+  for (int I = 62; I <= 69; I++) FormSettings -> sComboBoxSelectingMessage -> Items -> Add (LanguageStrings [I]);
+  FormSettings -> sComboBoxSelectingMessage -> ItemIndex = CurIndex;
   FormScreenZoom -> Caption = LanguageStrings [36];
   FormGlobalProcess -> sLabelWait -> Caption = LanguageStrings [40];
   FormSelectMapMode -> Caption = LanguageStrings [54];
   FormAboutLauncher -> Caption = FormMainMenu -> sBitBtnAboutLauncher -> Caption;
   FormAboutLauncher -> sRichEditInfo -> Lines -> Clear ();
   FormAboutLauncher -> sRichEditInfo -> Lines -> Add (LanguageStrings [42]);
-  FormAboutLauncher -> sRichEditInfo -> Lines -> Add (ReplaceStringMask (ReplaceStringMask (LanguageStrings [43], "name", Author), "projectname", LanguageStrings [2]));
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add (ReplaceStringMask (ReplaceStringMask (LanguageStrings [43], "name", AUTHOR), "projectname", LanguageStrings [2]));
   FormAboutLauncher -> sRichEditInfo -> Lines -> Add (LanguageStrings [44]);
   FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("");
   FormAboutLauncher -> sRichEditInfo -> Lines -> Add (ReplaceStringMask (LanguageStrings [51], "name", LanguageStrings [2]));
-  FormAboutLauncher -> sRichEditInfo -> Lines -> Add (ReplaceStringMask (ReplaceStringMask (LanguageStrings [53], "link", GitHub), "license", License));
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add (ReplaceStringMask (ReplaceStringMask (LanguageStrings [53], "link", GITHUB), "license", LICENSE));
   FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("");
-  FormAboutLauncher -> sRichEditInfo -> Lines -> Add (ReplaceStringMask (LanguageStrings [45], "number", LauncherVersion));
-  FormAboutLauncher -> sRichEditInfo -> Lines -> Add (ReplaceStringMask (LanguageStrings [46], "names", OfficialLanguages));
-  FormAboutLauncher -> sRichEditInfo -> Lines -> Add (ReplaceStringMask (LanguageStrings [47], "date", CompilationDate));
-  FormAboutLauncher -> sRichEditInfo -> Lines -> Add (ReplaceStringMask (LanguageStrings [48], "name", Author));
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add (ReplaceStringMask (LanguageStrings [45], "number", LAUNCHER_VERSION));
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add (ReplaceStringMask (LanguageStrings [46], "names", OFFICIAL_LANGUAGES));
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add (ReplaceStringMask (LanguageStrings [47], "date", COMPILATION_DATE));
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add (ReplaceStringMask (LanguageStrings [48], "name", AUTHOR));
   FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("");
-  FormAboutLauncher -> sRichEditInfo -> Lines -> Add (ReplaceStringMask (LanguageStrings [49], "link", OfficialTopic));
-  FormAboutLauncher -> sRichEditInfo -> Lines -> Add (ReplaceStringMask (LanguageStrings [50], "link", FOXenteVk));
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add (ReplaceStringMask (LanguageStrings [49], "link", OFFICIAL_TOPIC));
+  FormAboutLauncher -> sRichEditInfo -> Lines -> Add (ReplaceStringMask (LanguageStrings [50], "link", FOXENTE_VK));
   FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("");
   FormAboutLauncher -> sRichEditInfo -> Lines -> Add (ReplaceStringMask (LanguageStrings [52], "name", "Aradam"));
   FormAboutLauncher -> sRichEditInfo -> Lines -> Add ("Mail: aradam@o-coder.pp.ua");
@@ -406,7 +406,7 @@ void UnvisibleForm (TForm* Form)
  }
 
 //Show error message
-void ShowErrorM (UnicodeString Error)
+void ShowErrorMessage (UnicodeString Error)
  {
   Application -> MessageBox (Error.c_str (), UnicodeString ("ERROR").c_str (), MB_OK);
  }

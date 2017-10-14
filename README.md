@@ -39,6 +39,10 @@ If you want to edit this source code - you must disable options that control Tab
 - [ ] Tools -> Options... -> Editor Options -> Source Options -> Use tab character
 - [x] Tools -> Options... -> Editor Options -> Source Options -> Show tab character
 - [x] Tools -> Options... -> Editor Options -> Source Options -> Show space character  
+  
+The names of **constants** must be in upcase like AUTHOR, CURRENT_VERSION.  
+The names of **variables** must be in different registers like int I, UnicodeString AddonName.  
+The names of **functions** must be in different registers like GetLauncherDataPath, IsBattlefrontRunning.  
 
 ### Some C++/IDE pranks :
 1) Error:  
